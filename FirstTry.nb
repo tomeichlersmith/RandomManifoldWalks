@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      9510,        284]
-NotebookOptionsPosition[      8519,        256]
-NotebookOutlinePosition[      8853,        271]
-CellTagsIndexPosition[      8810,        268]
+NotebookDataLength[     16682,        503]
+NotebookOptionsPosition[     14908,        457]
+NotebookOutlinePosition[     15242,        472]
+CellTagsIndexPosition[     15199,        469]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -252,7 +252,208 @@ surface that we can solve the geodesic equations for)"
  CellChangeTimes->{{3.714412616591442*^9, 3.714412647511654*^9}, {
   3.714412700422011*^9, 
   3.714412720884942*^9}},ExpressionUUID->"80243687-0f95-4ae8-aa3f-\
-c94e7c01e982"]
+c94e7c01e982"],
+
+Cell[CellGroupData[{
+
+Cell["Plane", "Subsection",
+ CellChangeTimes->{{3.714413347905442*^9, 
+  3.7144133486087*^9}},ExpressionUUID->"1ab08e6c-a766-4fc2-b0aa-4c3a3ef54ea9"],
+
+Cell["\<\
+The Christoffel symbols are identically zero for the entire plane. This leads \
+rather quickly to the analytical solution for geodesics of the familiar line:\
+\
+\>", "Text",
+ CellChangeTimes->{{3.714413355528845*^9, 
+  3.714413389615962*^9}},ExpressionUUID->"ad2edf48-567f-4691-ac95-\
+298169895972"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[GridBox[{
+    {
+     RowBox[{
+      RowBox[{
+       StyleBox["x",
+        FontWeight->"Bold"], 
+       StyleBox["(",
+        FontWeight->"Plain"], 
+       StyleBox["s",
+        FontWeight->"Plain"], 
+       StyleBox[")",
+        FontWeight->"Plain"]}], 
+      StyleBox["=",
+       FontWeight->"Plain"], 
+      RowBox[{
+       SubscriptBox[
+        StyleBox["p",
+         FontWeight->"Bold"], "0"], "+", 
+       RowBox[{
+        RowBox[{
+         StyleBox["u",
+          FontWeight->"Bold"], 
+         StyleBox["(",
+          FontWeight->"Plain"], 
+         StyleBox["\[Theta]",
+          FontWeight->"Plain"], 
+         StyleBox[")",
+          FontWeight->"Plain"]}], 
+        StyleBox["s",
+         FontWeight->"Plain"]}]}]}]}
+   },
+   GridBoxItemSize->{"Columns" -> {{
+        Scaled[0.96]}}}], 
+  TraditionalForm]],ExpressionUUID->"360d061f-6c80-4a00-b259-19a3dd724b05"]], \
+"Text",
+ CellChangeTimes->{{3.714412218087628*^9, 3.714412337042656*^9}, {
+  3.71441248513496*^9, 3.714412503460306*^9}, {3.7144133981447277`*^9, 
+  3.714413464078548*^9}},ExpressionUUID->"c5ab61a5-52eb-4981-b46f-\
+0bcc803421e5"],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox[
+    StyleBox["p",
+     FontWeight->"Bold"], "0"], TraditionalForm]],ExpressionUUID->
+  "75cbfc53-3d8b-4577-a443-78e5405eb86c"],
+ " is the starting point and ",
+ Cell[BoxData[
+  FormBox["\[Theta]", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "e0e8a43b-5903-4b3f-bc49-5143e1fb085a"],
+ " is an angle from an x-axis. Thus we have the stepping function"
+}], "Text",
+ CellChangeTimes->{{3.7144134553417063`*^9, 
+  3.714413531268153*^9}},ExpressionUUID->"940d71ed-e550-42f6-9d1e-\
+8113d16f7fb3"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[GridBox[{
+    {
+     RowBox[{
+      SubscriptBox[
+       StyleBox["p",
+        FontWeight->"Bold"], 
+       RowBox[{"n", "+", "1"}]], 
+      StyleBox["=",
+       FontWeight->"Plain"], 
+      RowBox[{
+       SubscriptBox[
+        StyleBox["p",
+         FontWeight->"Bold"], "n"], "+", 
+       RowBox[{
+        RowBox[{
+         StyleBox["u",
+          FontWeight->"Bold"], 
+         StyleBox["(",
+          FontWeight->"Plain"], 
+         StyleBox["\[Theta]",
+          FontWeight->"Plain"], 
+         StyleBox[")",
+          FontWeight->"Plain"]}], 
+        StyleBox["h",
+         FontWeight->"Plain"]}]}]}]}
+   },
+   GridBoxItemSize->{"Columns" -> {{
+        Scaled[0.96]}}}], 
+  TraditionalForm]],ExpressionUUID->"34259d17-a610-4f26-99c4-cdaced047b28"]], \
+"Text",
+ CellChangeTimes->{{3.714412218087628*^9, 3.714412337042656*^9}, {
+  3.71441248513496*^9, 3.714412503460306*^9}, {3.7144133981447277`*^9, 
+  3.714413464078548*^9}, {3.714413542813333*^9, 
+  3.714413551908454*^9}},ExpressionUUID->"754679e6-d8ff-4e74-9c75-\
+b27387f8e957"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"steplength", ",", "numsteps", ",", "stepfunc"}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"steplength", " ", "=", " ", "1"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"numsteps", " ", "=", " ", "10"}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"stepfunc", "[", 
+      RowBox[{"{", 
+       RowBox[{"x_", ",", "y_"}], "}"}], "]"}], ":=", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", "\[Theta]", "}"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"\[Theta]", "=", 
+         RowBox[{"RandomReal", "[", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", 
+            RowBox[{"2", "\[Pi]"}]}], "}"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"x", "+", 
+           RowBox[{"steplength", "*", 
+            RowBox[{"Cos", "[", "\[Theta]", "]"}]}]}], ",", 
+          RowBox[{"y", "+", 
+           RowBox[{"steplength", "*", 
+            RowBox[{"Sin", "[", "\[Theta]", "]"}]}]}]}], "}"}]}]}], 
+      "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"NestList", "[", "\[IndentingNewLine]", 
+     RowBox[{"stepfunc", ",", "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}], ",", "\[IndentingNewLine]", 
+      "numsteps"}], "\[IndentingNewLine]", "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.714413594869421*^9, 
+  3.714413914850059*^9}},ExpressionUUID->"395ecf61-6d57-4cb0-af54-\
+5d6fcd1b53fc"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "0.9192402045954934`"}], ",", 
+     RowBox[{"-", "0.39369715042813735`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.06274750968889353`", ",", 
+     RowBox[{"-", "0.20475237279582165`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.8405441906933584`", ",", "0.4237635959897285`"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.4764326707612202`", ",", 
+     RowBox[{"-", "0.507591761031805`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1.0308280142564632`", ",", 
+     RowBox[{"-", "1.339845209874639`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.2535049752859919`", ",", 
+     RowBox[{"-", "1.9689468654802422`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "0.4346304538394923`"}], ",", 
+     RowBox[{"-", "1.243364595036507`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "0.18101900854492842`"}], ",", 
+     RowBox[{"-", "0.2760584207485506`"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "0.20126562473592738`"}], ",", "0.7237365955086892`"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "1.0259680387539616`"}], ",", "1.2893035042938719`"}], 
+    "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.714413854189781*^9, {3.714413896353549*^9, 
+   3.714413919425609*^9}},ExpressionUUID->"0efff0a2-9228-4e0b-bca8-\
+9a99e8d8703c"]
+}, Open  ]]
+}, Open  ]]
 },
 WindowSize->{1280, 779},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -285,7 +486,25 @@ Cell[6537, 191, 592, 19, 33, "Text", "ExpressionUUID" -> \
 Cell[7132, 212, 674, 23, 33, "Text", "ExpressionUUID" -> \
 "2e0ae7fb-335a-4282-b145-99a709dd8e88"],
 Cell[7809, 237, 706, 17, 55, "Text", "ExpressionUUID" -> \
-"80243687-0f95-4ae8-aa3f-c94e7c01e982"]
+"80243687-0f95-4ae8-aa3f-c94e7c01e982"],
+Cell[CellGroupData[{
+Cell[8540, 258, 149, 2, 44, "Subsection", "ExpressionUUID" -> \
+"1ab08e6c-a766-4fc2-b0aa-4c3a3ef54ea9"],
+Cell[8692, 262, 309, 7, 33, "Text", "ExpressionUUID" -> \
+"ad2edf48-567f-4691-ac95-298169895972"],
+Cell[9004, 271, 1144, 39, 33, "Text", "ExpressionUUID" -> \
+"c5ab61a5-52eb-4981-b46f-0bcc803421e5"],
+Cell[10151, 312, 584, 17, 33, "Text", "ExpressionUUID" -> \
+"940d71ed-e550-42f6-9d1e-8113d16f7fb3"],
+Cell[10738, 331, 1074, 35, 33, "Text", "ExpressionUUID" -> \
+"754679e6-d8ff-4e74-9c75-b27387f8e957"],
+Cell[CellGroupData[{
+Cell[11837, 370, 1562, 39, 284, "Input", "ExpressionUUID" -> \
+"395ecf61-6d57-4cb0-af54-5d6fcd1b53fc"],
+Cell[13402, 411, 1478, 42, 114, "Output", "ExpressionUUID" -> \
+"0efff0a2-9228-4e0b-bca8-9a99e8d8703c"]
+}, Open  ]]
+}, Open  ]]
 }
 ]
 *)
