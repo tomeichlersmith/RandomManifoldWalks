@@ -10,17 +10,252 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[       757,         33]
-NotebookOptionsPosition[       561,         21]
-NotebookOutlinePosition[       897,         36]
-CellTagsIndexPosition[       854,         33]
+NotebookDataLength[      9510,        284]
+NotebookOptionsPosition[      8519,        256]
+NotebookOutlinePosition[      8853,        271]
+CellTagsIndexPosition[      8810,        268]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
+Cell["\<\
+The geodesic equations are given below (taken from Diff. Geo. of Curves and \
+Surfaces shamelessly):\
+\>", "Text",
+ CellChangeTimes->{{3.714411377821896*^9, 
+  3.7144114166923447`*^9}},ExpressionUUID->"2b453f88-b4b3-475f-bce1-\
+a14ff97000ea"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[GridBox[{
+    {GridBox[{
+       {
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           FractionBox[
+            RowBox[{
+             SuperscriptBox["\[DifferentialD]", "2"], 
+             SuperscriptBox["x", "i"]}], 
+            RowBox[{"\[DifferentialD]", 
+             SuperscriptBox["s", "2"]}]], "+", 
+           RowBox[{
+            UnderoverscriptBox["\[Sum]", 
+             RowBox[{"j", ",", 
+              RowBox[{"k", "=", "1"}]}], "2"], 
+            RowBox[{
+             SubscriptBox[
+              SuperscriptBox["\[CapitalGamma]", "i"], "jk"], 
+             FractionBox[
+              RowBox[{"\[DifferentialD]", 
+               SuperscriptBox["x", "j"]}], 
+              RowBox[{"\[DifferentialD]", "s"}]], 
+             FractionBox[
+              RowBox[{"\[DifferentialD]", 
+               SuperscriptBox["x", "k"]}], 
+              RowBox[{"\[DifferentialD]", "s"}]]}]}]}], "=", 
+          RowBox[{
+           RowBox[{"0", "   ", "for", " ", "i"}], " ", "=", " ", "1"}]}], ",",
+          "2"}]}
+      },
+      GridBoxAlignment->{"Columns" -> {{"Center"}}}]}
+   },
+   GridBoxItemSize->{"Columns" -> {{
+        Scaled[0.96]}}}], 
+  TraditionalForm]],ExpressionUUID->"edee3a44-8dd1-4d92-9553-a080bf17a264"]], \
+"Text",
+ CellChangeTimes->{{3.714411478992166*^9, 
+  3.714411621686399*^9}},ExpressionUUID->"cc96ead1-c5c9-4441-8421-\
+b1bd9a12b609"],
+
+Cell[TextData[{
+ "where the Christoffel symbols are the ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox[
+    SuperscriptBox["\[CapitalGamma]", "i"], "jk"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "586e841b-a758-4b3a-ad6b-6de1c433e461"],
+ ", which characterize the metric on the surface in question. These equations \
+are useful for our purposes because they hold for geodesics parameterized by \
+arc length. These are second order ordinary differential equations, so they \
+require boundary conditions. Since there are two coordinates ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{
+     SuperscriptBox["x", "1"], ",", 
+     SuperscriptBox["x", "2"]}], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "ad735579-8d72-4922-b320-beb25d174adf"],
+ ", we must have four boundary conditions (which we will simplify to three by \
+assuming the first derivative has unit magnitude):"
+}], "Text",
+ CellChangeTimes->{{3.7144116633008204`*^9, 3.714411670392291*^9}, {
+  3.7144117290919437`*^9, 3.714411783577001*^9}, {3.7144118566474543`*^9, 
+  3.714411872975774*^9}, {3.714411954908184*^9, 3.71441199841072*^9}, {
+  3.714412050033408*^9, 3.714412194125061*^9}, {3.714412344465028*^9, 
+  3.714412370975882*^9}},ExpressionUUID->"525b7d55-8fa2-4fd6-a403-\
+973dde6a9735"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[GridBox[{
+    {GridBox[{
+       {
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           StyleBox["x",
+            FontWeight->"Bold"], "(", "0", ")"}], "=", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{
+             SuperscriptBox["x", "1"], "(", "0", ")"}], ",", 
+            RowBox[{
+             SuperscriptBox["x", "2"], "(", "0", ")"}]}], ")"}]}], 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            StyleBox["x",
+             FontWeight->"Bold"], 
+            StyleBox["'",
+             FontWeight->"Plain"]}], 
+           StyleBox[
+            RowBox[{"(", "0", ")"}],
+            FontWeight->"Plain"]}], 
+          StyleBox["=",
+           FontWeight->"Plain"], 
+          RowBox[{
+           StyleBox["(",
+            FontWeight->"Plain"], 
+           RowBox[{
+            RowBox[{
+             StyleBox["cos\[Theta]",
+              FontWeight->"Plain"], 
+             StyleBox[" ",
+              FontWeight->"Plain"], 
+             StyleBox["u",
+              FontWeight->"Bold"]}], ",", 
+            RowBox[{"sin\[Theta]", " ", 
+             StyleBox["v",
+              FontWeight->"Bold"]}]}], ")"}]}]}]}
+      },
+      GridBoxAlignment->{"Columns" -> {{"="}}}]}
+   },
+   GridBoxItemSize->{"Columns" -> {{
+        Scaled[0.96]}}}], 
+  TraditionalForm]],ExpressionUUID->"ec25514c-a642-4eb2-893a-d4567d68a3fe"]], \
+"Text",
+ CellChangeTimes->{{3.714412218087628*^9, 
+  3.714412337042656*^9}},ExpressionUUID->"7ac21b7e-7ec2-489b-bc45-\
+be724b2acd64"],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["u",
+     FontWeight->"Bold"], ",", 
+    StyleBox["v",
+     FontWeight->"Bold"]}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "b1dc999a-0636-49c0-8c44-36bf6cdea0cd"],
+ " are the unit coordinate vectors at ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    StyleBox["x",
+     FontWeight->"Bold"], "(", "0", ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "1ea9b0c5-e268-4412-9e4d-2c9d485d4fc9"],
+ ".\nFor now, let\[CloseCurlyQuote]s skip the difficult part of determining \
+the geodesic parameterization in terms of arc length (either analytically or \
+numerically) and let\[CloseCurlyQuote]s assume that we have found a \
+parameterization for a geodesic on our coordinate map that satisfies the \
+above equations. Since this parameterization is parameterized by arc length, \
+we simply \[OpenCurlyQuote]step\[CloseCurlyQuote] along this geodesic for one \
+step length ",
+ Cell[BoxData[
+  FormBox["h", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "d704cb0b-a225-41be-a774-9fbf252f2d21"],
+ ":"
+}], "Text",
+ CellChangeTimes->{
+  3.714412199836565*^9, {3.714412377919622*^9, 3.71441247726847*^9}, {
+   3.714412651903801*^9, 3.7144126832149677`*^9}, {3.714413096497242*^9, 
+   3.714413099608861*^9}},ExpressionUUID->"f347baa9-880d-4b94-8986-\
+5e710127194c"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[GridBox[{
+    {
+     RowBox[{
+      SubscriptBox[
+       StyleBox["p",
+        FontWeight->"Bold"], 
+       RowBox[{"n", "+", "1"}]], "=", 
+      RowBox[{
+       StyleBox["x",
+        FontWeight->"Bold"], "(", "h", ")"}]}]}
+   },
+   GridBoxItemSize->{"Columns" -> {{
+        Scaled[0.96]}}}], 
+  TraditionalForm]],ExpressionUUID->"d83cf109-cf3c-4cb9-a297-219fecf23e57"]], \
+"Text",
+ CellChangeTimes->{{3.714412218087628*^9, 3.714412337042656*^9}, {
+  3.71441248513496*^9, 
+  3.714412503460306*^9}},ExpressionUUID->"e3a154a8-1b59-43d3-9481-\
+7d3e4e629b54"],
+
+Cell[TextData[{
+ "where ",
+ Cell[BoxData[
+  FormBox[
+   StyleBox["x",
+    FontWeight->"Bold"], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "e28df15e-3a6b-462c-9f4a-3be356ed82bb"],
+ " is the geodesic with ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{
+     StyleBox["x",
+      FontWeight->"Bold"], "(", "0", ")"}], "=", 
+    SubscriptBox[
+     StyleBox["p",
+      FontWeight->"Bold"], "n"]}], TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "8d60f293-0db7-42ad-b4e1-96eb3a0cd7c6"]
+}], "Text",
+ CellChangeTimes->{{3.7144125097625723`*^9, 
+  3.714412555427197*^9}},ExpressionUUID->"2e0ae7fb-335a-4282-b145-\
+99a709dd8e88"],
+
+Cell[TextData[{
+ "This procedure allows us to define a step length ",
+ Cell[BoxData[
+  FormBox["h", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "fe7fd717-18a1-420e-b186-0345fca73053"],
+ " and a random direction ",
+ Cell[BoxData[
+  FormBox["\[Theta]", TraditionalForm]],
+  FormatType->"TraditionalForm",ExpressionUUID->
+  "36275fe7-52d5-4d7c-b77a-6b5973f9351e"],
+ " for each step in our random walk (and thus perform a random walk on any \
+surface that we can solve the geodesic equations for)"
+}], "Text",
+ CellChangeTimes->{{3.714412616591442*^9, 3.714412647511654*^9}, {
+  3.714412700422011*^9, 
+  3.714412720884942*^9}},ExpressionUUID->"80243687-0f95-4ae8-aa3f-\
+c94e7c01e982"]
 },
-WindowSize->{808, 653},
-WindowMargins->{{236, Automatic}, {49, Automatic}},
+WindowSize->{1280, 779},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
 FrontEndVersion->"11.1 for Linux x86 (64-bit) (April 18, 2017)",
 StyleDefinitions->"Default.nb"
 ]
@@ -35,9 +270,23 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
+Cell[558, 20, 252, 6, 33, "Text", "ExpressionUUID" -> \
+"2b453f88-b4b3-475f-bce1-a14ff97000ea"],
+Cell[813, 28, 1408, 40, 47, "Text", "ExpressionUUID" -> \
+"cc96ead1-c5c9-4441-8421-b1bd9a12b609"],
+Cell[2224, 70, 1322, 28, 82, "Text", "ExpressionUUID" -> \
+"525b7d55-8fa2-4fd6-a403-973dde6a9735"],
+Cell[3549, 100, 1577, 51, 61, "Text", "ExpressionUUID" -> \
+"7ac21b7e-7ec2-489b-bc45-be724b2acd64"],
+Cell[5129, 153, 1405, 36, 99, "Text", "ExpressionUUID" -> \
+"f347baa9-880d-4b94-8986-5e710127194c"],
+Cell[6537, 191, 592, 19, 33, "Text", "ExpressionUUID" -> \
+"e3a154a8-1b59-43d3-9481-7d3e4e629b54"],
+Cell[7132, 212, 674, 23, 33, "Text", "ExpressionUUID" -> \
+"2e0ae7fb-335a-4282-b145-99a709dd8e88"],
+Cell[7809, 237, 706, 17, 55, "Text", "ExpressionUUID" -> \
+"80243687-0f95-4ae8-aa3f-c94e7c01e982"]
 }
 ]
 *)
-
-(* End of internal cache information *)
 
