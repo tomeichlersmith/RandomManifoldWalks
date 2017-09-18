@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     16874,        505]
-NotebookOptionsPosition[     14893,        455]
-NotebookOutlinePosition[     15227,        470]
-CellTagsIndexPosition[     15184,        467]
+NotebookDataLength[     32910,        919]
+NotebookOptionsPosition[     30072,        851]
+NotebookOutlinePosition[     30406,        866]
+CellTagsIndexPosition[     30363,        863]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -432,7 +432,402 @@ Cell[BoxData[{
    3.714762175192156*^9, 3.714762207861618*^9}, 3.714762243220236*^9, {
    3.714762394985923*^9, 3.714762396248605*^9}, {3.714762624652907*^9, 
    3.7147626284846573`*^9}},ExpressionUUID->"395ecf61-6d57-4cb0-af54-\
-5d6fcd1b53fc"]
+5d6fcd1b53fc"],
+
+Cell["\<\
+From here on, it will be easier to develop code for a more general 2D \
+manifold and apply it to different manifolds with different coordinate maps. \
+(Most of this code and equations are taken from [Geodesics Using Mathematica \
+by Lewis]. The equations we will use are\
+\>", "Text",
+ CellChangeTimes->{{3.714765058309765*^9, 3.714765138092313*^9}, {
+  3.7147653714903803`*^9, 
+  3.714765378713826*^9}},ExpressionUUID->"6210707c-c995-4c5c-91fe-\
+4fc21118a88e"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[GridBox[{
+    {GridBox[{
+       {
+        RowBox[{
+         RowBox[{
+          RowBox[{"u", "'"}], "=", "p"}], "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"v", "'"}], "=", "q"}], "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"p", "'"}], "=", 
+          RowBox[{
+           FractionBox[
+            RowBox[{"-", "1"}], 
+            RowBox[{
+             SubscriptBox[
+              StyleBox["x",
+               FontWeight->"Bold"], "u"], "\[CenterDot]", 
+             SubscriptBox[
+              StyleBox["x",
+               FontWeight->"Bold"], "u"]}]], 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "uu"], "\[CenterDot]", 
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "u"]}], 
+              SuperscriptBox["p", "2"]}], "+", 
+             RowBox[{"2", 
+              RowBox[{
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "uv"], "\[CenterDot]", 
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "u"]}], "p", " ", "q"}], "+", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "vv"], "\[CenterDot]", 
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "u"]}], 
+              SuperscriptBox["q", "2"]}]}], ")"}]}]}], "\[IndentingNewLine]", 
+         
+         RowBox[{
+          RowBox[{"q", "'"}], "=", 
+          RowBox[{
+           FractionBox[
+            RowBox[{"-", "1"}], 
+            RowBox[{
+             SubscriptBox[
+              StyleBox["x",
+               FontWeight->"Bold"], "v"], "\[CenterDot]", 
+             SubscriptBox[
+              StyleBox["x",
+               FontWeight->"Bold"], "v"]}]], 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "uu"], "\[CenterDot]", 
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "v"]}], 
+              SuperscriptBox["p", "2"]}], "+", 
+             RowBox[{"2", 
+              RowBox[{
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "uv"], "\[CenterDot]", 
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "v"]}], "p", " ", "q"}], "+", 
+             RowBox[{
+              RowBox[{
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "vv"], "\[CenterDot]", 
+               SubscriptBox[
+                StyleBox["x",
+                 FontWeight->"Bold"], "v"]}], 
+              SuperscriptBox["q", "2"]}]}], ")"}]}]}]}]}
+      },
+      GridBoxAlignment->{"Columns" -> {{"="}}}]}
+   },
+   GridBoxItemSize->{"Columns" -> {{
+        Scaled[0.96]}}}], 
+  TraditionalForm]],ExpressionUUID->"135887dc-ca16-43c2-969a-9768a5c308f9"]], \
+"Text",
+ CellChangeTimes->{{3.714765167964666*^9, 
+  3.7147653440785933`*^9}},ExpressionUUID->"f7ecb44e-b7ca-47ea-91fe-\
+53258288941c"],
+
+Cell[TextData[{
+ "where ",
+ StyleBox["x ",
+  FontWeight->"Bold"],
+ "is the coordinate map from the u-v plane onto the 2D manifold. These \
+equations are a system of four first order ordinary differential equations. \
+We use a similar procedure used as in [Lewis] to translate this system of \
+equations to Mathematica:"
+}], "Text",
+ CellChangeTimes->{{3.714765382512278*^9, 3.7147654030798283`*^9}, {
+  3.714765435543318*^9, 3.7147654595017548`*^9}, {3.714765495078827*^9, 
+  3.714765527229508*^9}, {3.7147657095664577`*^9, 
+  3.714765714533298*^9}},ExpressionUUID->"18011d85-70e2-4e58-b32f-\
+6fe2792d44cc"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "geodesicequations", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"geodesicequations", "[", "x_", "]"}], "[", 
+     RowBox[{"u_", ",", "v_", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"u0_:", "0"}], ",", 
+        RowBox[{"v0_:", "0"}]}], "}"}], ",", "\[Theta]_"}], "]"}], "[", "s_", 
+    "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"xu", ",", "xv", ",", "xuu", ",", "xuv", ",", "xvv"}], "}"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"xu", "=", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"u", ",", "v"}], "]"}], ",", "u"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"xv", "=", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"u", ",", "v"}], "]"}], ",", "v"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"xuu", "=", 
+       RowBox[{"D", "[", 
+        RowBox[{"xu", ",", "u"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"xuv", "=", 
+       RowBox[{"D", "[", 
+        RowBox[{"xu", ",", "v"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"xvv", "=", 
+       RowBox[{"D", "[", 
+        RowBox[{"xv", ",", "v"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Simplify", "[", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"u", "''"}], "[", "s", "]"}], "==", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1"}], "/", 
+             RowBox[{"xu", ".", "xu"}]}], ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"xuu", ".", "xu"}], " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"u", "'"}], "[", "s", "]"}], ")"}], "2"]}], "+", 
+             RowBox[{"2", 
+              RowBox[{"xuv", ".", "xu"}], " ", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"u", "'"}], "[", "s", "]"}], ")"}], 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"v", "'"}], "[", "s", "]"}], ")"}]}], "+", 
+             RowBox[{
+              RowBox[{"xvv", ".", "xu"}], " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"v", "'"}], "[", "s", "]"}], ")"}], "2"]}]}], 
+            ")"}]}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"v", "''"}], "[", "s", "]"}], "==", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1"}], "/", 
+             RowBox[{"xv", ".", "xv"}]}], ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"xuu", ".", "xv"}], " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"u", "'"}], "[", "s", "]"}], ")"}], "2"]}], "+", 
+             RowBox[{"2", 
+              RowBox[{"xuv", ".", "xv"}], " ", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"u", "'"}], "[", "s", "]"}], ")"}], 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"v", "'"}], "[", "s", "]"}], ")"}]}], "+", 
+             RowBox[{
+              RowBox[{"xvv", ".", "xv"}], " ", 
+              SuperscriptBox[
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"v", "'"}], "[", "s", "]"}], ")"}], "2"]}]}], 
+            ")"}]}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"u", "[", "0", "]"}], "\[Equal]", "u0"}], ",", 
+         RowBox[{
+          RowBox[{"v", "[", "0", "]"}], "\[Equal]", "v0"}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"u", "'"}], "[", "0", "]"}], "\[Equal]", 
+          RowBox[{"Cos", "[", "\[Theta]", "]"}]}], ",", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"v", "'"}], "[", "0", "]"}], "\[Equal]", 
+          RowBox[{"Sin", "[", "\[Theta]", "]"}]}]}], "}"}], 
+       "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"nsteponce", "[", "geoeqns_", "]"}], "[", 
+     RowBox[{"u_", ",", "v_", ",", "steplength_"}], "]"}], "[", "s_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"uu", ",", "vv"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"uu", "[", "s", "]"}], ",", 
+         RowBox[{"vv", "[", "s", "]"}]}], "}"}], "=", 
+       RowBox[{"NDSolveValue", "[", " ", 
+        RowBox[{"geoeqns", ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"u", "[", "s", "]"}], ",", 
+           RowBox[{"v", "[", "s", "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"s", ",", "0", ",", "steplength"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"uu", "[", "steplength", "]"}], ",", 
+        RowBox[{"vv", "[", "steplength", "]"}]}], "}"}]}]}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.714765530217992*^9, 3.714765682118379*^9}, {
+  3.714765718277842*^9, 3.71476575876538*^9}, {3.71476581344558*^9, 
+  3.714766001207467*^9}, {3.7147660915817127`*^9, 3.714766524977762*^9}, {
+  3.714766673881971*^9, 3.714766699232361*^9}, {3.714766737582478*^9, 
+  3.714766939879107*^9}, {3.714767033291875*^9, 3.714767107798924*^9}, {
+  3.714767145602619*^9, 3.7147672888742933`*^9}, {3.714767383496462*^9, 
+  3.714767394022917*^9}},ExpressionUUID->"a8ad0bf4-78a4-410e-81ab-\
+694b20d7d347"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"sphere", ",", "geosphere"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"sphere", "[", 
+      RowBox[{"u_", ",", "v_"}], "]"}], ":=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Cos", "[", "u", "]"}], 
+        RowBox[{"Cos", "[", "v", "]"}]}], ",", 
+       RowBox[{
+        RowBox[{"Cos", "[", "v", "]"}], 
+        RowBox[{"Sin", "[", "u", "]"}]}], ",", 
+       RowBox[{"Sin", "[", "v", "]"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
+    
+    RowBox[{"geosphere", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"geodesicequations", "[", "sphere", "]"}], "[", 
+       RowBox[{"u", ",", "v", ",", 
+        RowBox[{"{", 
+         RowBox[{"u0", ",", "v0"}], "}"}], ",", "\[Theta]"}], "]"}], "[", "s",
+       "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"nsteponce", "[", "geosphere", "]"}], "[", 
+      RowBox[{"u", ",", "v", ",", 
+       RowBox[{"\[Pi]", "/", "10"}]}], "]"}], "[", "s", "]"}]}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.714766009748665*^9, 3.7147660558046722`*^9}, {
+  3.71476694836586*^9, 3.7147669594521093`*^9}, {3.714767165109839*^9, 
+  3.714767193996791*^9}, {3.714767305050459*^9, 
+  3.7147673383443327`*^9}},ExpressionUUID->"a9e39c26-16f6-4121-a386-\
+191df73afe55"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NDSolveValue","dvnoarg",
+   "\"The function \\!\\(\\*RowBox[{\\\"v\\\"}]\\) appears with no arguments.\
+\"",2,36,4,17103502534359671259,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.714767350298925*^9, 
+  3.714767397657558*^9},ExpressionUUID->"47b84d03-f378-4d6f-97f3-\
+17c18d1116b4"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Set","shape",
+   "\"Lists \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"uu$7286\\\", \
+\\\"[\\\", \\\"s\\\", \\\"]\\\"}], \\\",\\\", RowBox[{\\\"vv$7286\\\", \
+\\\"[\\\", \\\"s\\\", \\\"]\\\"}]}], \\\"}\\\"}]\\) and \
+\\!\\(\\*RowBox[{\\\"NDSolveValue\\\", \\\"[\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{RowBox[{RowBox[{\\\"2\\\", \\\" \\\", RowBox[{\\\"Tan\\\", \\\"[\\\", \
+\\\"v\\\", \\\"]\\\"}], \\\" \\\", RowBox[{SuperscriptBox[\\\"u\\\", \\\"\
+\[Prime]\\\", Rule[MultilineFunction, None]], \\\"[\\\", \\\"s\\\", \
+\\\"]\\\"}], \\\" \\\", RowBox[{SuperscriptBox[\\\"v\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"s\\\", \\\"]\\\"}]}], \\\"\
+\[Equal]\\\", RowBox[{SuperscriptBox[\\\"u\\\", \\\"\[Prime]\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"s\\\", \\\"]\\\"}]}], \
+\\\",\\\", RowBox[{RowBox[{RowBox[{RowBox[{\\\"Cos\\\", \\\"[\\\", \\\"v\\\", \
+\\\"]\\\"}], \\\" \\\", RowBox[{\\\"Sin\\\", \\\"[\\\", \\\"v\\\", \
+\\\"]\\\"}], \\\" \\\", SuperscriptBox[RowBox[{SuperscriptBox[\\\"u\\\", \\\"\
+\[Prime]\\\", Rule[MultilineFunction, None]], \\\"[\\\", \\\"s\\\", \
+\\\"]\\\"}], \\\"2\\\"]}], \\\"+\\\", RowBox[{SuperscriptBox[\\\"v\\\", \\\"\
+\[Prime]\[Prime]\\\", Rule[MultilineFunction, None]], \\\"[\\\", \\\"s\\\", \
+\\\"]\\\"}]}], \\\"\[Equal]\\\", \\\"0\\\"}], \\\",\\\", RowBox[{\\\"u0\\\", \
+\\\"\[Equal]\\\", RowBox[{\\\"u\\\", \\\"[\\\", \\\"0\\\", \\\"]\\\"}]}], \
+\\\",\\\", RowBox[{\\\"v0\\\", \\\"\[Equal]\\\", RowBox[{\\\"v\\\", \
+\\\"[\\\", \\\"0\\\", \\\"]\\\"}]}], \\\",\\\", RowBox[{RowBox[{\\\"Cos\\\", \
+\\\"[\\\", \\\"\[Theta]\\\", \\\"]\\\"}], \\\"\[Equal]\\\", \
+RowBox[{SuperscriptBox[\\\"u\\\", \\\"\[Prime]\\\", Rule[MultilineFunction, \
+None]], \\\"[\\\", \\\"0\\\", \\\"]\\\"}]}], \\\",\\\", \
+RowBox[{RowBox[{\\\"Sin\\\", \\\"[\\\", \\\"\[Theta]\\\", \\\"]\\\"}], \\\"\
+\[Equal]\\\", RowBox[{SuperscriptBox[\\\"v\\\", \\\"\[Prime]\\\", \
+Rule[MultilineFunction, None]], \\\"[\\\", \\\"0\\\", \\\"]\\\"}]}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"u\\\", \\\"[\\\
+\", \\\"s\\\", \\\"]\\\"}], \\\",\\\", RowBox[{\\\"v\\\", \\\"[\\\", \
+\\\"s\\\", \\\"]\\\"}]}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\
+\\\"s\\\", \\\",\\\", \\\"0\\\", \\\",\\\", FractionBox[\\\"\[Pi]\\\", \\\"10\
+\\\"]}], \\\"}\\\"}]}], \\\"]\\\"}]\\) are not the same shape.\"",2,36,5,
+   17103502534359671259,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.714767350298925*^9, 
+  3.714767397672635*^9},ExpressionUUID->"072f3fd1-bc63-47e1-b80b-\
+b8bc2fd1bddf"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"uu$7286", "[", 
+    FractionBox["\[Pi]", "10"], "]"}], ",", 
+   RowBox[{"vv$7286", "[", 
+    FractionBox["\[Pi]", "10"], "]"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.7147660572077227`*^9, {3.714766262885569*^9, 3.714766281725184*^9}, 
+   3.714766520105242*^9, {3.714766926129109*^9, 3.714766960833955*^9}, {
+   3.714767161328002*^9, 3.714767166865711*^9}, 3.714767297154599*^9, 
+   3.714767350316493*^9, 
+   3.714767397673842*^9},ExpressionUUID->"551d8a43-1988-4fc4-960f-\
+542763f19b8d"]
+}, Open  ]]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -442,9 +837,10 @@ Cell["Sphere", "Subsection",
   3.71476286567797*^9}},ExpressionUUID->"1863643d-8469-43ee-a8d5-\
 282e03d22a48"],
 
-Cell["The Christoffel symbols for the sphere are", "Text",
- CellChangeTimes->{{3.714762869302024*^9, 
-  3.714762884532858*^9}},ExpressionUUID->"eb4dc2af-b030-48a0-9364-\
+Cell["", "Text",
+ CellChangeTimes->{{3.714762869302024*^9, 3.714762884532858*^9}, {
+  3.714765045525178*^9, 
+  3.714765048537051*^9}},ExpressionUUID->"eb4dc2af-b030-48a0-9364-\
 345ef2e11a7b"]
 }, Open  ]],
 
@@ -497,15 +893,33 @@ Cell[10151, 312, 584, 17, 33, "Text", "ExpressionUUID" -> \
 Cell[10738, 331, 1074, 35, 33, "Text", "ExpressionUUID" -> \
 "754679e6-d8ff-4e74-9c75-b27387f8e957"],
 Cell[11815, 368, 2528, 66, 330, "Input", "ExpressionUUID" -> \
-"395ecf61-6d57-4cb0-af54-5d6fcd1b53fc"]
+"395ecf61-6d57-4cb0-af54-5d6fcd1b53fc"],
+Cell[14346, 436, 471, 9, 55, "Text", "ExpressionUUID" -> \
+"6210707c-c995-4c5c-91fe-4fc21118a88e"],
+Cell[14820, 447, 3351, 99, 131, "Text", "ExpressionUUID" -> \
+"f7ecb44e-b7ca-47ea-91fe-53258288941c"],
+Cell[18174, 548, 607, 13, 55, "Text", "ExpressionUUID" -> \
+"18011d85-70e2-4e58-b32f-6fe2792d44cc"],
+Cell[18784, 563, 5804, 158, 393, "Input", "ExpressionUUID" -> \
+"a8ad0bf4-78a4-410e-81ab-694b20d7d347"],
+Cell[CellGroupData[{
+Cell[24613, 725, 1384, 37, 125, "Input", "ExpressionUUID" -> \
+"a9e39c26-16f6-4121-a386-191df73afe55"],
+Cell[26000, 764, 342, 8, 23, "Message", "ExpressionUUID" -> \
+"47b84d03-f378-4d6f-97f3-17c18d1116b4"],
+Cell[26345, 774, 2610, 39, 80, "Message", "ExpressionUUID" -> \
+"072f3fd1-bc63-47e1-b80b-b8bc2fd1bddf"],
+Cell[28958, 815, 545, 13, 79, "Output", "ExpressionUUID" -> \
+"551d8a43-1988-4fc4-960f-542763f19b8d"]
+}, Open  ]]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[14380, 439, 152, 3, 45, "Subsection", "ExpressionUUID" -> \
+Cell[29552, 834, 152, 3, 45, "Subsection", "ExpressionUUID" -> \
 "1863643d-8469-43ee-a8d5-282e03d22a48"],
-Cell[14535, 444, 184, 3, 33, "Text", "ExpressionUUID" -> \
+Cell[29707, 839, 191, 4, 33, "Text", "ExpressionUUID" -> \
 "eb4dc2af-b030-48a0-9364-345ef2e11a7b"]
 }, Open  ]],
-Cell[14734, 450, 155, 3, 44, "Subsection", "ExpressionUUID" -> \
+Cell[29913, 846, 155, 3, 44, "Subsection", "ExpressionUUID" -> \
 "53d846d5-0748-4013-8a30-6833e5b89236"]
 }
 ]
