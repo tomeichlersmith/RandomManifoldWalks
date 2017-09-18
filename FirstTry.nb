@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     15995,        479]
-NotebookOptionsPosition[     14359,        437]
-NotebookOutlinePosition[     14693,        452]
-CellTagsIndexPosition[     14650,        449]
+NotebookDataLength[     16874,        505]
+NotebookOptionsPosition[     14893,        455]
+NotebookOutlinePosition[     15227,        470]
+CellTagsIndexPosition[     15184,        467]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -433,7 +433,25 @@ Cell[BoxData[{
    3.714762394985923*^9, 3.714762396248605*^9}, {3.714762624652907*^9, 
    3.7147626284846573`*^9}},ExpressionUUID->"395ecf61-6d57-4cb0-af54-\
 5d6fcd1b53fc"]
-}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Sphere", "Subsection",
+ CellChangeTimes->{{3.71476286402985*^9, 
+  3.71476286567797*^9}},ExpressionUUID->"1863643d-8469-43ee-a8d5-\
+282e03d22a48"],
+
+Cell["The Christoffel symbols for the sphere are", "Text",
+ CellChangeTimes->{{3.714762869302024*^9, 
+  3.714762884532858*^9}},ExpressionUUID->"eb4dc2af-b030-48a0-9364-\
+345ef2e11a7b"]
+}, Open  ]],
+
+Cell["Torus", "Subsection",
+ CellChangeTimes->{{3.714762853714737*^9, 
+  3.7147628583094788`*^9}},ExpressionUUID->"53d846d5-0748-4013-8a30-\
+6833e5b89236"]
 },
 WindowSize->{1280, 779},
 WindowMargins->{{0, Automatic}, {Automatic, 0}},
@@ -480,7 +498,15 @@ Cell[10738, 331, 1074, 35, 33, "Text", "ExpressionUUID" -> \
 "754679e6-d8ff-4e74-9c75-b27387f8e957"],
 Cell[11815, 368, 2528, 66, 330, "Input", "ExpressionUUID" -> \
 "395ecf61-6d57-4cb0-af54-5d6fcd1b53fc"]
-}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14380, 439, 152, 3, 45, "Subsection", "ExpressionUUID" -> \
+"1863643d-8469-43ee-a8d5-282e03d22a48"],
+Cell[14535, 444, 184, 3, 33, "Text", "ExpressionUUID" -> \
+"eb4dc2af-b030-48a0-9364-345ef2e11a7b"]
+}, Open  ]],
+Cell[14734, 450, 155, 3, 44, "Subsection", "ExpressionUUID" -> \
+"53d846d5-0748-4013-8a30-6833e5b89236"]
 }
 ]
 *)
