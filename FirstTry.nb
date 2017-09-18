@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     16422,        489]
-NotebookOptionsPosition[     14572,        443]
-NotebookOutlinePosition[     14906,        458]
-CellTagsIndexPosition[     14863,        455]
+NotebookDataLength[     15995,        479]
+NotebookOptionsPosition[     14359,        437]
+NotebookOutlinePosition[     14693,        452]
+CellTagsIndexPosition[     14650,        449]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -366,7 +366,7 @@ Cell[TextData[Cell[BoxData[
   3.714413551908454*^9}},ExpressionUUID->"754679e6-d8ff-4e74-9c75-\
 b27387f8e957"],
 
-Cell[BoxData[
+Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"planewalk", "[", 
@@ -403,42 +403,36 @@ Cell[BoxData[
         RowBox[{"{", 
          RowBox[{"0", ",", "0"}], "}"}], ",", "\[IndentingNewLine]", 
         "numsteps"}], "\[IndentingNewLine]", "]"}]}]}], "]"}]}], 
-  ";"}]], "Input",
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"planehist", "[", 
+     RowBox[{"steplength_", ",", "numsteps_"}], "]"}], "[", "numpts_", "]"}], 
+   ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "data", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"data", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"Norm", "[", 
+          RowBox[{
+           RowBox[{"planewalk", "[", 
+            RowBox[{"steplength", ",", "numsteps"}], "]"}], "[", 
+           RowBox[{"[", 
+            RowBox[{"-", "1"}], "]"}], "]"}], "]"}], ",", 
+         RowBox[{"{", "numpts", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+      
+      RowBox[{"Histogram", "[", 
+       RowBox[{"{", "data", "}"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}], 
+  ";"}]}], "Input",
  CellChangeTimes->{{3.714413594869421*^9, 3.714413914850059*^9}, {
    3.714762175192156*^9, 3.714762207861618*^9}, 3.714762243220236*^9, {
-   3.714762394985923*^9, 
-   3.714762396248605*^9}},ExpressionUUID->"395ecf61-6d57-4cb0-af54-\
-5d6fcd1b53fc"],
-
-Cell[BoxData[
- RowBox[{"Module", "[", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"numpts", ",", "data"}], "}"}], ",", "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"numpts", "=", "2000"}], ";", "\[IndentingNewLine]", 
-    RowBox[{"data", "=", 
-     RowBox[{"Table", "[", 
-      RowBox[{
-       RowBox[{"Norm", "[", 
-        RowBox[{
-         RowBox[{"planewalk", "[", 
-          RowBox[{"1", ",", "200"}], "]"}], "[", 
-         RowBox[{"[", 
-          RowBox[{"-", "1"}], "]"}], "]"}], "]"}], ",", 
-       RowBox[{"{", "numpts", "}"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
-    RowBox[{"Histogram", "[", 
-     RowBox[{"{", "data", "}"}], "]"}]}]}], "\[IndentingNewLine]", 
-  "]"}]], "Input",
- CellChangeTimes->{{3.714762246543076*^9, 3.714762267115076*^9}, {
-  3.714762336588716*^9, 3.7147624219670486`*^9}, {3.7147624772327642`*^9, 
-  3.714762533732348*^9}},ExpressionUUID->"5674f540-5b56-4104-a317-\
-25522331fcec"],
-
-Cell[BoxData[""], "Input",
- CellChangeTimes->{{3.714762538251539*^9, 
-  3.714762538269202*^9}},ExpressionUUID->"0969718f-8b0a-4cae-8de4-\
-03ae2166d8be"]
+   3.714762394985923*^9, 3.714762396248605*^9}, {3.714762624652907*^9, 
+   3.7147626284846573`*^9}},ExpressionUUID->"395ecf61-6d57-4cb0-af54-\
+5d6fcd1b53fc"]
 }, Open  ]]
 },
 WindowSize->{1280, 779},
@@ -484,12 +478,8 @@ Cell[10151, 312, 584, 17, 33, "Text", "ExpressionUUID" -> \
 "940d71ed-e550-42f6-9d1e-8113d16f7fb3"],
 Cell[10738, 331, 1074, 35, 33, "Text", "ExpressionUUID" -> \
 "754679e6-d8ff-4e74-9c75-b27387f8e957"],
-Cell[11815, 368, 1665, 42, 239, "Input", "ExpressionUUID" -> \
-"395ecf61-6d57-4cb0-af54-5d6fcd1b53fc"],
-Cell[13483, 412, 918, 23, 124, "Input", "ExpressionUUID" -> \
-"5674f540-5b56-4104-a317-25522331fcec"],
-Cell[14404, 437, 152, 3, 32, InheritFromParent, "ExpressionUUID" -> \
-"0969718f-8b0a-4cae-8de4-03ae2166d8be"]
+Cell[11815, 368, 2528, 66, 330, "Input", "ExpressionUUID" -> \
+"395ecf61-6d57-4cb0-af54-5d6fcd1b53fc"]
 }, Open  ]]
 }
 ]
