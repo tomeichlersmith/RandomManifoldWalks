@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     76915,       2031]
-NotebookOptionsPosition[     73368,       1943]
-NotebookOutlinePosition[     73702,       1958]
-CellTagsIndexPosition[     73659,       1955]
+NotebookDataLength[     82213,       2188]
+NotebookOptionsPosition[     77977,       2084]
+NotebookOutlinePosition[     78311,       2099]
+CellTagsIndexPosition[     78268,       2096]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1939,6 +1939,147 @@ VN6QQV6gnmXwYSZGRTfSp03m4Hy0+0vrDUy8LBVUN0bJYG/tRaLChoWF30sG
   3.7152624659468527`*^9}},ExpressionUUID->"b669496c-d002-4925-9e24-\
 6358c85c9870"]
 }, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Region Area", "Subsection",
+ CellChangeTimes->{{3.715288900676347*^9, 
+  3.7152889020913267`*^9}},ExpressionUUID->"458d157b-e48f-4da5-9c20-\
+8e780f2a919e"],
+
+Cell["Chapter 6 of Diff Geo of Curves and Surfaces", "Text",
+ CellChangeTimes->{{3.715288913787273*^9, 
+  3.7152889340259132`*^9}},ExpressionUUID->"cac55272-1860-4ab5-9dc3-\
+a299a8f5b58a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "metricdet", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"metricdet", "[", "x_", "]"}], "[", 
+    RowBox[{"u_", ",", "v_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"xu", ",", "xv", ",", "g"}], "}"}], ",", "\[IndentingNewLine]", 
+     
+     RowBox[{
+      RowBox[{"xu", "=", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"u", ",", "v"}], "]"}], ",", "u"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"xv", "=", 
+       RowBox[{"D", "[", 
+        RowBox[{
+         RowBox[{"x", "[", 
+          RowBox[{"u", ",", "v"}], "]"}], ",", "v"}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"g", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"xu", ".", "xu"}], ",", 
+           RowBox[{"xu", ".", "xv"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"xv", ".", "xu"}], ",", 
+           RowBox[{"xv", ".", "xv"}]}], "}"}]}], "}"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Simplify", "[", 
+       RowBox[{"Det", "[", "g", "]"}], "]"}]}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"regionarea", "[", "metdet_", "]"}], "[", "region_", "]"}], ":=", 
+   
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"u", ",", "v"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Integrate", "[", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", 
+        RowBox[{"metdet", "[", 
+         RowBox[{"u", ",", "v"}], "]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"u", ",", "v"}], "}"}], "\[Element]", "region"}]}], "]"}]}], 
+    "\[IndentingNewLine]", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.71528894186749*^9, 3.7152890871192627`*^9}, {
+  3.715289135269499*^9, 3.715289175643854*^9}, {3.715289221554978*^9, 
+  3.7152892453374357`*^9}, {3.715289379421669*^9, 
+  3.7152894569382973`*^9}},ExpressionUUID->"a53572d6-50c9-4428-b419-\
+b259d4591948"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Module", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"sphere", ",", "spheremetdet", ",", "reg"}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"sphere", "[", 
+      RowBox[{"u_", ",", "v_"}], "]"}], ":=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Cos", "[", "u", "]"}], 
+        RowBox[{"Sin", "[", "v", "]"}]}], ",", 
+       RowBox[{
+        RowBox[{"Sin", "[", "u", "]"}], 
+        RowBox[{"Sin", "[", "v", "]"}]}], ",", 
+       RowBox[{"Cos", "[", "v", "]"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
+    
+    RowBox[{
+     RowBox[{"spheremetdet", "[", 
+      RowBox[{"u_", ",", "v_"}], "]"}], ":=", 
+     RowBox[{"Evaluate", "[", 
+      RowBox[{
+       RowBox[{"metricdet", "[", "sphere", "]"}], "[", 
+       RowBox[{"u", ",", "v"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"reg", " ", "=", " ", 
+     RowBox[{"ParametricRegion", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"u", ",", "v"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"u", ",", "0", ",", "\[Pi]"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"v", ",", "0", ",", "1"}], "}"}]}], "}"}]}], "]"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"regionarea", "[", "spheremetdet", "]"}], "[", "reg", "]"}]}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.715289091432743*^9, 3.71528912962076*^9}, {
+  3.715289231554276*^9, 3.715289301657874*^9}, {3.715289466722241*^9, 
+  3.715289532913838*^9}},ExpressionUUID->"f81e5c4c-c84f-4ea1-8d8b-\
+4d37c8419c41"],
+
+Cell[BoxData[
+ RowBox[{"\[Pi]", "-", 
+  RowBox[{"\[Pi]", " ", 
+   RowBox[{"Cos", "[", "1", "]"}]}]}]], "Output",
+ CellChangeTimes->{{3.715289524549563*^9, 
+  3.71528953347304*^9}},ExpressionUUID->"67e190b6-01f8-4a0e-8917-\
+fe798e85fe64"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.715289499514523*^9, 
+  3.71528950747314*^9}},ExpressionUUID->"214f5f7d-b917-4a15-bad9-\
+ff48abd24da2"]
 }, Open  ]]
 },
 WindowSize->{1280, 779},
@@ -2013,7 +2154,7 @@ Cell[42293, 1157, 3378, 62, 203, "Output", "ExpressionUUID" -> \
 Cell[CellGroupData[{
 Cell[45708, 1224, 2460, 69, 216, "Input", "ExpressionUUID" -> \
 "8250fb62-87ea-407c-aeb5-50dfc9b06653"],
-Cell[48171, 1295, 8342, 242, 274, "Output", "ExpressionUUID" -> \
+Cell[48171, 1295, 8342, 242, 241, "Output", "ExpressionUUID" -> \
 "028412a1-2d1e-4983-bca2-16f504a7687f"]
 }, Open  ]]
 }, Open  ]],
@@ -2032,6 +2173,22 @@ Cell[63511, 1718, 4354, 123, 377, "Input", "ExpressionUUID" -> \
 Cell[67868, 1843, 5472, 96, 381, "Output", "ExpressionUUID" -> \
 "b669496c-d002-4925-9e24-6358c85c9870"]
 }, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[73389, 1945, 161, 3, 45, "Subsection", "ExpressionUUID" -> \
+"458d157b-e48f-4da5-9c20-8e780f2a919e"],
+Cell[73553, 1950, 188, 3, 33, "Text", "ExpressionUUID" -> \
+"cac55272-1860-4ab5-9dc3-a299a8f5b58a"],
+Cell[73744, 1955, 2158, 63, 240, "Input", "ExpressionUUID" -> \
+"a53572d6-50c9-4428-b419-b259d4591948"],
+Cell[CellGroupData[{
+Cell[75927, 2022, 1628, 45, 147, "Input", "ExpressionUUID" -> \
+"f81e5c4c-c84f-4ea1-8d8b-4d37c8419c41"],
+Cell[77558, 2069, 237, 6, 89, "Output", "ExpressionUUID" -> \
+"67e190b6-01f8-4a0e-8917-fe798e85fe64"]
+}, Open  ]],
+Cell[77810, 2078, 151, 3, 32, "Input", "ExpressionUUID" -> \
+"214f5f7d-b917-4a15-bad9-ff48abd24da2"]
 }, Open  ]]
 }
 ]
