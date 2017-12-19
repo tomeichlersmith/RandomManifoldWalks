@@ -1,5 +1,7 @@
 
 
+#include <cmath>
+
 namespace MOSEY {
 
 	/**
@@ -18,6 +20,7 @@ namespace MOSEY {
 	/**
 	 * Sphere Coordinate Wrapper. Using most basic chart from unit square to
 	 * sphere.
+	 * Assumes (u,v) is not further than 1 unit outside of domain in either coordinate.
 	 */
 	CoordinateWrapperPtr SphereWrapper(double &u, double &v) {
 		
@@ -46,6 +49,7 @@ namespace MOSEY {
 	/**
 	 * Torus Coordinate Wrapper. Using most basic chart from unit square
 	 * to torus.
+	 * Assumes (u,v) is not further than 1 unit outside of domain in either coordinate.
 	 */
 	CoordinateWrapperPtr TorusWrapper(double &u, double &v) {
 		
