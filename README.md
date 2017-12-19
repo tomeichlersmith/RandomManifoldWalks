@@ -9,11 +9,14 @@ RandGen: Complex Uniform Random Double Generator
  - constructor
  - operator/function returning rand number
 
-typedef ChristoffelSymbolPtr double (*func)(double u, double v)
+typedef double (*ChristoffelSymbolPtr)(double u, double v)
  - Function that returns the value of a christoffel symbol at point (u,v)
 
-typedef CoordinateWrapperPtr double (*func)(double coord)
+typedef double (*CoordinateWrapperPtr)(double coord)
  - Function that returns the coordinate within the correct range, wrapping the coordinate (either bouncing back or transporting)
+ 
+typedef bool (*EscapeCheckPtr)(double u, double v)
+ - function to decide if point (u,v) is in the escape region
 
 Stepper: Perform Geodesic Walk for given christoffel symbols / coordinate limits
  - double ulow,uhigh,vlow,vhigh
@@ -29,9 +32,7 @@ Step: Node for Walk link list
  - double u
  - double v
 
-typedef EscapeCheckPtr bool (*func)(double u, double v)
- - function to decide if point (u,v) is in the escape region
-typedef StepPtr Step*
+typedef Step* StepPtr
 
 Walk: Stack Linked List - pg 794 in Savitch
  - StepPtr top
