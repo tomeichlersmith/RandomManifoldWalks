@@ -4,8 +4,6 @@ Mathematica and related files on performing random walks on various (simple and 
 ## Classes for C++ Implementation:
 
 RandGen: Complex Uniform Random Double Generator
- - double lowbound
- - double upperbound
  - constructor
  - operator/function returning rand number
 
@@ -19,7 +17,6 @@ typedef bool (*EscapeCheckPtr)(double u, double v)
  - function to decide if point (u,v) is in the escape region
 
 Stepper: Perform Geodesic Walk for given christoffel symbols / coordinate limits
- - double ulow,uhigh,vlow,vhigh
  - ChristoffelSymbolPtr Symbols[2][2][2]
  - int numsteps ⇒ number of steps to use in Runge-Kutta method (not number of steps in walk, this class performs a single step in the random walk)
  - CoordinateWrapperPtr ucoord, vcoord
