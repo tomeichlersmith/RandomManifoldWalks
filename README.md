@@ -10,7 +10,7 @@ RandGen: Complex Uniform Random Double Generator
 typedef double (*ChristoffelSymbolPtr)(double u, double v)
  - Function that returns the value of a christoffel symbol at point (u,v)
 
-typedef double (*CoordinateWrapperPtr)(double coord)
+typedef void (*CoordinateWrapperPtr)(double &u, double &v)
  - Function that returns the coordinate within the correct range, wrapping the coordinate (either bouncing back or transporting)
  
 typedef bool (*EscapeCheckPtr)(double u, double v)
@@ -19,7 +19,7 @@ typedef bool (*EscapeCheckPtr)(double u, double v)
 Stepper: Perform Geodesic Walk for given christoffel symbols / coordinate limits
  - ChristoffelSymbolPtr Symbols[2][2][2]
  - int numsteps ⇒ number of steps to use in Runge-Kutta method (not number of steps in walk, this class performs a single step in the random walk)
- - CoordinateWrapperPtr ucoord, vcoord
+ - CoordinateWrapperPtr coordwrap
  - constructor
  - Forward(double u0, double v0, double direction, double steplen, double &u1, double &v1)
 

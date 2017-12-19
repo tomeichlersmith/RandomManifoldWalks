@@ -1,5 +1,7 @@
 
 /**
  * Defining type of functions that wrap the coordinates to keep the domain points within the domain.
+ * Call by reference, changes input coordinates to a point in the domain that would map to the same
+ * point on the manifold.
  */
-typedef double (*CoordinateWrapperPtr)(double u);
+typedef void (*CoordinateWrapperPtr)(double &u, double &v);
