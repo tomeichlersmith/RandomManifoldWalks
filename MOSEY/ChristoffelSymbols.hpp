@@ -20,12 +20,12 @@ namespace MOSEY {
 									ChristoffelSymbolPtr _vuu, ChristoffelSymbolPtr _vuv, ChristoffelSymbolPtr _vvv) :
 									uuu(_uuu), uuv(_uuv), uvv(_uvv), vuu(_vuu), vuv(_vuv), vvv(_vvv) {}
 		
-			UUU() const { return uuu; }
-			UUV() const { return uuv; }
-			UVV() const { return uvv; }
-			VUU() const { return vuu; }
-			VUV() const { return vuv; }
-			VVV() const { return vvv; }
+			UUU(double u, double v) const { return uuu(u,v); }
+			UUV(double u, double v) const { return uuv(u,v); }
+			UVV(double u, double v) const { return uvv(u,v); }
+			VUU(double u, double v) const { return vuu(u,v); }
+			VUV(double u, double v) const { return vuv(u,v); }
+			VVV(double u, double v) const { return vvv(u,v); }
 		
 		private:
 			ChristoffelSymbolPtr uuu;

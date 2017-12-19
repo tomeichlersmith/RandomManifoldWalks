@@ -1,5 +1,7 @@
 
 
+#include <cmath>
+
 #include "ChristoffelSymbols.hpp"
 #include "CoordinateWrappers.hpp"
 
@@ -17,7 +19,7 @@ namespace MOSEY {
 			 * @param numsteps number of steps to be used in the Runge-Kutta method
 			 * @param coordwrap Coordinate Wrapping function for the manifold
 			 */
-			Stepper(CurvatureTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap) :
+			Stepper(CurveTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap) :
 				m_curvetensor(curvetensor), m_numsteps(numsteps), m_coordwrap(coordwrap) {}
 		
 			/**
@@ -34,14 +36,14 @@ namespace MOSEY {
 			 * @param u1 ending point, u coordinate
 			 * @param v1 ending point, v coordinate
 			 */
-			Forward(double u0, double v0, double direction, double steplen, double &u1, double &v1);
+			void Forward(const double u0, const double v0, const double direction, const double steplen, double &u1, double &v1) const;
 		
 		private:
 			/**
 			 * Pointers to functions defining the Christoffel symbols matching the manifold that is
 			 * walked on. 
 			 */
-			CurvatureTensor m_curvetensor;
+			CurveTensor m_curvetensor;
 		
 			/**
 			 * Number of steps to be used in the Runge-Kutta method. (NOT to be confused with number of
@@ -53,6 +55,11 @@ namespace MOSEY {
 			 * Pointer to function that will wrap the u,v coordinates appropriately for the manifold.
 			 */
 			CoordinateWrapperPtr m_coordwrap;
+			
+			/**
+			 * Helper Function for Runge-Kutta Method. Puts values for u,v,p,q in k array (size 4).
+			 */
+			void EvalSlope(double y[], double k[]) const;
 	};
 
 }
