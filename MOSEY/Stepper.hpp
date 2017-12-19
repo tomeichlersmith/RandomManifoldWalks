@@ -28,7 +28,7 @@ namespace MOSEY {
 			Stepper() : m_curvetensor(MOSEY::ZeroTensor), m_numsteps(1), m_coordwrap(MOSEY::PlaneWrapper) {}
 		
 			/**
-			 * function that performs the approxmation step
+			 * function that performs the approxmation step using the RK4 approximation method
 			 * @param u0 starting point, u coordinate
 			 * @param v0 starting point, v coordinate
 			 * @param direction starting angle (assumed to be from positive u-coordinate axis)
@@ -36,7 +36,8 @@ namespace MOSEY {
 			 * @param u1 ending point, u coordinate
 			 * @param v1 ending point, v coordinate
 			 */
-			void Forward(const double u0, const double v0, const double direction, const double steplen, double &u1, double &v1) const;
+			void Forward(const double u0, const double v0, const double direction, const double steplen,
+				double &u1, double &v1) const;
 		
 		private:
 			/**
@@ -57,7 +58,9 @@ namespace MOSEY {
 			CoordinateWrapperPtr m_coordwrap;
 			
 			/**
-			 * Helper Function for Runge-Kutta Method. Puts values for u,v,p,q in k array (size 4).
+			 * Helper Function for Runge-Kutta Method. Puts values for u,v,p,q in k array (size 4)
+			 * using u,v,p,q values from y array (size 4).
+			 * Assumes the two arrays are correctly formatted.
 			 */
 			void EvalSlope(double y[], double k[]) const;
 	};

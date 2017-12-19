@@ -54,6 +54,9 @@ namespace MOSEY {
 		u1 = y[0];
 		v1 = y[1];
 		
+		//Make sure coordinates stay within domain of chart
+		m_coordwrapper( u1 , v1 );
+		
 		return;
 	}
 	

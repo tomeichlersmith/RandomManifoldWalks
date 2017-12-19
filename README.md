@@ -17,10 +17,10 @@ typedef bool (*EscapeCheckPtr)(double u, double v)
  - function to decide if point (u,v) is in the escape region
 
 Stepper: Perform Geodesic Walk for given christoffel symbols / coordinate limits
- - ChristoffelSymbolPtr Symbols[2][2][2]
+ - CurveTensor curvetensor
  - int numsteps ⇒ number of steps to use in Runge-Kutta method (not number of steps in walk, this class performs a single step in the random walk)
  - CoordinateWrapperPtr coordwrap
- - constructor
+ - Constructor
  - Forward(double u0, double v0, double direction, double steplen, double &u1, double &v1)
 
 Step: Node for Walk link list
