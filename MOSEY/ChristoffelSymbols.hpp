@@ -32,3 +32,13 @@ class CurveTensor {
 		ChristoffelSymbolPtr vuv;
 		ChristoffelSymbolPtr vvv;
 };
+
+/**
+ * The Zero function in the Christoffel symbol type.
+ */
+ChristoffelSymbolPtr ZeroSymbol(double u, double v) { return 0; }
+
+/**
+ * The zero curvature tensor in the CurveTensor class.
+ */
+CurveTensor ZeroTensor( ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol );

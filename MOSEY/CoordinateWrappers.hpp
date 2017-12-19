@@ -5,3 +5,9 @@
  * point on the manifold.
  */
 typedef void (*CoordinateWrapperPtr)(double &u, double &v);
+
+/**
+ * Plane Coordinate Wrapper. Simplest coordinate wrapper because it
+ * does nothing to the coordinate point.
+ */
+CoordinateWrapperPtr PlaneWrapper(double &u, double &v) { /* Intentionally Empty */ }
