@@ -1,5 +1,8 @@
 
 
+#ifndef MOSEY_STEPPER_HPP
+#define MOSEY_STEPPER_HPP
+
 #include <cmath>
 
 #include "ChristoffelSymbols.hpp"
@@ -66,3 +69,5 @@ namespace MOSEY {
 	};
 
 }
+
+#endif

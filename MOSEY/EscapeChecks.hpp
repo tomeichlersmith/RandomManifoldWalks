@@ -1,5 +1,8 @@
 
 
+#ifndef MOSEY_ESCAPECHECKS_HPP
+#define MOSEY_ESCAPECHECKS_HPP
+
 namespace MOSEY {
 
 	/**
@@ -8,3 +11,5 @@ namespace MOSEY {
 	typedef bool (*EscapeCheckPtr)(double u, double v);
 	
 }
+
+#endif

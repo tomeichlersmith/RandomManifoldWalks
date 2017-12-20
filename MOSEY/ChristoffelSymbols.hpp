@@ -1,5 +1,8 @@
 
 
+#ifndef MOSEY_CHRISTOFFELSYMBOLS_HPP
+#define MOSEY_CHRISTOFFELSYMBOLS_HPP
+
 namespace MOSEY {
 
 	/**
@@ -47,3 +50,5 @@ namespace MOSEY {
 	CurveTensor ZeroTensor( ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol );
 
 }
+
+#endif

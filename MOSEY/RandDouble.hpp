@@ -1,5 +1,7 @@
 
 
+#ifndef MOSEY_RANDDOUBLE_HPP
+#define MOSEY_RANDDOUBLE_HPP
 
 #include <functional>
 #include <random>
@@ -34,3 +36,5 @@ namespace MOSEY {
 	};
 	
 }
+
+#endif

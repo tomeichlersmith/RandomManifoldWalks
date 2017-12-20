@@ -1,5 +1,8 @@
 
 
+#ifndef MOSEY_STEP_HPP
+#define MOSEY_STEP_HPP
+
 namespace MOSEY {
 
 	/**
@@ -70,3 +73,5 @@ namespace MOSEY {
 	
 	typedef Step* StepPtr;
 }
+
+#endif
