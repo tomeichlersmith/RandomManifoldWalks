@@ -43,6 +43,3 @@ Walk: Stack Linked List - pg 794 in Savitch
  - Subtract length_walked from total_walk_length when poping
  - Constructor
 
-Define default ChristoffelSymbolPtr (zero function)
-Define default EscapeCheckPtr (...)
-
