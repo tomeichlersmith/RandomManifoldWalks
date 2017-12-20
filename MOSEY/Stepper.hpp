@@ -64,6 +64,8 @@ namespace MOSEY {
 			 * Helper Function for Runge-Kutta Method. Puts values for u,v,p,q in k array (size 4)
 			 * using u,v,p,q values from y array (size 4).
 			 * Assumes the two arrays are correctly formatted.
+			 * @param y size 4 array that holds values that geodesic equations will be evaluated on
+			 * @param k size 4 array that will hold the value of the intermediary variables for the RK4 method
 			 */
 			void EvalSlope(double y[], double k[]) const;
 	};

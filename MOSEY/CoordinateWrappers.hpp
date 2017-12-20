@@ -3,8 +3,6 @@
 #ifndef MOSEY_COORDINATEWRAPPERS_HPP
 #define MOSEY_COORDINATEWRAPPERS_HPP
 
-#include <cmath>
-
 namespace MOSEY {
 
 	/**
