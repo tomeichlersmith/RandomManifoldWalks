@@ -3,7 +3,7 @@ Mathematica and related files on performing random walks on various (simple and 
 
 ## Classes for C++ Implementation:
 
-RandGen: Complex Uniform Random Double Generator
+RandGen: Uniform Random Real Generator
  - constructor
  - operator/function returning rand number
 

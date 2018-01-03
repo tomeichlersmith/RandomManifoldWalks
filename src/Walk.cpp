@@ -11,7 +11,9 @@ namespace MOSEY {
 		Walk(), m_step_length(step_length), m_escape_check(escape_check)
 		{ /*Intentionally Empty */ }
 	
-	Walk::Walk(const Walk& a_walk)
+	Walk::Walk(const Walk& a_walk) {
+		//Copy constructor - have to think (FUCK)
+	}
 	
 	Walk::~Walk() {
 		double u,v,len;
@@ -45,7 +47,7 @@ namespace MOSEY {
 	}
 	
 	void Walk::empty() const {
-		return (m_last = nullptr);
+		return (m_last == nullptr);
 	}
 	
 }
