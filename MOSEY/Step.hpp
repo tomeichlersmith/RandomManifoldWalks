@@ -15,44 +15,43 @@ namespace MOSEY {
 			/**
 			 * Preferred Constructor
 			 */
-			Step(Step* prev_step, const double length_walked, const double u, const double v) :
-				m_prev_step(prev_step), m_length_walked(length_walked), m_u(u), m_v(v) {}
+			Step(Step* prev_step, const double length_walked, const double u, const double v);
 			
 			/**
 			 * Default Constructor
 			 * Sets previous step to nullptr, length walked to zero and the point of the step to zero point
 			 */
-			Step() : m_prev_step(nullptr), m_length_walked(0), m_u(0), m_v(0) {}
+			Step();
 			
 			/**
 			 * Access pointer to previous step.
 			 */
-			Step* PrevStep() const { return m_prev_step; }
+			Step* PrevStep() const;
 			
 			/**
 			 * Access length walked to this step
 			 */
-			double LengthWalked() const { return m_length_walked; }
+			double LengthWalked() const;
 			
 			/**
 			 * Access point of step
 			 */
-			void StepPoint(double &u, double &v) const { u = m_u; v = m_v; return; }
+			void StepPoint(double &u, double &v) const;
 			
 			/**
 			 * Set pointer to previous step
 			 */
-			void SetPrevStep(const Step* prev_step) { m_prev_step = prev_step; return; }
+			void SetPrevStep(const Step* prev_step);
 			
 			/**
 			 * Set length walked to this step
 			 */
-			void SetLengthWalked(const double length_walked) { m_length_walked = length_walked; return; }
+			void SetLengthWalked(const double length_walked);
 			
 			/**
 			 * Set point of step
 			 */
-			void SetStepPoint(const double u, const double v) { m_u = u; m_v = v; return; }
+			void SetStepPoint(const double u, const double v);
 			
 		private:
 			/**
