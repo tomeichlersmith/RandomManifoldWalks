@@ -8,7 +8,7 @@ namespace MOSEY {
 	/**
 	 * Defining type of function that is considered a Christoffel Symbol
 	 */
-	typedef double (*ChristoffelSymbolPtr)(double u, double v);
+	typedef double (*ChristoffelSymbolPtr)(const double u, const double v);
 
 	/**
 	 * Curvature Tensor class. A short class that stores the Christoffel symbols for a two dimensional manifold.
@@ -22,12 +22,12 @@ namespace MOSEY {
 			CurveTensor(ChristoffelSymbolPtr _uuu, ChristoffelSymbolPtr _uuv, ChristoffelSymbolPtr _uvv,
 									ChristoffelSymbolPtr _vuu, ChristoffelSymbolPtr _vuv, ChristoffelSymbolPtr _vvv);
 		
-			UUU(double u, double v) const;
-			UUV(double u, double v) const;
-			UVV(double u, double v) const;
-			VUU(double u, double v) const;
-			VUV(double u, double v) const;
-			VVV(double u, double v) const;
+			UUU(const double u, const double v) const;
+			UUV(const double u, const double v) const;
+			UVV(const double u, const double v) const;
+			VUU(const double u, const double v) const;
+			VUV(const double u, const double v) const;
+			VVV(const double u, const double v) const;
 		
 		private:
 			ChristoffelSymbolPtr uuu;
@@ -37,7 +37,16 @@ namespace MOSEY {
 			ChristoffelSymbolPtr vuv;
 			ChristoffelSymbolPtr vvv;
 	};
+	
+	/**
+	 * The Zero function in the Christoffel symbol type.
+	 */
+	ChristoffelSymbolPtr ZeroSymbol(const double u, const double v);
 
+	/**
+	 * The zero curvature tensor in the CurveTensor class.
+	 */
+	CurveTensor ZeroTensor( ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol );
 }
 
 #endif
