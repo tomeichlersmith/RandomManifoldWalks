@@ -4,8 +4,12 @@
 
 #include "Step.hpp"
 #include "EscapeChecks.hpp"
+#include "RandDouble.hpp"
 
 namespace MOSEY {
+	
+	const long double TWO_PI = 2*M_PI;
+	
 	/**
 	 * Walk Class. Stack linked list, code copied heavily from Savitch 2009.
 	 */
@@ -19,7 +23,7 @@ namespace MOSEY {
 			/**
 			 * Preferred Constructor. Initializes empty stack and defines the escape check function and step length
 			 */
-			Walk(const double step_length, EscapeCheckPtr escape_check);
+			Walk(const double step_length, const double max_walk_length, EscapeCheckPtr escape_check, Stepper* stepper);
 			
 			/**
 			 * Copy Constructor.
@@ -46,11 +50,6 @@ namespace MOSEY {
 			 * length to escape
 			 */
 			void StepBackward(double &u, double &v, double &escape_length);
-		
-			/**
-			 * Utility function to tell if the stack is empty.
-			 */
-			bool Empty() const;
 			
 		private:
 			/**
@@ -77,6 +76,21 @@ namespace MOSEY {
 			 * function defining if the walk has entered the escape region
 			 */
 			EscapeCheckPtr m_escape_check;
+			
+			/**
+			 * Random number generator for direction
+			 */
+			RandDouble m_rand_gen(0,1);
+			
+			/**
+			 * Pointer to Stepper class instance that contains the necessary manifold information
+			 */
+			Stepper* m_stepper;
+			
+			/**
+			 * Utility function to tell if the stack is empty.
+			 */
+			bool Empty() const;
 			
 			/**
 			 * Add a new step to the walk and increment total_walk_length.

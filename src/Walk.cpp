@@ -4,11 +4,12 @@
 namespace MOSEY {
 	
 	Walk::Walk() : 
-		m_last(nullptr), m_total_length_walked(0), m_maximum_walk_length(100), m_step_length(1), m_escape_check(nullptr)
+		m_last(nullptr), m_total_length_walked(0), m_maximum_walk_length(100), m_step_length(1),
+		m_escape_check(nullptr), m_stepper(nullptr)
 		{ /* Intentionally Empty */ }
 	
-	Walk::Walk(const double step_length, const double max_walk_length, EscapeCheckPtr escape_check) :
-		Walk(), m_step_length(step_length), m_escape_check(escape_check)
+	Walk::Walk(const double step_length, const double max_walk_length, EscapeCheckPtr escape_check, Stepper* stepper) :
+		Walk(), m_step_length(step_length), m_escape_check(escape_check), m_stepper(stepper)
 		{ /*Intentionally Empty */ }
 	
 	Walk::Walk(const Walk& a_walk) {
@@ -64,7 +65,28 @@ namespace MOSEY {
 	}
 	
 	void Walk::StepForward() {
-		//Randomly step using Stepper
+		
+		//Get starting point
+		double u0, v0;
+		m_last->StepPoint( u0 , v0 );
+		
+		//Get random starting angle
+		double randdir = TWO_PI*m_rand_gen();
+		
+		//Declare ending point
+		double u1, v1;
+		
+		//Make a step using member variable step length
+		m_stepper->Forward( u0, v0 , randdir , m_step_length , u1 , v1 );
+		
+		//Increment total length walked
+		m_total_length_walked += m_step_length;
+		
+		//Push new step onto the stack
+		StepPtr newstep = new Step( m_last , m_total_length_walked , u1 , v1 );
+		m_last = newstep;
+		
+		return;
 	}
 	
 }
