@@ -17,15 +17,12 @@ namespace MOSEY {
 			 * Constructor.
 			 * Requires entry of minimum a and maximum b
 			 */
-			RandDouble(double minimum, double maximum) :
-				r( std::bind(
-					std::uniform_real_distribution<>( minimum , maximum ),
-					std::default_random_engine() ) ) {}
+			RandDouble(const double minimum, const double maximum);
 		
 			/**
 			 * Operator to return a random value from r
 			 */
-			double operator()() { return r(); }
+			double operator()();
 		
 		private:
 			/**
