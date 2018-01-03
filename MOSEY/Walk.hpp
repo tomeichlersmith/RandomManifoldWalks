@@ -3,6 +3,7 @@
 #define MOSEY_WALK_HPP
 
 #include "Step.hpp"
+#include "EscapeChecks.hpp"
 
 namespace MOSEY {
 	/**
@@ -29,23 +30,27 @@ namespace MOSEY {
 			 * Destructor. Avoiding memory leakage.
 			 */
 			~Walk();
-		
+			
 			/**
-			 * Add a new step to the walk and increment total_walk_length.
-			 * New step is in random direction and is made from m_last.
+			 * Set maximum walk length that will be allowed
 			 */
-			void stepforward();
-		
+			void SetMaximumWalkLength(const double max_walk_length);
+			
+			/**
+			 * Continues to step forward until the escape check returns true begining at input point
+			 */
+			void Wander(const double u, const double v);
+			
 			/**
 			 * Remove a single step off the top of the stack and "return" the point and
 			 * length to escape
 			 */
-			void stepbackward(double &u, double &v, double &escape_length);
+			void StepBackward(double &u, double &v, double &escape_length);
 		
 			/**
 			 * Utility function to tell if the stack is empty.
 			 */
-			bool empty() const;
+			bool Empty() const;
 			
 		private:
 			/**
@@ -64,9 +69,20 @@ namespace MOSEY {
 			double m_total_length_walked;
 			
 			/**
+			 * maximum walk length (to avoid infinite loops)
+			 */
+			double m_maximum_walk_length;
+			
+			/**
 			 * function defining if the walk has entered the escape region
 			 */
 			EscapeCheckPtr m_escape_check;
+			
+			/**
+			 * Add a new step to the walk and increment total_walk_length.
+			 * New step is in random direction and is made from m_last.
+			 */
+			void StepForward();
 	};
 	
 }
