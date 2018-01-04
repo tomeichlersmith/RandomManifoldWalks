@@ -27,6 +27,7 @@ namespace MOSEY {
 			
 			/**
 			 * Copy Constructor.
+			 * NOT WRITTEN
 			 */
 			Walk(const Walk& a_walk);
 		

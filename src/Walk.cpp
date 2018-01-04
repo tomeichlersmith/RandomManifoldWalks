@@ -5,12 +5,14 @@ namespace MOSEY {
 	
 	Walk::Walk() : 
 		m_last(nullptr), m_total_length_walked(0), m_maximum_walk_length(100), m_step_length(1),
-		m_escape_check(nullptr), m_stepper(nullptr)
-		{ /* Intentionally Empty */ }
+		m_escape_check(nullptr), m_stepper(nullptr) {
+		/* Intentionally Empty */
+	}
 	
 	Walk::Walk(const double step_length, const double max_walk_length, EscapeCheckPtr escape_check, Stepper* stepper) :
-		Walk(), m_step_length(step_length), m_escape_check(escape_check), m_stepper(stepper)
-		{ /*Intentionally Empty */ }
+		Walk(), m_step_length(step_length), m_escape_check(escape_check), m_stepper(stepper) {
+		/*Intentionally Empty */
+	}
 	
 	Walk::Walk(const Walk& a_walk) {
 		//Copy constructor - have to think (FUCK)
