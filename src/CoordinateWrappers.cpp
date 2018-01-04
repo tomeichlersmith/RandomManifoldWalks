@@ -2,15 +2,15 @@
 #include "../MOSEY/CoordinateWrappers.hpp"
 
 namespace MOSEY {
-	
-	CoordinateWrapperPtr PlaneWrapper(double &u, double &v) { 
+
+	void PlaneWrapper(double& u, double& v) { 
 		
 		/* Intentionally Empty */
-		
+	
 		return;
 	}
-	
-	CoordinateWrapperPtr SphereWrapper(double &u, double &v) {
+
+	void SphereWrapper(double &u, double &v) {
 		
 		//If exit in u-coordinate, bounce back and add 1/2 to v-coordinate
 		if ( u < 0 ) {
@@ -33,8 +33,8 @@ namespace MOSEY {
 		
 		return;
 	}
-	
-	CoordinateWrapperPtr TorusWrapper(double &u, double &v) {
+
+	void TorusWrapper(double &u, double &v) {
 		
 		//If exit in u-coordinate, transport to other side of domain
 		if ( u < 0 ) {
@@ -54,6 +54,5 @@ namespace MOSEY {
 		
 		return;
 	}
-	
 	
 }
