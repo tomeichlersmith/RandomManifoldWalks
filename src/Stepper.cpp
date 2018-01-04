@@ -8,7 +8,7 @@ namespace MOSEY {
 		/* Intentionally Empty */
 	}
 	
-	Stepper::Stepper() : m_curvetensor(nullptr), m_numsteps(1), m_coordwrap(nullptr) {
+	Stepper::Stepper() : m_curvetensor(MOSEY::ZeroTensor), m_numsteps(1), m_coordwrap(&PlaneWrapper) {
 		/* Intentionally Empty */
 	}
 		
@@ -25,7 +25,7 @@ namespace MOSEY {
 		double h = steplen/m_numsteps;
 		
 		//Iterate through m_numsteps steps of RK4 approximation method
-		for (unsigned int i = 0; i < m_numsteps; i++) {
+		for (int i = 0; i < m_numsteps; i++) {
 			
 			//Calculating k1 at y
 			EvalSlope( y , k1 );
@@ -65,7 +65,7 @@ namespace MOSEY {
 		v1 = y[1];
 		
 		//Make sure coordinates stay within domain of chart
-		m_coordwrapper( u1 , v1 );
+		m_coordwrap( u1 , v1 );
 		
 		return;
 	}
