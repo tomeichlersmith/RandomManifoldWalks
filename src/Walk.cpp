@@ -4,19 +4,20 @@
 namespace MOSEY {
 	
 	Walk::Walk() : 
-		m_last(nullptr), m_total_length_walked(0), m_maximum_walk_length(100), m_step_length(1),
+		m_rand_gen(0,1), m_last(nullptr), m_step_length(1), m_total_length_walked(0), m_maximum_walk_length(100),
 		m_escape_check(nullptr), m_stepper(nullptr) {
 		/* Intentionally Empty */
 	}
 	
-	Walk::Walk(const double step_length, const double max_walk_length, EscapeCheckPtr escape_check, Stepper* stepper) :
-		Walk(), m_step_length(step_length), m_escape_check(escape_check), m_stepper(stepper) {
+	Walk::Walk(const double step_length, EscapeCheckPtr escape_check, Stepper* stepper) :
+		m_rand_gen(0,1), m_last(nullptr), m_step_length(step_length), m_total_length_walked(0), m_maximum_walk_length(100),
+		m_escape_check(escape_check), m_stepper(stepper) {
 		/*Intentionally Empty */
 	}
 	
-	Walk::Walk(const Walk& a_walk) {
+	/*Walk::Walk(const Walk& a_walk) {
 		//Copy constructor - have to think (FUCK)
-	}
+	}*/
 	
 	Walk::~Walk() {
 		double u,v,len;
@@ -44,7 +45,9 @@ namespace MOSEY {
 	
 	void Walk::StepBackward(double &u, double &v, double &escape_length) {
 		if ( Empty() ) {
-			std::cout << "Error: No walk to trace back.\n"
+			u = 0;
+			v = 0;
+			escape_length = 0;
 			return;
 		}
 		
@@ -62,7 +65,7 @@ namespace MOSEY {
 		return;
 	}
 	
-	void Walk::Empty() const {
+	bool Walk::Empty() const {
 		return (m_last == nullptr);
 	}
 	

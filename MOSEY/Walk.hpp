@@ -24,13 +24,13 @@ namespace MOSEY {
 			/**
 			 * Preferred Constructor. Initializes empty stack and defines the escape check function and step length
 			 */
-			Walk(const double step_length, const double max_walk_length, EscapeCheckPtr escape_check, Stepper* stepper);
+			Walk(const double step_length, EscapeCheckPtr escape_check, Stepper* stepper);
 			
 			/**
 			 * Copy Constructor.
 			 * NOT WRITTEN
 			 */
-			Walk(const Walk& a_walk);
+			//Walk(const Walk& a_walk);
 		
 			/**
 			 * Destructor. Avoiding memory leakage.
@@ -40,7 +40,7 @@ namespace MOSEY {
 			/**
 			 * Set maximum walk length that will be allowed
 			 */
-			void SetMaximumWalkLength(const double max_walk_length);
+			void SetMaxWalkLength(const double max_walk_length);
 			
 			/**
 			 * Continues to step forward until the escape check returns true begining at input point
@@ -54,6 +54,12 @@ namespace MOSEY {
 			void StepBackward(double &u, double &v, double &escape_length);
 			
 		private:
+			
+			/**
+			 * Random number generator for direction
+			 */
+			RandDouble m_rand_gen;
+			
 			/**
 			 * pointer to last step taken (serves role as top of stack)
 			 */
@@ -78,11 +84,6 @@ namespace MOSEY {
 			 * function defining if the walk has entered the escape region
 			 */
 			EscapeCheckPtr m_escape_check;
-			
-			/**
-			 * Random number generator for direction
-			 */
-			RandDouble m_rand_gen(0,1);
 			
 			/**
 			 * Pointer to Stepper class instance that contains the necessary manifold information
