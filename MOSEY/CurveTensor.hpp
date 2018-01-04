@@ -19,8 +19,13 @@ namespace MOSEY {
 			/**
 			 * Constructor
 			 */
-			CurveTensor(ChristoffelSymbolPtr _uuu, ChristoffelSymbolPtr _uuv, ChristoffelSymbolPtr _uvv,
-									ChristoffelSymbolPtr _vuu, ChristoffelSymbolPtr _vuv, ChristoffelSymbolPtr _vvv);
+			CurveTensor(ChristoffelSymbolPtr uuu, ChristoffelSymbolPtr uuv, ChristoffelSymbolPtr uvv,
+									ChristoffelSymbolPtr vuu, ChristoffelSymbolPtr vuv, ChristoffelSymbolPtr vvv);
+			
+			/**
+			 * Copy Constructor
+			 */
+			CurveTensor( const CurveTensor &ct );
 		
 			double UUU(const double u, const double v) const;
 			double UUV(const double u, const double v) const;
@@ -30,12 +35,12 @@ namespace MOSEY {
 			double VVV(const double u, const double v) const;
 		
 		private:
-			ChristoffelSymbolPtr uuu;
-			ChristoffelSymbolPtr uuv;
-			ChristoffelSymbolPtr uvv;
-			ChristoffelSymbolPtr vuu;
-			ChristoffelSymbolPtr vuv;
-			ChristoffelSymbolPtr vvv;
+			ChristoffelSymbolPtr m_uuu;
+			ChristoffelSymbolPtr m_uuv;
+			ChristoffelSymbolPtr m_uvv;
+			ChristoffelSymbolPtr m_vuu;
+			ChristoffelSymbolPtr m_vuv;
+			ChristoffelSymbolPtr m_vvv;
 	};
 	
 	/**
