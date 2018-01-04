@@ -3,8 +3,13 @@
 #ifndef MOSEY_CURVETENSOR_HPP
 #define MOSEY_CURVETENSOR_HPP
 
-namespace MOSEY {
+#include <cmath>
 
+namespace MOSEY {
+	
+	const long double PI = M_PI;
+	const long double TWO_PI = 2*PI;
+	
 	/**
 	 * Defining type of function that is considered a Christoffel Symbol
 	 */
@@ -44,15 +49,32 @@ namespace MOSEY {
 	};
 	
 	/**
-	 * The Zero function in the Christoffel symbol type.
-	 * NOT DEFINED
+	 * The zero function in the Christoffel symbol type.
 	 */
-	ChristoffelSymbolPtr ZeroSymbol;
+	double ZeroSymbol(const double u, const double v);
 
 	/**
-	 * The zero curvature tensor in the CurveTensor class.
+	 * The zero curvature tensor in the CurveTensor class (plane)
 	 */
-	CurveTensor ZeroTensor( ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol , ZeroSymbol );
+	CurveTensor PlaneTensor( &ZeroSymbol , &ZeroSymbol , &ZeroSymbol , 
+													 &ZeroSymbol , &ZeroSymbol , &ZeroSymbol );
+	
+	/**
+	 * The uuv christoffel symbol for the sphere
+	 */
+	double ChrisSym_SphereUUV(const double u, const double v);
+	
+	/**
+	 * The vuu christoffel symbol for the sphere
+	 */
+	double ChrisSym_SphereVUU(const double u, const double v);
+	
+	/**
+	 * The curvature tensor for the sphere parameterized by
+	 * (u,v) -> ( cos(2pi u) sin(pi v) , sin(2pi u) sin(pi v) , cos(pi v) )
+	 */
+	CurveTensor SphereTensor( &ZeroSymbol , &ChrisSym_SphereUUV , &ZeroSymbol ,
+														&ChrisSym_SphereVUU , &ZeroSymbol , &ZeroSymbol );
 }
 
 #endif

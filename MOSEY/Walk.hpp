@@ -6,10 +6,9 @@
 #include "Step.hpp"
 #include "EscapeChecks.hpp"
 #include "RandDouble.hpp"
+#include "CurveTensor.hpp" //Definition of TWO_PI
 
 namespace MOSEY {
-	
-	const long double TWO_PI = 2*M_PI;
 	
 	/**
 	 * Walk Class. Stack linked list, code copied heavily from Savitch 2009.

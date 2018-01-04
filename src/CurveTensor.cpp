@@ -20,11 +20,44 @@ namespace MOSEY {
 		
 	}
 
-	double CurveTensor::UUU(const double u, const double v) const { return m_uuu(u,v); }
-	double CurveTensor::UUV(const double u, const double v) const { return m_uuv(u,v); }
-	double CurveTensor::UVV(const double u, const double v) const { return m_uvv(u,v); }
-	double CurveTensor::VUU(const double u, const double v) const { return m_vuu(u,v); }
-	double CurveTensor::VUV(const double u, const double v) const { return m_vuv(u,v); }
-	double CurveTensor::VVV(const double u, const double v) const { return m_vvv(u,v); }
+	double CurveTensor::UUU(const double u, const double v) const { 
+		return m_uuu(u,v);
+	}
+	
+	double CurveTensor::UUV(const double u, const double v) const {
+		return m_uuv(u,v);
+	}
+	
+	double CurveTensor::UVV(const double u, const double v) const {
+		return m_uvv(u,v);
+	}
+	
+	double CurveTensor::VUU(const double u, const double v) const {
+		return m_vuu(u,v);
+	}
+	
+	double CurveTensor::VUV(const double u, const double v) const {
+		return m_vuv(u,v);
+	}
+	
+	double CurveTensor::VVV(const double u, const double v) const { 
+		return m_vvv(u,v);
+	}
+	
+	double ZeroSymbol(const double u, const double v) {
+		return 0;
+	}
+	
+	double ChrisSym_SphereUUV(const double u, const double v) {
+		
+		double sinv = sin( PI*v );
+		double cosv = cos( PI*v );
+		
+		return ( PI*(cosv/sinv) );
+	}
+	
+	double ChrisSym_SphereVUU(const double u, const double v) {
+		return ( -1*TWO_PI*sin( TWO_PI*v ) );
+	}
 	
 }

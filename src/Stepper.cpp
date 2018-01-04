@@ -8,7 +8,7 @@ namespace MOSEY {
 		/* Intentionally Empty */
 	}
 	
-	Stepper::Stepper() : m_curvetensor(MOSEY::ZeroTensor), m_numsteps(1), m_coordwrap(&PlaneWrapper) {
+	Stepper::Stepper() : m_curvetensor(MOSEY::PlaneTensor), m_numsteps(1), m_coordwrap(&PlaneWrapper) {
 		/* Intentionally Empty */
 	}
 		
