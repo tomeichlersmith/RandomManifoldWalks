@@ -22,12 +22,12 @@ namespace MOSEY {
 			CurveTensor(ChristoffelSymbolPtr _uuu, ChristoffelSymbolPtr _uuv, ChristoffelSymbolPtr _uvv,
 									ChristoffelSymbolPtr _vuu, ChristoffelSymbolPtr _vuv, ChristoffelSymbolPtr _vvv);
 		
-			UUU(const double u, const double v) const;
-			UUV(const double u, const double v) const;
-			UVV(const double u, const double v) const;
-			VUU(const double u, const double v) const;
-			VUV(const double u, const double v) const;
-			VVV(const double u, const double v) const;
+			double UUU(const double u, const double v) const;
+			double UUV(const double u, const double v) const;
+			double UVV(const double u, const double v) const;
+			double VUU(const double u, const double v) const;
+			double VUV(const double u, const double v) const;
+			double VVV(const double u, const double v) const;
 		
 		private:
 			ChristoffelSymbolPtr uuu;
@@ -40,8 +40,9 @@ namespace MOSEY {
 	
 	/**
 	 * The Zero function in the Christoffel symbol type.
+	 * NOT DEFINED
 	 */
-	ChristoffelSymbolPtr ZeroSymbol(const double u, const double v);
+	ChristoffelSymbolPtr ZeroSymbol;
 
 	/**
 	 * The zero curvature tensor in the CurveTensor class.

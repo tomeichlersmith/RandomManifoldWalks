@@ -1,5 +1,5 @@
 
-#include "../MOSEY/CoordinateWrappers.cpp"
+#include "../MOSEY/CoordinateWrappers.hpp"
 
 namespace MOSEY {
 	

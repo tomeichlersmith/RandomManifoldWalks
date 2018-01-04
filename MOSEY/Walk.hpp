@@ -2,6 +2,7 @@
 #ifndef MOSEY_WALK_HPP
 #define MOSEY_WALK_HPP
 
+#include "Stepper.hpp"
 #include "Step.hpp"
 #include "EscapeChecks.hpp"
 #include "RandDouble.hpp"
