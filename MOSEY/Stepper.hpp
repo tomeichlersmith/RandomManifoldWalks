@@ -25,7 +25,7 @@ namespace MOSEY {
 			Stepper(CurveTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap);
 		
 			/**
-			 * Default Constructructor. Defines the member variables with the default (planar) values
+			 * Default Constructructor. Defines the member variables with the default (useless) values
 			 */
 			Stepper();
 			
