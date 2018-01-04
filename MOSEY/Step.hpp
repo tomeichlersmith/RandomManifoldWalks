@@ -41,7 +41,7 @@ namespace MOSEY {
 			/**
 			 * Set pointer to previous step
 			 */
-			void SetPrevStep(const Step* prev_step);
+			void SetPrevStep(Step* prev_step);
 			
 			/**
 			 * Set length walked to this step

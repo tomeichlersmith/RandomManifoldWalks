@@ -27,7 +27,7 @@ namespace MOSEY {
 		return;
 	}
 	
-	void Step::SetPrevStep(const Step* prev_step) {
+	void Step::SetPrevStep(Step* prev_step) {
 		m_prev_step = prev_step;
 		return;
 	}
