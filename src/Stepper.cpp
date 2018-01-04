@@ -3,6 +3,16 @@
 
 namespace MOSEY {
 	
+	Stepper::Stepper(CurveTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap) :
+		m_curvetensor(curvetensor), m_numsteps(numsteps), m_coordwrap(coordwrap) {
+		/* Intentionally Empty */
+	}
+	
+	Stepper::Stepper() : m_curvetensor(MOSEY::ZeroTensor), m_numsteps(1), m_coordwrap(MOSEY::PlaneWrapper) {
+		/* Intentionally Empty */
+	}
+		
+	
 	void Stepper::Forward(const double u0, const double v0, const double direction, const double steplen, double &u1, double &v1) const {
 		
 		//Declaring and Initializing variables that will be carried through Runge-Kutta

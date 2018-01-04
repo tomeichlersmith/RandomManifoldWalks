@@ -5,7 +5,7 @@
 
 #include <cmath>
 
-#include "ChristoffelSymbols.hpp"
+#include "CurveTensor.hpp"
 #include "CoordinateWrappers.hpp"
 
 namespace MOSEY {
@@ -22,14 +22,13 @@ namespace MOSEY {
 			 * @param numsteps number of steps to be used in the Runge-Kutta method
 			 * @param coordwrap Coordinate Wrapping function for the manifold
 			 */
-			Stepper(CurveTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap) :
-				m_curvetensor(curvetensor), m_numsteps(numsteps), m_coordwrap(coordwrap) {}
+			Stepper(CurveTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap);
 		
 			/**
 			 * Default Constructructor. Defines the member variables with the default (planar) values
 			 */
-			Stepper() : m_curvetensor(MOSEY::ZeroTensor), m_numsteps(1), m_coordwrap(MOSEY::PlaneWrapper) {}
-		
+			Stepper();
+			
 			/**
 			 * function that performs the approxmation step using the RK4 approximation method
 			 * @param u0 starting point, u coordinate
