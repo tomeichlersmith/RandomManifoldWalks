@@ -6,6 +6,7 @@
 #include <cmath>
 
 #include "CurveTensor.hpp"
+#include "Plane_CurveTensor.hpp"
 #include "CoordinateWrappers.hpp"
 
 namespace MOSEY {

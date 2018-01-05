@@ -3,6 +3,8 @@
 #ifndef MOSEY_CURVETENSOR_HPP
 #define MOSEY_CURVETENSOR_HPP
 
+#include <cmath>
+
 namespace MOSEY {
 	
 	const long double PI = M_PI;

@@ -34,7 +34,7 @@ bin/RandDouble.o : src/RandDouble.cpp $(INCDIR)/RandDouble.hpp
 bin/Step.o : src/Step.cpp $(INCDIR)/Step.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-bin/Stepper.o : src/Stepper.cpp $(INCDIR)/Stepper.hpp $(INCDIR)/CurveTensor.hpp $(INCDIR)/CoordinateWrappers.hpp
+bin/Stepper.o : src/Stepper.cpp $(INCDIR)/Stepper.hpp $(INCDIR)/CurveTensor.hpp $(INCDIR)/Plane_CurveTensor.hpp $(INCDIR)/CoordinateWrappers.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 bin/Walk.o : src/Walk.cpp $(INCDIR)/Walk.hpp $(INCDIR)/RandDouble.hpp $(INCDIR)/Stepper.hpp $(INCDIR)/Step.hpp $(INCDIR)/EscapeChecks.hpp $(INCDIR)/CurveTensor.hpp
