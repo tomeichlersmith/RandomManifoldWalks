@@ -7,8 +7,9 @@ RandGen: Uniform Random Real Generator
  - constructor
  - operator/function returning rand number
 
-typedef double (*ChristoffelSymbolPtr)(double u, double v)
- - Function that returns the value of a christoffel symbol at point (u,v)
+CurveTensor (and derived classes): storage of curve tensor in the form of public member functions 
+ - parameters are private member variables defined via constructor
+ - Each manifold (and corresponding map) has a derived class from this base class, then it can be passed to Stepper to perform walk
 
 typedef void (*CoordinateWrapperPtr)(double &u, double &v)
  - Function that returns the coordinate within the correct range, wrapping the coordinate (either bouncing back or transporting)
