@@ -14,7 +14,7 @@ CurveTensor (and derived classes): storage of curve tensor in the form of public
 typedef void (*CoordinateWrapperPtr)(double &u, double &v)
  - Function that returns the coordinate within the correct range, wrapping the coordinate (either bouncing back or transporting)
  
-typedef bool (*EscapeCheckPtr)(double u, double v)
+typedef bool (*EscapeCheckPtr)(StepPtr step)
  - function to decide if point (u,v) is in the escape region
 
 Stepper: Perform Geodesic Walk for given christoffel symbols / coordinate limits
