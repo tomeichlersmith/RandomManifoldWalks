@@ -16,13 +16,13 @@ bin/CoordinateWrappers.o : src/CoordinateWrappers.cpp $(INCDIR)/CoordinateWrappe
 bin/CurveTensor.o : src/CurveTensor.cpp $(INCDIR)/CurveTensor.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-bin/Plane_CurveTensor.o : src/Plane_CurveTensor.cpp $(INCDIR)/Plane_CurveTensor.hpp $(INCDIR)/CurveTensor.hpp
+bin/Plane_CurveTensor.o : src/CurveTensor/Plane.cpp $(INCDIR)/CurveTensor/Plane.hpp $(INCDIR)/CurveTensor.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-bin/Sphere_CurveTensor.o : src/Sphere_CurveTensor.cpp $(INCDIR)/Sphere_CurveTensor.hpp $(INCDIR)/CurveTensor.hpp
+bin/Sphere_CurveTensor.o : src/CurveTensor/Sphere.cpp $(INCDIR)/CurveTensor/Sphere.hpp $(INCDIR)/CurveTensor.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-bin/Torus_CurveTensor.o : src/Torus_CurveTensor.cpp $(INCDIR)/Torus_CurveTensor.hpp $(INCDIR)/CurveTensor.hpp
+bin/Torus_CurveTensor.o : src/CurveTensor/Torus.cpp $(INCDIR)/CurveTensor/Torus.hpp $(INCDIR)/CurveTensor.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 bin/EscapeChecks.o : src/EscapeChecks.cpp $(INCDIR)/EscapeChecks.hpp $(INCDIR)/Step.hpp

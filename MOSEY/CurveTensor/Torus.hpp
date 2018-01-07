@@ -1,8 +1,8 @@
 
-#ifndef MOSEY_TORUS_CURVETENSOR_HPP
-#define MOSEY_TORUS_CURVETENSOR_HPP
+#ifndef MOSEY_CURVETENSOR_TORUS_HPP
+#define MOSEY_CURVETENSOR_TORUS_HPP
 
-#include "CurveTensor.hpp"
+#include "../CurveTensor.hpp"
 
 namespace MOSEY {
 	

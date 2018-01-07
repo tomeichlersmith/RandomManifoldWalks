@@ -1,8 +1,8 @@
 
-#ifndef MOSEY_SPHERE_CURVETENSOR_HPP
-#define MOSEY_SPHERE_CURVETENSOR_HPP
+#ifndef MOSEY_CURVETENSOR_SPHERE_HPP
+#define MOSEY_CURVETENSOR_SPHERE_HPP
 
-#include "CurveTensor.hpp"
+#include "../CurveTensor.hpp"
 
 namespace MOSEY {
 	

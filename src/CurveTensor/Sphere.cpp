@@ -1,5 +1,5 @@
 
-#include "../MOSEY/Sphere_CurveTensor.hpp"
+#include "../MOSEY/CurveTensor/Sphere.hpp"
 
 namespace MOSEY {
 	
