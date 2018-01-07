@@ -13,10 +13,10 @@ CurveTensor (and derived classes): storage of curve tensor in the form of public
 
 typedef void (*CoordinateWrapperPtr)(double &u, double &v)
  - Function that returns the coordinate within the correct range, wrapping the coordinate (either bouncing back or transporting)
- 
-EscapeCheck (and derived classes): storage of escape check functions in the form of public member functions
- - parameters (e.g. radius of escape region) are private member variables defined via constructor and/or mutator functions
- - The escape checks are in terms of parameter space (u,v)
+
+typedef bool (*EscapeCheckPtr)(const std::vector<double> parameters, StepPtr step)
+ - parameters list changes depending on type/shape of Escape Region
+ - Escape checks are in terms of parameter space (u,v)
 
 Stepper: Perform Geodesic Walk for given christoffel symbols / coordinate limits
  - CurveTensor curvetensor
