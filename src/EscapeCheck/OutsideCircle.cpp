@@ -3,12 +3,12 @@
 
 namespace MOSEY {
 	
-	OutsideCircle::OutsideCircle() : EscapeCheck(), m_radius(1.), m_ucenter(0.), m_vcenter(0.) {
+	OutsideCircle::OutsideCircle() : m_radius(1.), m_ucenter(0.), m_vcenter(0.) {
 		/* Intentionally Empty */
 	}
 	
 	OutsideCircle::OutsideCircle(double radius, double ucenter, double vcenter) :
-		EscapeCheck(), m_radius(radius), m_ucenter(ucenter), m_vcenter(vcenter) {
+		m_radius(radius), m_ucenter(ucenter), m_vcenter(vcenter) {
 		/* Intentionally Empty */
 	}
 	

@@ -10,23 +10,9 @@
 namespace MOSEY {
 
 	/**
-	 * Defining class to be base class for all Escape Checks.
+	 * typedef function pointer to be used as escape checks
 	 */
-	class EscapeCheck {
-		public:
-			/**
-			 * Default Constructor.
-			 */
-			EscapeCheck();
-			
-			/**
-			 * Member function to perform escape check
-			 */
-			virtual bool IsFree(StepPtr step) const;
-		
-		private:
-			// parameters of an escape check will be private member variables set by constructor
-	};
+	typedef bool (*EscapeCheckPtr)(StepPtr step);
 	
 }
 

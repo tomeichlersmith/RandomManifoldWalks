@@ -10,7 +10,7 @@ int main() {
 	MOSEY::Stepper plane( plane_ct , 10 , &MOSEY::PlaneWrapper ); //Initialize stepper class to match curvature tensor
 	
 	MOSEY::OutsideCircle unitcircle( 1. , 0. , 0. ); //Define escape region
-	MOSEY::Walk planewalk( 1./10 , unitcircle , &plane ); //Define clas to perform walk
+	MOSEY::Walk planewalk( 1./10 , &MOSEY::OutsideCircle::IsFree , &plane ); //Define clas to perform walk
 	
 	planewalk.Wander( 0. , 0. ); //Start from origin and walk
 	

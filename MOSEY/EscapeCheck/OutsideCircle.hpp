@@ -10,7 +10,7 @@ namespace MOSEY {
 	/**
 	 * Returns true if input step is outside the defined circle, otherwise returns false.
 	 */
-	class OutsideCircle : public EscapeCheck {
+	class OutsideCircle {
 		public:
 			/**
 			 * Default Constructor. Unit circle centered at origin
