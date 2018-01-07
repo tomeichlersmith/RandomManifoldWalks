@@ -52,6 +52,11 @@ namespace MOSEY {
 			 */
 			void StepBackward(double &u, double &v, double &escape_length);
 			
+			/**
+			 * Utility function to tell if the stack is empty.
+			 */
+			bool Empty() const;
+			
 		private:
 			
 			/**
@@ -88,11 +93,6 @@ namespace MOSEY {
 			 * Pointer to Stepper class instance that contains the necessary manifold information
 			 */
 			Stepper* m_stepper;
-			
-			/**
-			 * Utility function to tell if the stack is empty.
-			 */
-			bool Empty() const;
 			
 			/**
 			 * Add a new step to the walk and increment total_walk_length.

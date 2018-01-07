@@ -7,4 +7,8 @@ namespace MOSEY {
 		/* Intentionally Empty */
 	}
 	
+	bool EscapeCheck::IsFree(StepPtr step) const {
+		return false; //Should be redefined in Derived Class
+	}
+	
 }

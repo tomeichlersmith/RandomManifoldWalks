@@ -44,6 +44,7 @@ namespace MOSEY {
 	}
 	
 	void Walk::StepBackward(double &u, double &v, double &escape_length) {
+		
 		if ( Empty() ) {
 			u = 0;
 			v = 0;
