@@ -5,7 +5,7 @@ DEBUG = -g
 CXXFLAGS = -std=c++11 -Wall -c $(DEBUG)
 LFlAGS = -std=c++11 -Wall $(DEBUG)
 INCDIR = MOSEY
-OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/Plane_CurveTensor.o bin/Sphere_CurveTensor.o bin/Torus_CurveTensor.o bin/EscapeChecks.o bin/RandDouble.o bin/Step.o bin/Stepper.o bin/Walk.o
+OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/Plane_CurveTensor.o bin/Sphere_CurveTensor.o bin/Torus_CurveTensor.o bin/EscapeCheck.o bin/OutsideCircle.o bin/RandDouble.o bin/Step.o bin/Stepper.o bin/Walk.o
 
 bin/libMOSEY.a : $(OBJS)
 	ar -rc $@ $^
@@ -25,7 +25,10 @@ bin/Sphere_CurveTensor.o : src/CurveTensor/Sphere.cpp $(INCDIR)/CurveTensor/Sphe
 bin/Torus_CurveTensor.o : src/CurveTensor/Torus.cpp $(INCDIR)/CurveTensor/Torus.hpp $(INCDIR)/CurveTensor.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-bin/EscapeChecks.o : src/EscapeChecks.cpp $(INCDIR)/EscapeChecks.hpp $(INCDIR)/Step.hpp
+bin/EscapeCheck.o : src/EscapeCheck.cpp $(INCDIR)/EscapeCheck.hpp $(INCDIR)/Step.hpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+bin/OutsideCircle.o : src/EscapeCheck/OutsideCircle.cpp $(INCDIR)/EscapeCheck/OutsideCircle.hpp $(INCDIR)/EscapeCheck.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 bin/RandDouble.o : src/RandDouble.cpp $(INCDIR)/RandDouble.hpp
