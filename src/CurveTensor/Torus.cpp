@@ -1,5 +1,5 @@
 
-#include "../MOSEY/CurveTensor/Torus.hpp"
+#include "../../MOSEY/CurveTensor/Torus.hpp"
 
 namespace MOSEY {
 	

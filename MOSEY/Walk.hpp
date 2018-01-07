@@ -4,7 +4,7 @@
 
 #include "Stepper.hpp"
 #include "Step.hpp"
-#include "EscapeChecks.hpp"
+#include "EscapeCheck.hpp"
 #include "RandDouble.hpp"
 #include "CurveTensor.hpp" //Definition of TWO_PI
 
@@ -23,7 +23,7 @@ namespace MOSEY {
 			/**
 			 * Preferred Constructor. Initializes empty stack and defines the escape check function and step length
 			 */
-			Walk(const double step_length, EscapeCheckPtr escape_check, Stepper* stepper);
+			Walk(const double step_length, EscapeCheck escape_check, Stepper* stepper);
 			
 			/**
 			 * Copy Constructor.
@@ -82,7 +82,7 @@ namespace MOSEY {
 			/**
 			 * function defining if the walk has entered the escape region
 			 */
-			EscapeCheckPtr m_escape_check;
+			EscapeCheck m_escape_check;
 			
 			/**
 			 * Pointer to Stepper class instance that contains the necessary manifold information
