@@ -3,9 +3,12 @@
 CXX = g++
 DEBUG = -g
 CXXFLAGS = -std=c++11 -Wall -c $(DEBUG)
-LFlAGS = -std=c++11 -Wall $(DEBUG)
+LFLAGS = -std=c++11 -Wall $(DEBUG)
 INCDIR = MOSEY
 OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/Plane_CurveTensor.o bin/Sphere_CurveTensor.o bin/Torus_CurveTensor.o bin/EscapeCheck.o bin/OutsideCircle.o bin/RandDouble.o bin/Step.o bin/Stepper.o bin/Walk.o
+
+test : test.cpp bin/libMOSEY.a
+	$(CXX) $(LFLAGS) $^ -o $@
 
 bin/libMOSEY.a : $(OBJS)
 	ar -rc $@ $^
@@ -47,4 +50,4 @@ directories :
 	mkdir -p bin
 
 clean :
-	rm -r bin/*
+	rm -r bin/* && rm test

@@ -1,3 +1,6 @@
 
 #Nothing in the bin
 bin/*
+
+#Ignore test executable
+test
