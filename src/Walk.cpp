@@ -5,19 +5,19 @@ namespace MOSEY {
 	
 	Walk::Walk() : 
 		m_rand_gen(0,1), m_last(nullptr), m_step_length(1), m_total_length_walked(0), m_maximum_walk_length(100),
-		m_escape_check(nullptr), m_stepper() {
+		m_escape_check(nullptr), m_check_parameters(), m_stepper() {
 		/* Intentionally Empty */
 	}
 	
-	Walk::Walk(const double step_length, EscapeCheckPtr escape_check, Stepper stepper) :
+	Walk::Walk(const double step_length, EscapeCheckPtr escape_check, std::vector<double> check_parameters, Stepper stepper) :
 		m_rand_gen(0,1), m_last(nullptr), m_step_length(step_length), m_total_length_walked(0), m_maximum_walk_length(100),
-		m_escape_check(escape_check), m_stepper(stepper) {
+		m_escape_check(escape_check), m_check_parameters(check_parameters), m_stepper(stepper) {
 		/*Intentionally Empty */
 	}
 	
-	Walk::Walk(const double step_length, EscapeCheckPtr escape_check, Manifold m) :
+	Walk::Walk(const double step_length, EscapeCheckPtr escape_check, std::vector<double> check_parameters, Manifold m) :
 		m_rand_gen(0,1), m_last(nullptr), m_step_length(step_length), m_total_length_walked(0), m_maximum_walk_length(100),
-		m_escape_check(escape_check), m_stepper(m,10) {
+		m_escape_check(escape_check), m_check_parameters(check_parameters), m_stepper(m,10) {
 		
 	}
 	
@@ -37,14 +37,18 @@ namespace MOSEY {
 		return;
 	}
 	
+	void Walk::SetEscapeRegion(EscapeCheckPtr escape_check, std::vector<double> check_parameters) {
+		m_escape_check = escape_check;
+		m_check_parameters = check_parameters;
+		return;
+	}
+	
 	void Walk::Wander(const double u, const double v) {
 		
 		//push starting point with begining total walk length
 		m_last = new Step(nullptr, m_total_length_walked, u, v);
 		
-		std::vector<double> empty;
-		
-		while ( !m_escape_check( empty, m_last ) and m_total_length_walked < m_maximum_walk_length ) {
+		while ( !m_escape_check( m_check_parameters , m_last ) and m_total_length_walked < m_maximum_walk_length ) {
 			StepForward();
 		} //walking until escape
 		

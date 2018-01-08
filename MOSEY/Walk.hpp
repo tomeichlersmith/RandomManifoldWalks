@@ -23,13 +23,13 @@ namespace MOSEY {
 			/**
 			 * General Constructor. Initializes empty stack and defines the escape check function and step length
 			 */
-			Walk(const double step_length, EscapeCheckPtr escape_check, Stepper stepper);
+			Walk(const double step_length, EscapeCheckPtr escape_check, std::vector<double> check_parameters, Stepper stepper);
 			
 			/**
 			 * Preferred Constructor. Initializes empty stack and defines member variables
 			 * that depend on the manifold depending on Manifold m
 			 */
-			Walk(const double step_length, EscapeCheckPtr escape_check, Manifold m);
+			Walk(const double step_length, EscapeCheckPtr escape_check, std::vector<double> check_parameters, Manifold m);
 			
 			/**
 			 * Copy Constructor.
@@ -46,6 +46,11 @@ namespace MOSEY {
 			 * Set maximum walk length that will be allowed
 			 */
 			void SetMaxWalkLength(const double max_walk_length);
+			
+			/**
+			 * Set the escape region
+			 */
+			void SetEscapeRegion(EscapeCheckPtr escape_check, std::vector<double> check_parameters);
 			
 			/**
 			 * Continues to step forward until the escape check returns true begining at input point
@@ -65,40 +70,21 @@ namespace MOSEY {
 			
 		private:
 			
-			/**
-			 * Random number generator for direction
-			 */
-			RandDouble m_rand_gen;
+			RandDouble m_rand_gen; //*Random number generator for direction
 			
-			/**
-			 * pointer to last step taken (serves role as top of stack)
-			 */
-			StepPtr m_last;
+			StepPtr m_last; //* pointer to last step taken (serves role as top of stack)
 			
-			/**
-			 * length that each step should be on the manifold
-			 */
-			double m_step_length;
+			double m_step_length; //* length that each step should be on the manifold
 			
-			/**
-			 * total length walked to get to m_last
-			 */
-			double m_total_length_walked;
+			double m_total_length_walked; //* total length walked to get to m_last
 			
-			/**
-			 * maximum walk length (to avoid infinite loops)
-			 */
-			double m_maximum_walk_length;
+			double m_maximum_walk_length; //* maximum walk length (to avoid infinite loops)
 			
-			/**
-			 * function defining if the walk has entered the escape region
-			 */
-			EscapeCheckPtr m_escape_check;
+			EscapeCheckPtr m_escape_check; //* function defining if the walk has entered the escape region
 			
-			/**
-			 * Pointer to Stepper class instance that contains the necessary manifold information
-			 */
-			Stepper m_stepper;
+			std::vector<double> m_check_parameters; //* escape check function parameters (depends on the function)
+			
+			Stepper m_stepper; //* Stepper class instance that contains the necessary manifold information
 			
 			/**
 			 * Add a new step to the walk and increment total_walk_length.

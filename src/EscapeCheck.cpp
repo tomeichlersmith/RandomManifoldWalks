@@ -3,6 +3,6 @@
 
 namespace MOSEY {
 	
-	/* Not needed??? */
+	/* No Escape Checks defined yet */
 	
 }
