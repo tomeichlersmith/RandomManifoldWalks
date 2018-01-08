@@ -40,12 +40,15 @@ namespace MOSEY {
 		/* Intentionally Empty */
 	}
 	
-	CurveTensor::CurveTensor( char signalchar ) : CurveTensor() {
+	CurveTensor::CurveTensor( Manifold m ) : CurveTensor() {
 		
 		//Default constructor sets all symbols to zero symbol, so only change non-zero ones
-		switch ( signalchar ) {
-			case 'S': m_uuv = &SphereUUVSymbol; m_vuu = &SphereVUUSymbol;
+		switch ( m ) {
+			case Manifold::Sphere: m_uuv = &SphereUUVSymbol; m_vuu = &SphereVUUSymbol;
 								break;
+			case Manifold::Torus : m_uuv = &TorusUUVSymbol; m_vuu = &TorusVUUSymbol;
+								break;
+			case Manifold::Plane : break; //Do nothing
 			default : break; //Do Nothing
 		}
 		

@@ -8,9 +8,22 @@ namespace MOSEY {
 		/* Intentionally Empty */
 	}
 	
-	Stepper::Stepper() : m_numsteps(1), m_coordwrap(&PlaneWrapper) {
-		Plane_CurveTensor pct;
-		m_curvetensor = pct;
+	Stepper::Stepper(Manifold m, int numsteps) :
+		m_curvetensor(m), m_numsteps(numsteps) {
+		
+		switch (m) {
+			case Manifold::Sphere: m_coordwrap = &SphereWrapper;
+								break;
+			case Manifold::Torus: m_coordwrap = &TorusWrapper;
+								break;
+			default : m_coordwrap = &PlaneWrapper;
+								break;
+		}
+		
+	}
+	
+	Stepper::Stepper() : m_curvetensor(), m_numsteps(1), m_coordwrap(&PlaneWrapper) {
+		/* Intentionally Empty */
 	}
 		
 	

@@ -21,9 +21,15 @@ namespace MOSEY {
 			Walk();
 			
 			/**
-			 * Preferred Constructor. Initializes empty stack and defines the escape check function and step length
+			 * General Constructor. Initializes empty stack and defines the escape check function and step length
 			 */
-			Walk(const double step_length, EscapeCheckPtr escape_check, Stepper* stepper);
+			Walk(const double step_length, EscapeCheckPtr escape_check, Stepper stepper);
+			
+			/**
+			 * Preferred Constructor. Initializes empty stack and defines member variables
+			 * that depend on the manifold depending on Manifold m
+			 */
+			Walk(const double step_length, EscapeCheckPtr escape_check, Manifold m);
 			
 			/**
 			 * Copy Constructor.
@@ -92,7 +98,7 @@ namespace MOSEY {
 			/**
 			 * Pointer to Stepper class instance that contains the necessary manifold information
 			 */
-			Stepper* m_stepper;
+			Stepper m_stepper;
 			
 			/**
 			 * Add a new step to the walk and increment total_walk_length.

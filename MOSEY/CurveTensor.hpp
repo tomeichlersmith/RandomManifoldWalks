@@ -13,7 +13,7 @@ namespace MOSEY {
 	/**
 	 * Christoffel Symbol function type
 	 */
-	typedef double (ChristoffelSymbolPtr*)(double,double);
+	typedef double (*ChristoffelSymbolPtr)(double,double);
 	
 	/**
 	 * The zero funciton in Christoffel Symbol structure.
@@ -44,6 +44,8 @@ namespace MOSEY {
 	 */
 	double TorusVUUSymbol(double u, double v);
 	
+	enum Manifold { Plane , Sphere , Torus };
+	
 	/**
 	 * Curvature Tensor class. A short class that stores the Christoffel symbols for a two dimensional manifold.
 	 * Assumes Curvature Tensor is symmetric (i.e. uuv = uvu and vuv = vvu)
@@ -56,10 +58,9 @@ namespace MOSEY {
 			CurveTensor();
 			
 			/**
-			 * Preferred Constructor. Sets Christoffel Symbols depending on input character.
-			 * S <=> sphere, T <=> torus, o.w. <=> plane
+			 * Preferred Constructor. Sets Christoffel Symbols depending on input Manifold.
 			 */
-			CurveTensor( char signalchar );
+			CurveTensor( Manifold m );
 			
 			/**
 			 * General Constructor.

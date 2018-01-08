@@ -6,7 +6,6 @@
 #include <cmath>
 
 #include "CurveTensor.hpp"
-#include "CurveTensor/Plane.hpp"
 #include "CoordinateWrappers.hpp"
 
 namespace MOSEY {
@@ -18,15 +17,20 @@ namespace MOSEY {
 	class Stepper {
 		public:
 			/**
-			 * Preferred constructor. Defines all necessary member variables explicitly
+			 * General constructor. Defines all necessary member variables explicitly
 			 * @param curvetensor CurvatureTensor class instance that contains the correct Christoffel symbols
 			 * @param numsteps number of steps to be used in the Runge-Kutta method
 			 * @param coordwrap Coordinate Wrapping function for the manifold
 			 */
 			Stepper(CurveTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap);
+			
+			/**
+			 * Preferred Constructor. Defines member variables depending on Manifold.
+			 */
+			Stepper(Manifold m, int numsteps);
 		
 			/**
-			 * Default Constructructor. Defines the member variables with the default (useless) values
+			 * Default Constructructor. Defines the member variables with the default (planar) values
 			 */
 			Stepper();
 			

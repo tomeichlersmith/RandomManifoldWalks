@@ -5,14 +5,20 @@ namespace MOSEY {
 	
 	Walk::Walk() : 
 		m_rand_gen(0,1), m_last(nullptr), m_step_length(1), m_total_length_walked(0), m_maximum_walk_length(100),
-		m_escape_check(nullptr), m_stepper(nullptr) {
+		m_escape_check(nullptr), m_stepper() {
 		/* Intentionally Empty */
 	}
 	
-	Walk::Walk(const double step_length, EscapeCheckPtr escape_check, Stepper* stepper) :
+	Walk::Walk(const double step_length, EscapeCheckPtr escape_check, Stepper stepper) :
 		m_rand_gen(0,1), m_last(nullptr), m_step_length(step_length), m_total_length_walked(0), m_maximum_walk_length(100),
 		m_escape_check(escape_check), m_stepper(stepper) {
 		/*Intentionally Empty */
+	}
+	
+	Walk::Walk(const double step_length, EscapeCheckPtr escape_check, Manifold m) :
+		m_rand_gen(0,1), m_last(nullptr), m_step_length(step_length), m_total_length_walked(0), m_maximum_walk_length(100),
+		m_escape_check(escape_check), m_stepper(m,10) {
+		
 	}
 	
 	/*Walk::Walk(const Walk& a_walk) {
@@ -36,7 +42,9 @@ namespace MOSEY {
 		//push starting point with begining total walk length
 		m_last = new Step(nullptr, m_total_length_walked, u, v);
 		
-		while ( !m_escape_check( m_last ) and m_total_length_walked < m_maximum_walk_length ) {
+		std::vector<double> empty;
+		
+		while ( !m_escape_check( empty, m_last ) and m_total_length_walked < m_maximum_walk_length ) {
 			StepForward();
 		} //walking until escape
 		
@@ -83,7 +91,7 @@ namespace MOSEY {
 		double u1, v1;
 		
 		//Make a step using member variable step length
-		m_stepper->Forward( u0, v0 , randdir , m_step_length , u1 , v1 );
+		m_stepper.Forward( u0, v0 , randdir , m_step_length , u1 , v1 );
 		
 		//Increment total length walked
 		m_total_length_walked += m_step_length;
