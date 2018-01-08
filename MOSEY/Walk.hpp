@@ -75,8 +75,6 @@ namespace MOSEY {
 			
 		private:
 			
-			RandDouble m_rand_gen; //*Random number generator for direction
-			
 			StepPtr m_last; //* pointer to last step taken (serves role as top of stack)
 			
 			double m_step_length; //* length that each step should be on the manifold

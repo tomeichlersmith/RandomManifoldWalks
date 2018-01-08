@@ -10,6 +10,10 @@ namespace MOSEY {
 		/* Intentionally Empty */
 	}
 	
+	RandDouble::RandDouble() : RandDouble(0,1) {
+		/* Intentionally Empty */
+	}
+	
 	double RandDouble::operator()() {
 		return r();
 	}

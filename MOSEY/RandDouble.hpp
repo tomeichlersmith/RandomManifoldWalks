@@ -14,10 +14,16 @@ namespace MOSEY {
 	class RandDouble {
 		public:
 			/**
-			 * Constructor.
-			 * Requires entry of minimum a and maximum b
+			 * General Constructor.
+			 * Requires entry of minimum and maximum
 			 */
 			RandDouble(const double minimum, const double maximum);
+			
+			/**
+			 * Default Constructor.
+			 * Sets minimum to 0 and maximum to 1
+			 */
+			RandDouble();
 		
 			/**
 			 * Operator to return a random value from r
