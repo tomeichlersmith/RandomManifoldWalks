@@ -54,20 +54,12 @@ namespace MOSEY {
 			void SetStepPoint(const double u, const double v);
 			
 		private:
-			/**
-			 * Pointer to previous step
-			 */
-			Step* m_prev_step;
 			
-			/**
-			 * Length of walk to this step
-			 */
-			double m_length_walked;
+			Step* m_prev_step; //* Pointer to previous step
 			
-			/**
-			 * Coordinate Point of step
-			 */
-			double m_u, m_v;
+			double m_length_walked; //* Length of walk to this step
+			
+			double m_u, m_v; //* Coordinate Point of step
 	};
 	
 	typedef Step* StepPtr;

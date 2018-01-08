@@ -5,24 +5,31 @@
 
 int main() {
 	
-	MOSEY::Plane_CurveTensor plane_ct; //Declare curvature tensor
+	MOSEY::Walk planewalk( MOSEY::Manifold::Plane ); //Define class instance to perform walk
+	planewalk.SetStepLength( 1./10 );
+	std::vector<double> circle_params( 3 , 0. ); //list of 3 zeros
+	circle_params[0] = 1.; //Change radius to 1
+	planewalk.SetEscapeRegion( &MOSEY::OutsideCircle , circle_params );
 	
-	MOSEY::Stepper plane( plane_ct , 10 , &MOSEY::PlaneWrapper ); //Initialize stepper class to match curvature tensor
-	
-	MOSEY::OutsideCircle unitcircle( 1. , 0. , 0. ); //Define escape region
-	MOSEY::Walk planewalk( 1./10 , &MOSEY::OutsideCircle::IsFree , &plane ); //Define clas to perform walk
-	
-	planewalk.Wander( 0. , 0. ); //Start from origin and walk
-	
-	while ( !planewalk.Empty() ) {
+	for (int i = 0; i < 50; i++ ) {
 		
-		double u,v,walklen;
-		
-		planewalk.StepBackward( u , v , walklen );
-		
-		std::cout << u << '\t' << v << '\t' << walklen << std::endl;
-		
-	} //StepBackward until empty
+		planewalk.Wander( 0. , 0. ); //Start from origin and walk
 	
-	return 1;
+		double walklen;
+		
+		while ( !planewalk.Empty() ) {
+		
+			double u,v;
+		
+			planewalk.StepBackward( u , v , walklen );
+		
+			//std::cout << u << '\t' << v << '\t' << walklen << std::endl;
+		
+		} //StepBackward until empty
+		
+		std::cout << walklen << std::endl;
+		
+	}
+	
+	return 0;
 }

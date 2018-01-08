@@ -29,7 +29,7 @@ namespace MOSEY {
 			 * Preferred Constructor. Initializes empty stack and defines member variables
 			 * that depend on the manifold depending on Manifold m
 			 */
-			Walk(const double step_length, EscapeCheckPtr escape_check, std::vector<double> check_parameters, Manifold m);
+			Walk(Manifold m);
 			
 			/**
 			 * Copy Constructor.
@@ -46,6 +46,11 @@ namespace MOSEY {
 			 * Set maximum walk length that will be allowed
 			 */
 			void SetMaxWalkLength(const double max_walk_length);
+			
+			/**
+			 * Set the length of each step of the random walk
+			 */
+			void SetStepLength(const double step_length);
 			
 			/**
 			 * Set the escape region
