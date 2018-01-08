@@ -5,7 +5,7 @@ DEBUG = -g
 CXXFLAGS = -std=c++11 -Wall -c $(DEBUG)
 LFLAGS = -std=c++11 -Wall $(DEBUG)
 INCDIR = MOSEY
-OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/Plane_CurveTensor.o bin/Sphere_CurveTensor.o bin/Torus_CurveTensor.o bin/EscapeCheck.o bin/OutsideCircle.o bin/RandDouble.o bin/Step.o bin/Stepper.o bin/Walk.o
+OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/EscapeCheck.o bin/RandDouble.o bin/Step.o bin/Stepper.o bin/Walk.o
 
 test : test.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
@@ -19,19 +19,7 @@ bin/CoordinateWrappers.o : src/CoordinateWrappers.cpp $(INCDIR)/CoordinateWrappe
 bin/CurveTensor.o : src/CurveTensor.cpp $(INCDIR)/CurveTensor.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
-bin/Plane_CurveTensor.o : src/CurveTensor/Plane.cpp $(INCDIR)/CurveTensor/Plane.hpp $(INCDIR)/CurveTensor.hpp
-	$(CXX) $(CXXFLAGS) $< -o $@
-
-bin/Sphere_CurveTensor.o : src/CurveTensor/Sphere.cpp $(INCDIR)/CurveTensor/Sphere.hpp $(INCDIR)/CurveTensor.hpp
-	$(CXX) $(CXXFLAGS) $< -o $@
-
-bin/Torus_CurveTensor.o : src/CurveTensor/Torus.cpp $(INCDIR)/CurveTensor/Torus.hpp $(INCDIR)/CurveTensor.hpp
-	$(CXX) $(CXXFLAGS) $< -o $@
-
 bin/EscapeCheck.o : src/EscapeCheck.cpp $(INCDIR)/EscapeCheck.hpp $(INCDIR)/Step.hpp
-	$(CXX) $(CXXFLAGS) $< -o $@
-
-bin/OutsideCircle.o : src/EscapeCheck/OutsideCircle.cpp $(INCDIR)/EscapeCheck/OutsideCircle.hpp $(INCDIR)/EscapeCheck.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 bin/RandDouble.o : src/RandDouble.cpp $(INCDIR)/RandDouble.hpp
