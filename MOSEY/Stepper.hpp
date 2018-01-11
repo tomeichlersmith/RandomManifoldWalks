@@ -4,6 +4,7 @@
 #define MOSEY_STEPPER_HPP
 
 #include <cmath>
+#include <iostream> //Functional Checks
 
 #include "CurveTensor.hpp"
 #include "CoordinateWrappers.hpp"

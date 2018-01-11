@@ -18,6 +18,9 @@ namespace MOSEY {
 		double delv = (v - vcenter);
 		double dist = std::sqrt( delu*delu + delv*delv );
 		
+		//Functional Check
+		//std::cout << dist << std::endl;
+		
 		return ( dist > radius );
 	}
 	

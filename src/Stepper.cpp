@@ -17,6 +17,7 @@ namespace MOSEY {
 			case Manifold::Torus: m_coordwrap = &TorusWrapper;
 								break;
 			default : m_coordwrap = &PlaneWrapper;
+								m_numsteps = 1; //In the plane, one step of RK4 is exact solution
 								break;
 		}
 		
@@ -90,6 +91,9 @@ namespace MOSEY {
 		k[1] = y[3];
 		k[2] = -m_curvetensor.UUU(y[0],y[1])*y[2]*y[2]-2*m_curvetensor.UUV(y[0],y[1])*y[2]*y[3]-m_curvetensor.UVV(y[0],y[1])*y[3]*y[3];
 		k[3] = -m_curvetensor.VUU(y[0],y[1])*y[2]*y[2]-2*m_curvetensor.VUV(y[0],y[1])*y[2]*y[3]-m_curvetensor.VVV(y[0],y[1])*y[3]*y[3];
+		
+		//Funcitonal Check
+		//for (int l = 0; l < 4; l++) { std::cout << k[l] << " "; } std::cout << std::endl;
 		
 		return;
 	}

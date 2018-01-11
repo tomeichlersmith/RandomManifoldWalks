@@ -5,6 +5,7 @@
 
 #include <cmath>
 #include <vector>
+#include <iostream> //Funcitonal Checks
 
 #include "Step.hpp"
 
