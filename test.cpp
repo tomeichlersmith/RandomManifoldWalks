@@ -23,11 +23,11 @@ int main() {
 		
 			planewalk.StepBackward( u , v , walklen );
 		
-			std::cout << u << '\t' << v << '\t' << walklen << std::endl;
+			//std::cout << u << '\t' << v << '\t' << walklen << std::endl;
 		
 		} //StepBackward until empty
 		
-		//std::cout << walklen << std::endl;
+		std::cout << walklen << std::endl;
 		
 	}
 	

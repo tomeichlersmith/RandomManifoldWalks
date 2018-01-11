@@ -52,12 +52,20 @@ namespace MOSEY {
 	
 	void Walk::Wander(const double u, const double v) {
 		
-		//push starting point with begining total walk length
-		m_last = new Step(nullptr, m_total_length_walked, u, v);
+		if ( Empty() ) {
+			//Reset total length walked to zero
+			m_total_length_walked = 0.;
 		
-		while ( !m_escape_check( m_check_parameters , m_last ) and m_total_length_walked < m_maximum_walk_length ) {
-			StepForward();
-		} //walking until escape
+			//push starting point with begining total walk length
+			m_last = new Step(nullptr, m_total_length_walked, u, v);
+		
+			while ( !m_escape_check( m_check_parameters , m_last ) and m_total_length_walked < m_maximum_walk_length ) {
+				StepForward();
+			} //walking until escape
+		} //stack is empty, can perform new walk
+		else {
+			std::cout << "ERROR:\tWalk stack nonempty. Walk::StepBackward until empty." << std::endl;
+		}
 		
 		return;
 	}
@@ -110,6 +118,9 @@ namespace MOSEY {
 		//Push new step onto the stack
 		StepPtr newstep = new Step( m_last , m_total_length_walked , u1 , v1 );
 		m_last = newstep;
+		
+		//Functional Check
+		//std::cout << u0 << " " << v0 << '\t' << u1 << " " << v1 << std::endl;
 		
 		return;
 	}

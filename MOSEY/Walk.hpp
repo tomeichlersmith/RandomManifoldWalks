@@ -2,6 +2,8 @@
 #ifndef MOSEY_WALK_HPP
 #define MOSEY_WALK_HPP
 
+#include <iostream> //Functional checks and Error Messages
+
 #include "Stepper.hpp"
 #include "Step.hpp"
 #include "EscapeCheck.hpp"
