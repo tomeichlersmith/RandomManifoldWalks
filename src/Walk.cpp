@@ -3,22 +3,20 @@
 
 namespace MOSEY {
 	
-	RandDouble RandReal01;
-	
 	Walk::Walk() : 
-		m_last(nullptr), m_step_length(1), m_total_length_walked(0), m_maximum_walk_length(100),
+		m_randangle(0,TWO_PI), m_last(nullptr), m_step_length(1), m_total_length_walked(0), m_maximum_walk_length(100),
 		m_escape_check(nullptr), m_check_parameters(), m_stepper() {
 		/* Intentionally Empty */
 	}
 	
 	Walk::Walk(const double step_length, EscapeCheckPtr escape_check, std::vector<double> check_parameters, Stepper stepper) :
-		m_last(nullptr), m_step_length(step_length), m_total_length_walked(0), m_maximum_walk_length(100),
+		m_randangle(0,TWO_PI), m_last(nullptr), m_step_length(step_length), m_total_length_walked(0), m_maximum_walk_length(100),
 		m_escape_check(escape_check), m_check_parameters(check_parameters), m_stepper(stepper) {
 		/*Intentionally Empty */
 	}
 	
 	Walk::Walk(Manifold m) :
-		m_last(nullptr), m_step_length(1), m_total_length_walked(0), m_maximum_walk_length(100),
+		m_randangle(0,TWO_PI), m_last(nullptr), m_step_length(1), m_total_length_walked(0), m_maximum_walk_length(100),
 		m_escape_check(nullptr), m_check_parameters(), m_stepper(m,10) {
 		/* Intentionally Empty */
 	}
@@ -104,7 +102,7 @@ namespace MOSEY {
 		m_last->StepPoint( u0 , v0 );
 		
 		//Get random starting angle
-		double randdir = TWO_PI*MOSEY::RandReal01();
+		double randdir = m_randangle();
 		
 		//Declare ending point
 		double u1, v1;
