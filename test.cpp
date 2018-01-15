@@ -12,7 +12,7 @@ int main() {
 	planewalk.SetEscapeRegion( &MOSEY::EscapeCheck::OutsideCircle , circle_params );
 	
 	planewalk.SetMaxWalkLength( 100000. );
-	
+	/*
 	for (int i = 0; i < 10; i++ ) {
 		
 		planewalk.Wander( 0. , 0. ); //Start from origin and walk
@@ -31,6 +31,25 @@ int main() {
 		
 		std::cout << walklen << std::endl;
 	}
+	*/
+	
+	//Test copy constructor
+	planewalk.Wander( 0. , 0. );
+	
+	MOSEY::Walk copy(planewalk);
+	
+	while ( !planewalk.Empty() ) {
+			
+			double walklen;
+			double u,v;
+			double uc,vc;
+		
+			planewalk.StepBackward( u , v , walklen );
+			copy.StepBackward( uc , vc , walklen );
+		
+			std::cout << u << ',' << v << '\t' << uc << ',' << vc << std::endl;
+		
+		} //StepBackward until empty
 	
 	return 0;
 }

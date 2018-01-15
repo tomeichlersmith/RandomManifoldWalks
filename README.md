@@ -18,6 +18,7 @@ CoordinateWrapper: functions that 'wrap' the parameter variables to keep them in
  - Function that returns the coordinate within the correct range, wrapping the coordinate (either bouncing back or transporting)
 
 EscapeCheck: functions that test if a given step is within an escape region (requires a paired parameters list)
+ - Each escape check is defined within the namespace EscapeCheck
  - `typedef bool (*EscapeCheckPtr)(const std::vector<double> parameters, StepPtr step)`
  - parameters list changes depending on type/shape of Escape Region
  - Escape checks are in terms of parameter space (u,v)

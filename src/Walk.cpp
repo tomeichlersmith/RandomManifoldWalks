@@ -21,9 +21,31 @@ namespace MOSEY {
 		/* Intentionally Empty */
 	}
 	
-	/*Walk::Walk(const Walk& a_walk) {
-		//Copy constructor - have to think (FUCK)
-	}*/
+	Walk::Walk(const Walk& a_walk) : m_randangle(0,TWO_PI), m_last(nullptr), m_step_length(a_walk.m_step_length),
+		m_total_length_walked(a_walk.m_total_length_walked), m_maximum_walk_length(a_walk.m_maximum_walk_length),
+		m_escape_check(a_walk.m_escape_check), m_check_parameters(a_walk.m_check_parameters), m_stepper(a_walk.m_stepper) {
+		
+		//Copy of a_walk stack
+		StepPtr scroll = a_walk.m_last;
+		std::vector< StepPtr > stacklist;
+		while( scroll->PrevStep() != nullptr ) {
+			stacklist.push_back( scroll );
+			scroll = scroll->PrevStep();
+		}
+		
+		//Now push onto this stack
+		//Need to procede in opposite order so final stack is in correct order
+		double u,v,len;
+		for (unsigned int i = stacklist.size(); i > 0; i--) {
+			len = stacklist[i-1]->LengthWalked();
+			stacklist[i-1]->StepPoint( u , v );
+			
+			//Push new step onto the stack
+			StepPtr newstep = new Step( this->m_last , len , u , v );
+			m_last = newstep;
+			
+		}
+	}
 	
 	Walk::~Walk() {
 		double u,v,len;

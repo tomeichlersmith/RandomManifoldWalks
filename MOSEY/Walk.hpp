@@ -35,9 +35,8 @@ namespace MOSEY {
 			
 			/**
 			 * Copy Constructor.
-			 * NOT WRITTEN
 			 */
-			//Walk(const Walk& a_walk);
+			Walk(const Walk& a_walk);
 		
 			/**
 			 * Destructor. Avoiding memory leakage.
