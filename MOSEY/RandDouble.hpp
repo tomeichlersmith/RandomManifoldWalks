@@ -5,6 +5,7 @@
 
 #include <functional>
 #include <random>
+#include <ctime>
 
 namespace MOSEY {
 

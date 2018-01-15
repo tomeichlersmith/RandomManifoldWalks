@@ -6,7 +6,7 @@ namespace MOSEY {
 	RandDouble::RandDouble(const double minimum, const double maximum) :
 				r( std::bind(
 					std::uniform_real_distribution<>( minimum , maximum ),
-					std::default_random_engine() ) ) {
+					std::default_random_engine( time(nullptr) ) ) ) {
 		/* Intentionally Empty */
 	}
 	
