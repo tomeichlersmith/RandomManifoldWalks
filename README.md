@@ -12,10 +12,12 @@ CurveTensor: storage of curve tensor in the form of public member functions
  - Each manifold (with corresponding chart) has a defined signal character to input into constructor (e.g. S <=> sphere)
  - Default constructor is plane manifold (zero symbols)
 
-typedef void (*CoordinateWrapperPtr)(double &u, double &v)
+CoordinateWrapper: functions that 'wrap' the parameter variables to keep them in the domain
+ - `typedef void (*CoordinateWrapperPtr)(double &u, double &v)`
  - Function that returns the coordinate within the correct range, wrapping the coordinate (either bouncing back or transporting)
 
-typedef bool (*EscapeCheckPtr)(const std::vector<double> parameters, StepPtr step)
+EscapeCheck: functions that test if a given step is within an escape region (requires a paired parameters list)
+ - `typedef bool (*EscapeCheckPtr)(const std::vector<double> parameters, StepPtr step)`
  - parameters list changes depending on type/shape of Escape Region
  - Escape checks are in terms of parameter space (u,v)
 
@@ -31,8 +33,7 @@ Step: Node for Walk link list
  - double length_walked
  - double u
  - double v
-
-typedef Step* StepPtr
+ - `typedef Step* StepPtr`
 
 Walk: Stack Linked List - pg 794 in Savitch
  - StepPtr top

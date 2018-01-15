@@ -11,7 +11,7 @@ int main() {
 	circle_params[0] = 50; //Change radius
 	planewalk.SetEscapeRegion( &MOSEY::OutsideCircle , circle_params );
 	
-	planewalk.SetMaxWalkLength( 1000. );
+	planewalk.SetMaxWalkLength( 100000. );
 	
 	for (int i = 0; i < 10; i++ ) {
 		
