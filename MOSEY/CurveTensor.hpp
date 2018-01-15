@@ -10,40 +10,47 @@ namespace MOSEY {
 	const long double PI = M_PI;
 	const long double TWO_PI = 2*PI;
 	
+	namespace ChristoffelSymbol {
+	
+		/**
+		 * The zero funciton in Christoffel Symbol structure.
+		 */
+		double Zero(double u, double v);
+	
+		/**
+		 * Sphere UUV Christoffel Symbol.
+		 * pi*cot( pi*v )
+		 */
+		double SphereUUV(double u, double v);
+	
+		/**
+		 * Sphere VUU Christoffel Symbol.
+		 * -2*pi*sin( 2*pi*v )
+		 */
+		double SphereVUU(double u, double v);
+	
+		/**
+		 * Torus UUV Christoffel Symbol.
+		 * (-2*pi*r*sin( 2*pi*v ))/(R+r*cos( 2*pi*v ))
+		 */
+		double TorusUUV(double u, double v);
+	
+		/**
+		 * Torus VUU Christoffel Symbol.
+		 * (2*pi/r)*(R+r*cos( 2*pi*v )*sin( 2*pi*v )
+		 */
+		double TorusVUU(double u, double v);
+	
+	} //namespace ChristoffelSymbol
+	
 	/**
 	 * Christoffel Symbol function type
 	 */
 	typedef double (*ChristoffelSymbolPtr)(double,double);
 	
 	/**
-	 * The zero funciton in Christoffel Symbol structure.
+	 * Manifold specification for formatted constructor
 	 */
-	double ZeroSymbol(double u, double v);
-	
-	/**
-	 * Sphere UUV Christoffel Symbol.
-	 * pi*cot( pi*v )
-	 */
-	double SphereUUVSymbol(double u, double v);
-	
-	/**
-	 * Sphere VUU Christoffel Symbol.
-	 * -2*pi*sin( 2*pi*v )
-	 */
-	double SphereVUUSymbol(double u, double v);
-	
-	/**
-	 * Torus UUV Christoffel Symbol.
-	 * (-2*pi*r*sin( 2*pi*v ))/(R+r*cos( 2*pi*v ))
-	 */
-	double TorusUUVSymbol(double u, double v);
-	
-	/**
-	 * Torus VUU Christoffel Symbol.
-	 * (2*pi/r)*(R+r*cos( 2*pi*v )*sin( 2*pi*v )
-	 */
-	double TorusVUUSymbol(double u, double v);
-	
 	enum Manifold { Plane , Sphere , Torus };
 	
 	/**

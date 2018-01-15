@@ -8,7 +8,7 @@ RandGen: Uniform Random Real Generator
  - operator/function returning rand number
 
 CurveTensor: storage of curve tensor in the form of public member functions 
- - christoffel symbols are stored as functions in namespace MOSEY
+ - christoffel symbols are stored as functions in namespace MOSEY::ChristoffelSymbol
  - Each manifold (with corresponding chart) has a defined signal character to input into constructor (e.g. S <=> sphere)
  - Default constructor is plane manifold (zero symbols)
 

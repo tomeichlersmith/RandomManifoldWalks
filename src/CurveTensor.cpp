@@ -3,40 +3,44 @@
 
 namespace MOSEY {
 	
-	double ZeroSymbol(double u, double v) {
-		return 0;
-	}
+	namespace ChristoffelSymbol {
 	
-	double SphereUUVSymbol(double u, double v) {
-		
-		double sinv = sin( PI*v );
-		double cosv = cos( PI*v );
-		
-		return ( PI*( cosv / sinv ) );
-	}
+		double Zero(double u, double v) {
+			return 0;
+		}
 	
-	double SphereVUUSymbol(double u, double v) {
-		return ( -1*TWO_PI*sin( TWO_PI*v ) );
-	}
+		double SphereUUV(double u, double v) {
+		
+			double sinv = sin( PI*v );
+			double cosv = cos( PI*v );
+		
+			return ( PI*( cosv / sinv ) );
+		}
 	
-	double TorusUUVSymbol(double u, double v) {
-		
-		double m_tube_rad = 1., m_hole_rad = 2.;
-		double num = -1*TWO_PI*m_tube_rad*sin( TWO_PI*v );
-		double den = m_hole_rad + m_tube_rad*cos( TWO_PI*v );
-		
-		return ( num / den );
-	}
+		double SphereVUU(double u, double v) {
+			return ( -1*TWO_PI*sin( TWO_PI*v ) );
+		}
 	
-	double TorusVUUSymbol(double u, double v) {
+		double TorusUUV(double u, double v) {
 		
-		double m_tube_rad = 1., m_hole_rad = 2.;
+			double m_tube_rad = 1., m_hole_rad = 2.;
+			double num = -1*TWO_PI*m_tube_rad*sin( TWO_PI*v );
+			double den = m_hole_rad + m_tube_rad*cos( TWO_PI*v );
 		
-		return ( ( TWO_PI / m_tube_rad )*( m_hole_rad + m_tube_rad*cos( TWO_PI*v ) )*sin( TWO_PI*v ) );
-	}
+			return ( num / den );
+		}
 	
-	CurveTensor::CurveTensor() : m_uuu(&ZeroSymbol), m_uuv(&ZeroSymbol), m_uvv(&ZeroSymbol), 
-		m_vuu(&ZeroSymbol), m_vuv(&ZeroSymbol), m_vvv(&ZeroSymbol) {
+		double TorusVUU(double u, double v) {
+		
+			double m_tube_rad = 1., m_hole_rad = 2.;
+		
+			return ( ( TWO_PI / m_tube_rad )*( m_hole_rad + m_tube_rad*cos( TWO_PI*v ) )*sin( TWO_PI*v ) );
+		}
+	
+	} //namespace Christoffel Symbol
+	
+	CurveTensor::CurveTensor() : m_uuu(&ChristoffelSymbol::Zero), m_uuv(&ChristoffelSymbol::Zero), m_uvv(&ChristoffelSymbol::Zero), 
+		m_vuu(&ChristoffelSymbol::Zero), m_vuv(&ChristoffelSymbol::Zero), m_vvv(&ChristoffelSymbol::Zero) {
 		/* Intentionally Empty */
 	}
 	
@@ -44,9 +48,9 @@ namespace MOSEY {
 		
 		//Default constructor sets all symbols to zero symbol, so only change non-zero ones
 		switch ( m ) {
-			case Manifold::Sphere: m_uuv = &SphereUUVSymbol; m_vuu = &SphereVUUSymbol;
+			case Manifold::Sphere: m_uuv = &ChristoffelSymbol::SphereUUV; m_vuu = &ChristoffelSymbol::SphereVUU;
 								break;
-			case Manifold::Torus : m_uuv = &TorusUUVSymbol; m_vuu = &TorusVUUSymbol;
+			case Manifold::Torus : m_uuv = &ChristoffelSymbol::TorusUUV; m_vuu = &ChristoffelSymbol::TorusVUU;
 								break;
 			case Manifold::Plane : break; //Do nothing
 			default : break; //Do Nothing
