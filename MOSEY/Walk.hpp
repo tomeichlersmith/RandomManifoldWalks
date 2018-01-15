@@ -44,6 +44,11 @@ namespace MOSEY {
 			~Walk();
 			
 			/**
+			 * Assignment Operator.
+			 */
+			Walk& operator=(const Walk& rhs);
+			
+			/**
 			 * Set maximum walk length that will be allowed
 			 */
 			void SetMaxWalkLength(const double max_walk_length);

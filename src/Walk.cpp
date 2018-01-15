@@ -21,30 +21,10 @@ namespace MOSEY {
 		/* Intentionally Empty */
 	}
 	
-	Walk::Walk(const Walk& a_walk) : m_randangle(0,TWO_PI), m_last(nullptr), m_step_length(a_walk.m_step_length),
-		m_total_length_walked(a_walk.m_total_length_walked), m_maximum_walk_length(a_walk.m_maximum_walk_length),
-		m_escape_check(a_walk.m_escape_check), m_check_parameters(a_walk.m_check_parameters), m_stepper(a_walk.m_stepper) {
+	Walk::Walk(const Walk& a_walk) : Walk() {
 		
-		//Copy of a_walk stack
-		StepPtr scroll = a_walk.m_last;
-		std::vector< StepPtr > stacklist;
-		while( scroll->PrevStep() != nullptr ) {
-			stacklist.push_back( scroll );
-			scroll = scroll->PrevStep();
-		}
+		*this = a_walk;
 		
-		//Now push onto this stack
-		//Need to procede in opposite order so final stack is in correct order
-		double u,v,len;
-		for (unsigned int i = stacklist.size(); i > 0; i--) {
-			len = stacklist[i-1]->LengthWalked();
-			stacklist[i-1]->StepPoint( u , v );
-			
-			//Push new step onto the stack
-			StepPtr newstep = new Step( this->m_last , len , u , v );
-			m_last = newstep;
-			
-		}
 	}
 	
 	Walk::~Walk() {
@@ -52,6 +32,47 @@ namespace MOSEY {
 		while ( !Empty() ) {
 			StepBackward( u , v , len ); //StepBackward calls delete
 		}
+	}
+	
+	Walk& Walk::operator=(const Walk& rhs) {
+		
+		if ( this != &rhs ) {
+			
+			this->m_step_length = rhs.m_step_length;
+			this->m_total_length_walked = rhs.m_total_length_walked;
+			this->m_maximum_walk_length = rhs.m_maximum_walk_length;
+			this->m_escape_check = rhs.m_escape_check;
+			this->m_check_parameters = rhs.m_check_parameters;
+			this->m_stepper = rhs.m_stepper;
+			
+			//Copy of a_walk stack
+			if ( !rhs.Empty() ) {
+				StepPtr scroll = rhs.m_last;
+				std::vector< StepPtr > stacklist;
+				while( scroll->PrevStep() != nullptr ) {
+					stacklist.push_back( scroll );
+					scroll = scroll->PrevStep();
+				}
+		
+				//Now push onto this stack
+				//Need to procede in opposite order so final stack is in correct order
+				double u,v,len;
+				for (unsigned int i = stacklist.size(); i > 0; i--) {
+					len = stacklist[i-1]->LengthWalked();
+					stacklist[i-1]->StepPoint( u , v );
+			
+					//Push new step onto the stack
+					StepPtr newstep = new Step( this->m_last , len , u , v );
+					m_last = newstep;
+				}
+			} //rhs stack is nonempty
+			else {
+				this->m_last = nullptr;
+			} //rhs stack is empty
+			
+		}
+		
+		return *this;
 	}
 	
 	void Walk::SetMaxWalkLength(const double max_walk_length) {
