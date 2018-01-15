@@ -12,18 +12,18 @@ namespace MOSEY {
 		m_curvetensor(m), m_numsteps(numsteps) {
 		
 		switch (m) {
-			case Manifold::Sphere: m_coordwrap = &SphereWrapper;
+			case Manifold::Sphere: m_coordwrap = &CoordinateWrapper::Sphere;
 								break;
-			case Manifold::Torus: m_coordwrap = &TorusWrapper;
+			case Manifold::Torus: m_coordwrap = &CoordinateWrapper::Torus;
 								break;
-			default : m_coordwrap = &PlaneWrapper;
+			default : m_coordwrap = &CoordinateWrapper::Plane;
 								m_numsteps = 1; //In the plane, one step of RK4 is exact solution
 								break;
 		}
 		
 	}
 	
-	Stepper::Stepper() : m_curvetensor(), m_numsteps(1), m_coordwrap(&PlaneWrapper) {
+	Stepper::Stepper() : m_curvetensor(), m_numsteps(1), m_coordwrap(&CoordinateWrapper::Plane) {
 		/* Intentionally Empty */
 	}
 		

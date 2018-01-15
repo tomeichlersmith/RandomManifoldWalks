@@ -13,6 +13,7 @@ CurveTensor: storage of curve tensor in the form of public member functions
  - Default constructor is plane manifold (zero symbols)
 
 CoordinateWrapper: functions that 'wrap' the parameter variables to keep them in the domain
+ - Each wrapper is defined within the namespace CoordinateWrapper
  - `typedef void (*CoordinateWrapperPtr)(double &u, double &v)`
  - Function that returns the coordinate within the correct range, wrapping the coordinate (either bouncing back or transporting)
 

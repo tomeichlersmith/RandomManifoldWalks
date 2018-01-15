@@ -108,7 +108,7 @@ namespace MOSEY {
 		double u1, v1;
 		
 		//Make a step using member variable step length
-		m_stepper.Forward( u0, v0 , randdir , m_step_length , u1 , v1 );
+		m_stepper.Forward( u0 , v0 , randdir , m_step_length , u1 , v1 );
 		
 		//Increment total length walked
 		m_total_length_walked += m_step_length;

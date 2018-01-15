@@ -11,26 +11,30 @@ namespace MOSEY {
 	 * point on the manifold.
 	 */
 	typedef void (*CoordinateWrapperPtr)(double &u, double &v);
-
-	/**
-	 * Plane Coordinate Wrapper. Simplest coordinate wrapper because it
-	 * does nothing to the coordinate point.
-	 */
-	void PlaneWrapper(double& u, double& v);
 	
-	/**
-	 * Sphere Coordinate Wrapper. Using most basic chart from unit square to
-	 * sphere.
-	 * Assumes (u,v) is not further than 1 unit outside of domain in either coordinate.
-	 */
-	void SphereWrapper(double& u, double& v);
+	namespace CoordinateWrapper {
 	
-	/**
-	 * Torus Coordinate Wrapper. Using most basic chart from unit square
-	 * to torus.
-	 * Assumes (u,v) is not further than 1 unit outside of domain in either coordinate.
-	 */
-	void TorusWrapper(double& u, double& v);
+		/**
+		 * Plane Coordinate Wrapper. Simplest coordinate wrapper because it
+		 * does nothing to the coordinate point.
+		 */
+		void Plane(double& u, double& v);
+	
+		/**
+		 * Sphere Coordinate Wrapper. Using most basic chart from unit square to
+		 * sphere.
+		 * Assumes (u,v) is not further than 1 unit outside of domain in either coordinate.
+		 */
+		void Sphere(double& u, double& v);
+	
+		/**
+		 * Torus Coordinate Wrapper. Using most basic chart from unit square
+		 * to torus.
+		 * Assumes (u,v) is not further than 1 unit outside of domain in either coordinate.
+		 */
+		void Torus(double& u, double& v);
+	
+	} //namespace CoordinateWrapper
 	
 }
 

@@ -3,7 +3,7 @@
 #ifndef MOSEY_STEPPER_HPP
 #define MOSEY_STEPPER_HPP
 
-#include <cmath>
+#include <cmath> //trig functions
 #include <iostream> //Functional Checks
 
 #include "CurveTensor.hpp"
