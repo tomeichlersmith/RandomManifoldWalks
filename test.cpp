@@ -9,7 +9,7 @@ int main() {
 	planewalk.SetStepLength( 1 );
 	std::vector<double> circle_params( 3 , 0. ); //list of 3 zeros
 	circle_params[0] = 50; //Change radius
-	planewalk.SetEscapeRegion( &MOSEY::OutsideCircle , circle_params );
+	planewalk.SetEscapeRegion( &MOSEY::EscapeCheck::OutsideCircle , circle_params );
 	
 	planewalk.SetMaxWalkLength( 100000. );
 	
