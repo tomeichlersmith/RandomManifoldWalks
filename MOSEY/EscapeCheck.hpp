@@ -25,6 +25,15 @@ namespace MOSEY {
 		 *  u coordinate of the center, and v is the v coordinate
 		 */
 		bool OutsideCircle(std::vector<double> parameters, StepPtr step);
+		
+		/**
+		 * Defines escape region as the area in between concentric circles.
+		 * Calculates step's distance from the center of the cirlces and then
+		 * returns true if it is in between the two radii
+		 * @param parameters list of the form { r , R , u , v } where r is the inner radius,
+		 *  R is the outer radius, and (u,v) is the center of the circles
+		 */
+		bool CircleRing(std::vector<double> parameters, StepPtr step);
 	
 	} //namespace EscapeCheck
 	
