@@ -6,26 +6,26 @@
 int main() {
 	
 	MOSEY::Walk planewalk( MOSEY::Manifold::Plane ); //Define class instance to perform walk
-	planewalk.SetStepLength( 1 );
-	std::vector<double> circle_params( 3 , 0. ); //list of 3 zeros
-	circle_params[0] = 50; //Change radius
-	planewalk.SetEscapeRegion( &MOSEY::EscapeCheck::OutsideCircle , circle_params );
+	planewalk.SetStepLength( 0.1 );
+	std::vector<double> circle_params( 4 , 0. ); //list of 4 zeros
+	circle_params[0] = 1; //Change innter radius
+	circle_params[1] = 3; //Change outer radius
+	planewalk.SetEscapeRegion( &MOSEY::EscapeCheck::CircleRing , circle_params );
 	
-	planewalk.SetMaxWalkLength( 100000. );
+	planewalk.SetMaxWalkLength( 1000. );
 	
 	for (int i = 0; i < 10; i++ ) {
 		
-		planewalk.Wander( 0. , 0. ); //Start from origin and walk
+		planewalk.Wander( 2. , 0. ); //Start from origin and walk
 	
 		double walklen;
+		double ucurr,vcurr;
 		
 		while ( !planewalk.Empty() ) {
 		
-			double u,v;
+			planewalk.StepBackward( ucurr , vcurr , walklen );
 		
-			planewalk.StepBackward( u , v , walklen );
-		
-			//std::cout << u << '\t' << v << '\t' << walklen << std::endl;
+			//std::cout << ucurr << '\t' << vcurr << '\t' << walklen << std::endl;
 		
 		} //StepBackward until empty
 		
