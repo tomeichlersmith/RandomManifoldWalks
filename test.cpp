@@ -6,7 +6,7 @@
 int main() {
 	
 	MOSEY::Walk planewalk( MOSEY::Manifold::Plane ); //Define class instance to perform walk
-	planewalk.SetStepLength( 0.1 );
+	planewalk.SetStepLength( 0.01 );
 	std::vector<double> circle_params( 4 , 0. ); //list of 4 zeros
 	circle_params[0] = 1; //Change innter radius
 	circle_params[1] = 3; //Change outer radius
