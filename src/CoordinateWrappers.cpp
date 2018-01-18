@@ -14,23 +14,23 @@ namespace MOSEY {
 
 		void Sphere(double &u, double &v) {
 		
-			//If exit in u-coordinate, bounce back and add 1/2 to v-coordinate
-			if ( u < 0 ) {
-				u = -1*u;
-				v += 0.5;
-			}
-			else if ( u >= 1 ) {
-				u = 2-u; // u = 1-(u-1) = 1-u+1 = 2-u
-				v += 0.5;
-			}
-		
-			//If exit in v-coordinate, transport to other side of domain
-			//Done after u-coordinate because u-coordinate may change v-coordinate
+			//If exit in v-coordinate, bounce back and add 1/2 to u-coordinate
 			if ( v < 0 ) {
-				v = 1+v;
+				v = -1*v;
+				u += 0.5;
 			}
 			else if ( v >= 1 ) {
-				v = v-1;
+				v = 2-v; // v = 1-(v-1) = 1-v+1 = 2-v
+				u += 0.5;
+			}
+		
+			//If exit in u-coordinate, transport to other side of domain
+			//Done after v-coordinate because v-coordinate may change u-coordinate
+			if ( u < 0 ) {
+				u = 1+u;
+			}
+			else if ( u >= 1 ) {
+				u = u-1;
 			}
 		
 			return;
