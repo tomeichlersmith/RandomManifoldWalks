@@ -34,6 +34,15 @@ namespace MOSEY {
 		 *  R is the outer radius, and (u,v) is the center of the circles
 		 */
 		bool CircleRing(std::vector<double> parameters, StepPtr step);
+		
+		/**
+		 * Defines escape region as the area 'above' a threshhold v-coordinate.
+		 * Intented to be used on the Sphere (with usual chart) in which this escape
+		 * region is a circle around the 'south' pole (the pole with v = pi)
+		 * @param parameters list of the form { vthresh } where vthresh is the minimum v
+		 *  coordinate to be in the escape region
+		 */
+		bool VThresh(std::vector<double> parameters, StepPtr step);
 	
 	} //namespace EscapeCheck
 	
