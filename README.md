@@ -1,5 +1,7 @@
 # RandomManifoldWalks
-Mathematica and related files on performing random walks on various (simple and nice) manifolds.
+Mathematica and related files on performing random walks on various (simple and nice) manifolds. Mathematica is used to confirm the implementation written in C++ in order to obtain higher efficiency. It is suggested that each new manifold is compared to several walks done in Mathematica in order to maintain accuracy of the C++ package MOSEY.
+
+----------------------------------------------------------------------------------------------------------------------------
 
 ## Classes for C++ Implementation:
 
@@ -8,20 +10,21 @@ RandGen: Uniform Random Real Generator
  - operator/function returning rand number
 
 CurveTensor: storage of curve tensor in the form of public member functions 
- - christoffel symbols are stored as functions in namespace MOSEY::ChristoffelSymbol
+ - Christoffel Symbols are stored as functions in namespace MOSEY::ChristoffelSymbol
  - Each manifold (with corresponding chart) has a defined signal character to input into constructor (e.g. S <=> sphere)
  - Default constructor is plane manifold (zero symbols)
 
 CoordinateWrapper: functions that 'wrap' the parameter variables to keep them in the domain
  - Each wrapper is defined within the namespace CoordinateWrapper
- - `typedef void (*CoordinateWrapperPtr)(double &u, double &v)`
  - Function that returns the coordinate within the correct range, wrapping the coordinate (either bouncing back or transporting)
+ - Can be used to implement "walls" on the manifold (boundaries that a walk "bounces" off of, instead of wrapping to a different part of the domain)
+ - `typedef void (*CoordinateWrapperPtr)(double &u, double &v)`
 
 EscapeCheck: functions that test if a given step is within an escape region (requires a paired parameters list)
  - Each escape check is defined within the namespace EscapeCheck
- - `typedef bool (*EscapeCheckPtr)(const std::vector<double> parameters, StepPtr step)`
  - parameters list changes depending on type/shape of Escape Region
  - Escape checks are in terms of parameter space (u,v)
+ - `typedef bool (*EscapeCheckPtr)(const std::vector<double> parameters, StepPtr step)`
 
 Stepper: Perform Geodesic Walk for given christoffel symbols / coordinate limits
  - CurveTensor curvetensor
@@ -31,11 +34,13 @@ Stepper: Perform Geodesic Walk for given christoffel symbols / coordinate limits
  - Forward(double u0, double v0, double direction, double steplen, double &u1, double &v1)
 
 Step: Node for Walk link list
- - StepPtr previousstep
- - double length_walked
- - double u
- - double v
- - `typedef Step* StepPtr`
+```C++
+StepPtr previousstep
+double length_walked
+double u
+double v
+typedef Step* StepPtr
+```
 
 Walk: Stack Linked List - pg 794 in Savitch
  - StepPtr top
