@@ -1,0 +1,31 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+
+\title{Random Walks on Simple Two-Dimensional Manifolds}
+\author{Tom Eichlersmith}
+
+\begin{document}
+
+\section{Derivation of Christoffel Symbols}
+
+In order for the implementation of the geodesic equations in C\texttt{++} to be simpler, we change the domain of the standard charts for the sphere and the torus to be the unit square $I^2 = [0,1) \times [0,1)$.
+This will yield slightly different Christoffel Symbols for both of these manifolds (and their charts).
+First, we will calculate the Christoffel Symbols for the sphere $S^2$ mapped with the chart $\mu:I^2 \to S^2$ defined by
+$$ \mu(u,v) = (\cos(2\pi u)\sin(\pi v), \sin(2\pi u)\cos(\pi v), \cos(\pi v)) $$
+which has the corresponding Christoffel Symbols
+\begin{equation}
+\begin{array}{lr}
+	\left(\Gamma^{u}_{ij}\right) = \left( \begin{array}{cc}
+		0 & \pi\cot(\pi v) \\
+		\pi\cot(\pi v) & 0
+	\end{array} \right) &
+	\left(\Gamma^{v}_{ij}\right) = \left( \begin{array}{cc}
+		-2\pi\sin(2\pi v) & 0 \\
+		0 & 0
+	\end{array} \right)
+\end{array}
+\end{equation}
+
+
+\end{document}

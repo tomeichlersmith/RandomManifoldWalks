@@ -4,3 +4,8 @@ bin/*
 
 #Ignore test executable
 test
+
+#None of the latex process files
+*.aux
+*.log
+*.gz
