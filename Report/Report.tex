@@ -1,6 +1,9 @@
 \documentclass{article}
 
 \usepackage[margin=1in]{geometry}
+\usepackage{amsfonts, amsmath}
+
+\newcommand{\R}{\mathbb{R}}
 
 \title{Random Walks on Simple Two-Dimensional Manifolds}
 \author{Tom Eichlersmith \\ Art Guetter (adv)}
@@ -12,7 +15,11 @@
 	Most of this machinery has been developed in the field of differential geometry and we have learned a lot of this material from \cite{BanchoffLovett_DiffGeo_2010} (Read it for a more detailed explanation of this material).
 	We will begin with a general overview of differential manifolds that are locally Euclidean.
 	
-	\subsection{Euclidean Manifolds}
+	\subsection{Euclidean Surfaces}
+		The introduction to parametrized surfaces given in \cite{BanchoffLovett_DiffGeo_2010} is most readily adapted to this project because it can be easily implemented in computer programming.
+		We construct a surface as a subset of $\R^3$ by considering continuous functions $\mu:U\subseteq\R^2 \to \R^3$ --- we call the set of $\mu$ that covers the entire surface in question a \textit{chart}.
+		Glossing over the large amount of detail and development that can be extracted from this simple idea of a surface, we apply more restrictions on the surfaces (and their charts) in order to obtain an intuitive "smoothness" on the surface.
+		In a sense, these restrictions allow us to consider surfaces that are locally Euclidean (hence the name for this class of surfaces arise --- also known as \textit{regular} or \textit{differentiable} surfaces).
 		
 
 \section{Derivation of Geodesic Equations}
