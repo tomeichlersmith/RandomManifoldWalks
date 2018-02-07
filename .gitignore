@@ -9,3 +9,6 @@ test
 *.aux
 *.log
 *.gz
+*.bbl
+*.blg
+*.pdf
