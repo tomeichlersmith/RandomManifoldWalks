@@ -15,11 +15,19 @@
 	Most of this machinery has been developed in the field of differential geometry and we have learned a lot of this material from \cite{BanchoffLovett_DiffGeo_2010} (Read it for a more detailed explanation of this material).
 	We will begin with a general overview of differential manifolds that are locally Euclidean.
 	
-	\subsection{Euclidean Surfaces}
+	\subsection{Regular Surfaces}
 		The introduction to parametrized surfaces given in \cite{BanchoffLovett_DiffGeo_2010} is most readily adapted to this project because it can be easily implemented in computer programming.
-		We construct a surface as a subset of $\R^3$ by considering continuous functions $\mu:U\subseteq\R^2 \to \R^3$ --- we call the set of $\mu$ that covers the entire surface in question a \textit{chart}.
+		We construct a surface as a subset of $\R^3$ by considering continuous functions $\mu:U \to V$ where $U \subseteq \R^2$ and $V$ is a subset of the surface --- we call the set of $\mu$ that covers the entire surface in question a \textit{chart}.
 		Glossing over the large amount of detail and development that can be extracted from this simple idea of a surface, we apply more restrictions on the surfaces (and their charts) in order to obtain an intuitive "smoothness" on the surface.
-		In a sense, these restrictions allow us to consider surfaces that are locally Euclidean (hence the name for this class of surfaces arise --- also known as \textit{regular} or \textit{differentiable} surfaces).
+		In a sense, these restrictions allow us to consider surfaces that are locally Euclidean and therefore they more closely resemble what we perceive a surface to be (hence the name for this class of surfaces).
+		For a surface to be regular, there must exist a chart that has a member $\mu$ covering an open neighborhood around each point of the surface and satisfies the following conditions:
+		\begin{enumerate}
+			\item Differentiable --- the coordinate functions of $\mu$ in $\R^3$ have continuous partial derivatives for all orders
+			\item Homeomorphic --- $\mu$ and its inverse are continuous
+			\item Satisfies the Regularity Condition --- The differential of $\mu$ is a one-to-one linear transformation
+		\end{enumerate}
+		Often, a member of the chart for a regular surface is called a \textit{coordinate patch} because it imposes a homeomorphic relationship between coordinates in $\R^2$ --- represented by $U$ --- onto a "patch" enclosing an open neighborhood on the surface --- represented by $V$.
+		When properly constructed, a chart of a regular surface completely characterizes it, and we can calculate all of the properties of the surface we require from the chart.
 		
 
 \section{Derivation of Geodesic Equations}
