@@ -8,9 +8,14 @@
 \begin{document}
 
 \section{Introduction}
+	For us to be capable of exploring the central problem explained later in this paper, we must develop machinery in order to replicate the intuitive notion of a walk on different surfaces.
+	Most of this machinery has been developed in the field of differential geometry and we have learned a lot of this material from \cite{BanchoffLovett_DiffGeo_2010} (Read it for a more detailed explanation of this material).
+	We will begin with a general overview of differential manifolds that are locally Euclidean.
 	
+	\subsection{Euclidean Manifolds}
+		
 
-\section{Derivation of Differential Equations}
+\section{Derivation of Geodesic Equations}
 	
 	\subsection{Christoffel Symbols}
 		In order for the implementation of the geodesic equations in C\texttt{++} to be simpler, we change the domain of the standard charts for the sphere and the torus to be the unit square $I^2 = [0,1) \times [0,1)$.
@@ -21,13 +26,13 @@
 		\begin{equation}
 			\begin{array}{lr}
 			\left(\Gamma^{u}_{ij}\right) = \left( \begin{array}{cc}
-			0 & \pi\cot(\pi v) \\
-			\pi\cot(\pi v) & 0
-			\end{array} \right) &
+					0 & \pi\cot(\pi v) \\
+					\pi\cot(\pi v) & 0
+				\end{array} \right) &
 			\left(\Gamma^{v}_{ij}\right) = \left( \begin{array}{cc}
-			-2\pi\sin(2\pi v) & 0 \\
-			0 & 0
-			\end{array} \right)
+					-2\pi\sin(2\pi v) & 0 \\
+					0 & 0
+				\end{array} \right)
 			\end{array}
 		\end{equation}
 	
