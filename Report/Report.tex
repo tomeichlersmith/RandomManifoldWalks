@@ -12,8 +12,8 @@
 
 \section{Introduction}
 	For us to be capable of exploring the central problem explained later in this paper, we must develop machinery in order to replicate the intuitive notion of a walk on different surfaces.
-	Most of this machinery has been developed in the field of differential geometry and we have learned a lot of this material from \cite{BanchoffLovett_DiffGeo_2010} (Read it for a more detailed explanation of this material).
-	We will begin with a general overview of differential manifolds that are locally Euclidean.
+	Most of this machinery has been developed in the field of differential geometry and we have learned a lot of this material from \cite{BanchoffLovett_DiffGeo_2010} (Read it for a more detailed and precise explanation of this material).
+	We will begin with a general overview of differential manifolds that are considered to be "regular" because of their similarity to what we consider to be intuitively smooth.
 	
 	\subsection{Regular Surfaces}
 		The introduction to parametrized surfaces given in \cite{BanchoffLovett_DiffGeo_2010} is most readily adapted to this project because it can be easily implemented in computer programming.
@@ -28,6 +28,24 @@
 		\end{enumerate}
 		Often, a member of the chart for a regular surface is called a \textit{coordinate patch} because it imposes a homeomorphic relationship between coordinates in $\R^2$ --- represented by $U$ --- onto a "patch" enclosing an open neighborhood on the surface --- represented by $V$.
 		When properly constructed, a chart of a regular surface completely characterizes it, and we can calculate all of the properties of the surface we require from the chart.
+		Regular surfaces are the only surfaces we will work with in this paper, and by our definition, are embedded in $\R^3$.
+		They are the Euclidean plane, $P$; the two-dimensional sphere of radius $r$, $S(r)$; and the two-dimensional, one-hole torus of polar radius $R$ and axial radius $r$, $T(R,r)$.
+		For consistency, we impose the restrictions that all radii are larger than zero and the polar radius of the torus is strictly greater than the axial radius of the torus (i.e. $R > r > 0$).
+	
+	\subsection{Charts}
+		For easier program implementation in C\texttt{++}, we are going to define the charts of our focus surfaces to be slightly different from the usual charts of these surfaces.
+		This change is made so that the coordinate patches of $S$ and $T$ have the unit square $I^2 \subset \R^2$ as their domain.
+		The chart for the Euclidean plane $P$ is the single coordinate patch (the identity patch) $i: \R^2 \to P$ defined by
+		$$ i(u,v) = ( u , v , 0 ) $$
+		This is clearly the simplest chart.
+		The chart for the unit sphere $S(r)$ consists of two coordinate patches $\sigma_1:I^2 \to S(r)$ and $\sigma_2:I^2 \to S(r)$ defined by
+		$$ \sigma_1(u,v) = ( r\cos(2\pi u)\sin(\pi v) , r\sin(2\pi u)\cos(\pi v) , r\cos(\pi v) ) $$
+		$$ \sigma_2(u,v) = ( -r\cos(2\pi u)\sin(\pi v) , r\cos(\pi v) , -r\sin(2\pi u)\sin(\pi v) ) $$
+		Practically, the technical need for $\sigma_2$ in order to satisfy the requirements of the chart can be ignored when implementing in a computer program because the difficulties arise only at a two infinitesimal points (the "poles" of the sphere).
+		Nevertheless, care will be taken in order to avoid the issues arising from being near these points. 
+		Finally, the chart for the torus $T(R,r)$ consists of a single coordinate patch $\tau:I^2 \to T(R,r)$ defined by
+		$$ \tau(u,v) = ( (R+r\cos(2\pi v))\cos(2\pi u) , (R+r\cos(2\pi v)\sin(2\pi u) , r\sin(2\pi v) ) $$
+		We will use these charts whenever speaking of these surfaces for the rest of this paper.
 		
 
 \section{Derivation of Geodesic Equations}
@@ -52,6 +70,8 @@
 		\end{equation}
 	
 \section{Random Walks}
+	
+	\subsection{Method}
 	
 	\subsection{Optimizations}
 
