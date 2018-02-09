@@ -9,10 +9,15 @@
 \author{Tom Eichlersmith \\ Art Guetter (adv)}
 
 \begin{document}
+	
+\maketitle
 
-\section{Introduction}
+\section{Introduction and Background}
 	For us to be capable of exploring the central problem explained later in this paper, we must develop machinery in order to replicate the intuitive notion of a walk on different surfaces.
-	Most of this machinery has been developed in the field of differential geometry and we have learned a lot of this material from \cite{BanchoffLovett_DiffGeo_2010} (Read it for a more detailed and precise explanation of this material).
+	If we are able to determine what a "step" is on each of our surfaces, then a "walk" is simply a string of steps connected end-to-end.
+	We define a "step" on a surface as the movement to a point relatively near-by along the shortest path.
+	In order to determine this shortest path (as well as the direction the movement is taken), we require calculational tools from differential geometry.
+	Most of this machinery has been learned from \cite{BanchoffLovett_DiffGeo_2010} (Read it for a more detailed and precise explanation of this material).
 	We will begin with a general overview of differential manifolds that are considered to be "regular" because of their similarity to what we consider to be intuitively smooth.
 	
 	\subsection{Regular Surfaces}
@@ -45,10 +50,10 @@
 		Nevertheless, care will be taken in order to avoid the issues arising from being near these points. 
 		Finally, the chart for the torus $T(R,r)$ consists of a single coordinate patch $\tau:I^2 \to T(R,r)$ defined by
 		$$ \tau(u,v) = ( (R+r\cos(2\pi v))\cos(2\pi u) , (R+r\cos(2\pi v)\sin(2\pi u) , r\sin(2\pi v) ) $$
-		We will use these charts whenever speaking of these surfaces for the rest of this paper.
+		We will use these charts whenever speaking of these surfaces for the rest of this paper, and their form will lead to slightly different calculations that what you see in \cite{BanchoffLovett_DiffGeo_2010,Irons_GeodesicsTorus_2005}.
 		
 
-\section{Derivation of Geodesic Equations}
+	\subsection{Derivation of Geodesic Equations}
 	
 	\subsection{Christoffel Symbols}
 		In order for the implementation of the geodesic equations in C\texttt{++} to be simpler, we change the domain of the standard charts for the sphere and the torus to be the unit square $I^2 = [0,1) \times [0,1)$.
@@ -70,6 +75,8 @@
 		\end{equation}
 	
 \section{Random Walks}
+	Now that we have all of the tools necessary to take steps on each of our three surfaces, we are able to walk on them.
+	The implementation of these walks is in C\texttt{++}.
 	
 	\subsection{Method}
 	
