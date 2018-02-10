@@ -44,7 +44,7 @@
 		$$ i(u,v) = ( u , v , 0 ) $$
 		This is clearly the simplest chart.
 		The chart for the unit sphere $S(r)$ consists of two coordinate patches $\sigma_1:I^2 \to S(r)$ and $\sigma_2:I^2 \to S(r)$ defined by
-		$$ \sigma_1(u,v) = ( r\cos(2\pi u)\sin(\pi v) , r\sin(2\pi u)\cos(\pi v) , r\cos(\pi v) ) $$
+		$$ \sigma_1(u,v) = ( r\cos(2\pi u)\sin(\pi v) , r\sin(2\pi u)\sin(\pi v) , r\cos(\pi v) ) $$
 		$$ \sigma_2(u,v) = ( -r\cos(2\pi u)\sin(\pi v) , r\cos(\pi v) , -r\sin(2\pi u)\sin(\pi v) ) $$
 		Practically, the technical need for $\sigma_2$ in order to satisfy the requirements of the chart can be ignored when implementing in a computer program because the difficulties arise only at a two infinitesimal points (the "poles" of the sphere).
 		Nevertheless, care will be taken in order to avoid the issues arising from being near these points. 
@@ -52,15 +52,93 @@
 		$$ \tau(u,v) = ( (R+r\cos(2\pi v))\cos(2\pi u) , (R+r\cos(2\pi v)\sin(2\pi u) , r\sin(2\pi v) ) $$
 		We will use these charts whenever speaking of these surfaces for the rest of this paper, and their form will lead to slightly different calculations that what you see in \cite{BanchoffLovett_DiffGeo_2010,Irons_GeodesicsTorus_2005}.
 		
-
 	\subsection{Derivation of Geodesic Equations}
+		Geodesics are defined as paths on a surface with no acceleration (relative to the surface).
+		This is a method of extending the idea of a line on the plane to other surfaces --- done similarly in \cite{Lewis_GeodesicsMathematica_2002}.
+		If $\mu$ represents a coordinate patch on a surface $M$ containing a path $\gamma$, then we can formalize this notion of no acceleration relative to the surface by forcing $\gamma''$ to be normal to the surface everywhere.
+		Let $\gamma:[0,1] \to M$, then $\gamma$ is a \textit{geodesic} if
+		\begin{equation} \label{geodesic_def} \begin{split}
+			&\gamma''(t) \cdot \mu_u = 0 \\
+			&\gamma''(t) \cdot \mu_v = 0
+		\end{split} \end{equation}
+		for all $t$.
+		We are able to represent $\gamma(t) = \mu( u(t) , v(t) )$ and expand on this definition to find differential equations for the coordinate functions $u$ and $v$.
+		First (omitting the explicit writing of $t$ and writing partial derivatives as subscripts),
+		\begin{equation*}
+			\gamma' = \mu_u u'+\mu_v v'
+		\end{equation*}
+		And then (using the fact that since $\mu$ is a coordinate chart, we know $\mu_{uv}=\mu_{vu}$)
+		\begin{equation*} \begin{split}
+			\gamma'' & = (\mu_{uu} u' + \mu_{uv} v')u' + \mu_u u'' + (\mu_{vu} u' + \mu_{vv} v') v' + \mu_v v'' \\
+					 & = (u')^2 \mu_{uu} + (v')^2\mu_{vv} + 2u' v'\mu_{uv} + u''\mu_u + v''\mu_v
+		\end{split} \end{equation*}
+		Now we can put this expression for $\gamma''$ into equation \ref{geodesic_def} to obtain differential equations that the functions $u(t)$ and $v(t)$ must satisfy in order for $\gamma$ to be a geodesic (also using that $\mu_u$ and $\mu_v$ are orthogonal: $\mu_u \cdot \mu_v = 0$)
+		\begin{equation} \label{geodesic_work} \begin{split}
+			\gamma'' \cdot \mu_u & = (u')^2\mu_u \cdot \mu_{uu} + (v')^2\mu_u \cdot \mu_{vv} + 2u' v'\mu_u \cdot \mu_{uv} + u''\mu_u \cdot \mu_u + v''\mu_u \cdot \mu_v \\
+			0 & = (u')^2\mu_u \cdot \mu_{uu} + (v')^2\mu_u \cdot \mu_{vv} + 2u' v'\mu_u \cdot \mu_{uv} + u''\mu_u \cdot \mu_u \\
+			\gamma'' \cdot \mu_v & = (u')^2\mu_v \cdot \mu_{uu} + (v')^2\mu_v \cdot \mu_{vv} + 2u' v'\mu_v \cdot \mu_{uv} + u''\mu_v \cdot \mu_u + v''\mu_v \cdot \mu_v \\
+			0 & = (u')^2\mu_v \cdot \mu_{uu} + (v')^2\mu_v \cdot \mu_{vv} + 2u' v'\mu_v \cdot \mu_{uv} + v''\mu_v \cdot \mu_v \\
+		\end{split} \end{equation}
+		Rearranging equation \ref{geodesic_work} will be more useful for us. We can assume $\mu_u \cdot \mu_u \neq 0$  and $\mu_v \cdot \mu_v \neq 0$ because of the conditions on $\mu$ we imposed earlier.
+		\begin{equation} \label{geodesic_eqn} \begin{split}
+			u'' + \frac{\mu_{uu} \cdot \mu_u}{\mu_u \cdot \mu_u} (u')^2 + \frac{\mu_{vv} \cdot \mu_u}{\mu_u \cdot \mu_u} (v')^2 + 2\frac{\mu_{uv} \cdot \mu_u}{\mu_u \cdot \mu_u} u'v' & = 0 \\
+			v'' + \frac{\mu_{uu} \cdot \mu_v}{\mu_v \cdot \mu_v} (u')^2 + \frac{\mu_{vv} \cdot \mu_v}{\mu_v \cdot \mu_v} (v')^2 + 2\frac{\mu_{uv} \cdot \mu_v}{\mu_v \cdot \mu_v} u'v' & = 0 \\
+		\end{split} \end{equation}
+		In this form we can pick out the Christoffel Symbols (usually defined in reference to the metric) as the coefficients of the derivatives of $u$ and $v$. Specifically,
+		\begin{equation}
+			\Gamma^i_{jk} = \frac{\mu_{jk} \cdot \mu_i}{\mu_i \cdot \mu_i}
+		\end{equation}
+		where $i,j,k$ run over $u$ and $v$.
+		This "definition" means we can write equation \ref{geodesic_eqn} in tensor notation
+		\begin{equation} \label{geodesic_chris}
+			\frac{d^2 x^i}{dt^2} + \sum_{j,k = 1}^2 \Gamma^i_{jk} \frac{d x^j}{dt} \frac{dx^k}{dt}
+		\end{equation}
+		In \cite{BanchoffLovett_DiffGeo_2010}, equation \ref{geodesic_chris} uses $s$ as the independent variable because these equations produce a geodesic that is parametrized by arc length (has unit speed) when the proper initial conditions are given to it.
+		Specifically, if the initial direction vector has unit magnitude, then the resulting solution will have unit speed (and therefore be parametrized by arc length).
+		
 	
 	\subsection{Christoffel Symbols}
-		In order for the implementation of the geodesic equations in C\texttt{++} to be simpler, we change the domain of the standard charts for the sphere and the torus to be the unit square $I^2 = [0,1) \times [0,1)$.
-		This will yield slightly different Christoffel Symbols for both of these manifolds (and their charts).
-		First, we will calculate the Christoffel Symbols for the sphere $S^2$ mapped with the chart $\mu:I^2 \to S^2$ defined by
-		$$ \mu(u,v) = (\cos(2\pi u)\sin(\pi v), \sin(2\pi u)\cos(\pi v), \cos(\pi v)) $$
-		which has the corresponding Christoffel Symbols
+		The computer implementation of steps along geodesics uses equation \ref{geodesic_chris}, so we can completely characterize the geodesics (and therefore walk on the surfaces) by calculating the Christoffel symbols.
+		Below are the calculations producing the symbols for each of the coordinate patches from above.
+		
+		The symbols calculated from $i$ are quickly obtained.
+		Since all of the symbols contain second partial derivatives and $i$ only has linear orders of $u$ or $v$, all of the symbols on the plane are zero.
+		\begin{equation}
+			\begin{array}{lr}
+				\left(\Gamma^{u}_{ij}\right) = \left( \begin{array}{cc}
+					0 & 0 \\
+					0 & 0
+				\end{array} \right) &
+				\left(\Gamma^{v}_{ij}\right) = \left( \begin{array}{cc}
+					0 & 0 \\
+					0 & 0
+				\end{array} \right)
+			\end{array}
+		\end{equation}
+		
+		The first patch that's a member of the chart of $S(r)$ has derivatives
+		\begin{equation*} \begin{split}
+			\sigma_{1u} & = ( -2\pi r \sin(2\pi u)\sin(\pi v) , 2\pi r \cos(2\pi u)\sin(\pi v) , 0 ) \\
+			\sigma_{1v} & = ( \pi r \cos(2\pi u)\cos(\pi v) , \pi r \sin(2\pi u)\cos(\pi v) , -\pi r \sin(\pi v) ) \\
+			\sigma_{1uu} & = ( -4\pi^2 r \cos(2\pi u)\sin(\pi v) , -4\pi^2 r \sin(2\pi u)\sin(\pi v) , 0 ) \\
+			\sigma_{1uv} & = ( -2\pi^2 r \sin(2\pi u)\cos(\pi v) , 2\pi^2 r \cos(2\pi u)\cos(\pi v) , 0 ) \\
+			\sigma_{1vv} & = ( -\pi^2 r \cos(2\pi u)\sin(\pi v) , -\pi^2 r \sin(2\pi u)\sin(\pi v) , -\pi^2 r \cos(\pi v) )
+		\end{split} \end{equation*}
+		and then has the necessary dot products
+		\begin{equation*} \begin{array}{ll}
+			\begin{split}
+				\sigma_{1u} \cdot \sigma_{1u} & = 4\pi^2r^2\cos^2(\pi v) \\
+				\sigma_{1uu} \cdot \sigma_{1u} & = 0 \\
+				\sigma_{1uv} \cdot \sigma_{1u} & = 4\pi^3r^2\sin(\pi v)\cos(\pi v) \\
+				\sigma_{1vv} \cdot \sigma_{1u} & = 0
+			\end{split} & \begin{split}
+				\sigma_{1v} \cdot \sigma_{1v} & = \pi^2r^2 \\
+				\sigma_{1uu} \cdot \sigma_{1v} & = -2\pi^3r^2\sin(2\pi v) \\
+				\sigma_{1uv} \cdot \sigma_{1v} & = 0 \\
+				\sigma_{1vv} \cdot \sigma_{1v} & = 0
+			\end{split}
+		\end{array} \end{equation*}
+		Therefore, the Christoffel symbols for $\sigma_1$ are
 		\begin{equation}
 			\begin{array}{lr}
 			\left(\Gamma^{u}_{ij}\right) = \left( \begin{array}{cc}
@@ -73,10 +151,84 @@
 				\end{array} \right)
 			\end{array}
 		\end{equation}
+		Notice that these Christoffel symbols do not depend on $r$.
+		
+		The second patch that is a member of the chart for the sphere has derivatives
+		\begin{equation*} \begin{split}
+			\sigma_{2u} & = ( 2\pi r \sin(2\pi u)\sin(\pi v) , 0 , -2\pi r \cos(2\pi u)\sin(\pi v) ) \\
+			\sigma_{2v} & = ( -\pi r \cos(2\pi u)\cos(\pi v) , -\pi r \sin(\pi v) , -\pi r \sin(2\pi u)\cos(\pi v) ) \\
+			\sigma_{2uu} & = ( 4\pi^2r\cos(2\pi u)\sin(\pi v) , 0 , 4\pi^2r\sin(2\pi u)\sin(\pi v) ) \\
+			\sigma_{2uv} & = ( 2\pi^2r\sin(2\pi u)\cos(\pi v) , 0 , -2\pi^2r\cos(2\pi u)\cos(\pi v) ) \\
+			\sigma_{2vv} & = ( \pi^2r\cos(2\pi u)\sin(\pi v), -\pi^2r\cos(\pi v) , \pi^2r\sin(2\pi u)\sin(\pi v) )
+		\end{split} \end{equation*}
+		and then has the dot products
+		\begin{equation*} \begin{array}{ll}
+			\begin{split}
+				\sigma_{2u} \cdot \sigma_{2u} & = 4\pi^2r^2\sin^2(\pi v) \\
+				\sigma_{2uu} \cdot \sigma_{2u} & = 0 \\
+				\sigma_{2uv} \cdot \sigma_{2u} & = 4\pi^3r^2\sin(\pi v)\cos(\pi v) \\
+				\sigma_{2vv} \cdot \sigma_{2u} & = 0
+			\end{split} & \begin{split}
+				\sigma_{2v} \cdot \sigma_{2v} & = \pi^2r^2 \\
+				\sigma_{2uu} \cdot \sigma_{2v} & = -2\pi^3r^2\sin(2\pi v) \\
+				\sigma_{2uv} \cdot \sigma_{2v} & = 0 \\
+				\sigma_{2vv} \cdot \sigma_{2v} & = 0
+			\end{split}
+		\end{array} \end{equation*}
+		Therefore, the Christoffel symbols for $\sigma_2$ are
+		\begin{equation}
+			\begin{array}{lr}
+			\left(\Gamma^{u}_{ij}\right) = \left( \begin{array}{cc}
+					0 & \pi\cot(\pi v) \\
+					\pi\cot(\pi v) & 0
+				\end{array} \right) &
+			\left(\Gamma^{v}_{ij}\right) = \left( \begin{array}{cc}
+					-2\pi\sin(2\pi v) & 0 \\
+					0 & 0
+				\end{array} \right)
+			\end{array}
+		\end{equation}
+		Notice that these symbols are identical to the symbols for $\sigma_1$. This is why the technical requirement for $\sigma_2$ can be ignored when the poles of the mapping are able to be avoided.
+		
+		The coordinate patch we are using for the torus covers the entire surface with no problematic points (as long as domain wrapping is kept consistent). It has derivatives
+		\begin{equation*} \begin{split}
+			\tau_u & = ( -2\pi(R+r\cos(2\pi v))\sin(2\pi u) , 2\pi(R+r\cos(2\pi v))\cos(2\pi u) , 0 ) \\
+			\tau_v & = ( -2\pi r\sin(2\pi v)\cos(2\pi u) , -2\pi r\sin(2\pi v)\sin(2\pi u) , 2\pi r\cos(2\pi v) ) \\
+			\tau_{uu} & = ( -4\pi^2(R+r\cos(2\pi v))\cos(2\pi u) , -4\pi^2(R+r\cos(2\pi v))\sin(2\pi u) , 0 ) \\
+			\tau_{uv} & = ( 4\pi^2r\sin(2\pi v)\sin(2\pi u) , -4\pi^2r\sin(2\pi v)\cos(2\pi u) , 0 ) \\
+			\tau_{vv} & = ( -4\pi^2 r\cos(2\pi v)\cos(2\pi u) , -4\pi^2r\cos(2\pi v)\sin(2\pi u) , -4\pi^2r\sin(2\pi v) )
+		\end{split} \end{equation*}
+		and the dot products
+		\begin{equation*} \begin{array}{ll}
+			\begin{split}
+				\tau_u \cdot \tau_u & = 4\pi^2(R+r\cos(2\pi v))^2 \\
+				\tau_{uu} \cdot \tau_u & = 0 \\
+				\tau_{uv} \cdot \tau_u & = -8\pi^3r\sin(2\pi v)(R+r\cos(2\pi v)) \\
+				\tau_{vv} \cdot \tau_u & = 0
+			\end{split} & \begin{split}
+				\tau_v \cdot \tau_v & = 4\pi^2r^2 \\
+				\tau_{uu} \cdot \tau_v & = 8\pi^3r\sin(2\pi v)(R+r\cos(2\pi v)) \\
+				\tau_{uv} \cdot \tau_v & = 0 \\
+				\tau_{vv} \cdot \tau_v & = 0
+			\end{split}
+		\end{array} \end{equation*}
+		The Christoffel symbols for $\tau$ are
+		\begin{equation}
+			\begin{array}{lr}
+				\left(\Gamma^{u}_{ij}\right) = \left( \begin{array}{cc}
+					0 & -\frac{2\pi r\sin(2\pi v)}{R+r\cos(2\pi v)} \\
+					-\frac{2\pi r\sin(2\pi v)}{R+r\cos(2\pi v)} & 0
+				\end{array} \right) &
+				\left(\Gamma^{v}_{ij}\right) = \left( \begin{array}{cc}
+					\frac{2\pi}{r}\sin(2\pi v)(R+r\cos(2\pi v)) & 0 \\
+					0 & 0
+				\end{array} \right)
+			\end{array}
+		\end{equation}
 	
 \section{Random Walks}
 	Now that we have all of the tools necessary to take steps on each of our three surfaces, we are able to walk on them.
-	The implementation of these walks is in C\texttt{++}.
+	The implementation of these walks is in C\texttt{++} using an implementation of the standard Runge-Kutta numerical method.
 	
 	\subsection{Method}
 	
