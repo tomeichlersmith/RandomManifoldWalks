@@ -230,6 +230,48 @@
 	The implementation of these walks is in C\texttt{++} using an application of the standard Runge-Kutta numerical method.
 	
 	\subsection{Method}
+	The Runge-Kutta method is a process to approximate first order differential equations. We will be using the standard, fourth order Runge-Kutta method (RK4) that will be outlined for our specific problem below. First, we must transform our two second order geodesic equations \ref{geodesic_chris} into a system of first order differential equations so that we are able to apply the RK4 method.
+	
+	We begin by expanding \ref{geodesic_chris} and using $u$ and $v$ instead of $x^1$ and $x^2$.
+	\begin{equation} \label{geodesic_expansion} \begin{split} 
+		\frac{d^2u}{dt^2} & = -\Gamma^u_{uu}\left(\frac{du}{dt}\right)^2-2\Gamma^u_{uv}\frac{du}{dt}\frac{dv}{dt}-\Gamma^u_{vv}\left(\frac{dv}{dt}\right)^2 \\
+		\frac{d^2v}{dt^2} & = -\Gamma^v_{uu}\left(\frac{du}{dt}\right)^2-2\Gamma^v_{uv}\frac{du}{dt}\frac{dv}{dt}-\Gamma^v_{vv}\left(\frac{dv}{dt}\right)^2 \\
+	\end{split} \end{equation}
+	Define the first derivatives of $u$ and $v$ as their own variables
+	\begin{equation*} \begin{array}{cc}
+		p = \frac{du}{dt} & q = \frac{dv}{dt}
+	\end{array} \end{equation*}
+	Then \ref{geodesic_expansion} becomes
+	\begin{equation} \begin{split}
+		\frac{du}{dt} & = p \\
+		\frac{dv}{dt} & = q \\
+		\frac{dp}{dt} & = -\Gamma^u_{uu}p^2-2\Gamma^u_{uv}pq-\Gamma^u_{vv}q^2 \\
+		\frac{dq}{dt} & = -\Gamma^v_{uu}p^2-2\Gamma^v_{uv}pq-\Gamma^v_{vv}q^2 \\
+	\end{split} \end{equation}
+	This is a system of first order differential equations, so we can adapt RK4 to numerically solve it.
+	
+	Define $y = \langle u , v , p , q \rangle$.
+	Suppose $(u_0,v_0)$ is the point we wish to step from and we are moving at an angle $\theta$ relative to the positive $u$ axis (at that point).
+	Then the initial vector is $y_0 = \langle u_0 , v_0 , \cos(\theta) , \sin(\theta) \rangle$.
+	This begins the geodesic with unit speed, meaning that it is parametrized by arc length, so if we wish to step a distance $h$, we numerically solve the initial value problem
+	\begin{equation} \label{RK4_imp} \begin{split}
+		\frac{dy}{dt} & = F(y) = \langle p , q , -\Gamma^u_{uu}p^2-2\Gamma^u_{uv}pq-\Gamma^u_{vv}q^2 , -\Gamma^v_{uu}p^2-2\Gamma^v_{uv}pq-\Gamma^v_{vv}q^2 \rangle \\
+		y(0) & = y_0
+	\end{split} \end{equation}
+	until $t = h$.
+	Let $N$ be the number of iterations of the RK4 method we will use to approximate \ref{RK4_imp}.
+	Define $\delta = h/N$, then we write our approximation scheme below.
+	\begin{equation} \label{RK4_alg} \begin{split}
+		& y \gets y_0 \\
+		& \textit{loop } N \textit{ times:} \\
+		& \quad k_1 \gets F(y) \\
+		& \quad k_2 \gets F\left(y+(\delta/2)k_1\right) \\
+		& \quad k_3 \gets F\left(y+(\delta/2)k_2\right) \\
+		& \quad k_4 \gets F\left(y + \delta k_3\right) \\
+		& \quad y \gets y+(\delta/6)(k_1+2k_2+2k_3+k_4)
+	\end{split} \end{equation}
+	When implemented correctly, the loop exits with $y$ containing an approximate value for $u$, $v$, $p$, and $q$ a distance $h$ away from $(u_0, v_0)$ on the surface.
+	This method is constructed in the \texttt{MOSEY::Stepper} class.
 	
 	\subsection{Optimizations}
 
