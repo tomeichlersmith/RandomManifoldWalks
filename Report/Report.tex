@@ -96,7 +96,6 @@
 		In \cite{BanchoffLovett_DiffGeo_2010}, equation \ref{geodesic_chris} uses $s$ as the independent variable because these equations produce a geodesic that is parametrized by arc length (has unit speed) when the proper initial conditions are given to it.
 		Specifically, if the initial direction vector has unit magnitude, then the resulting solution will have unit speed (and therefore be parametrized by arc length).
 		
-	
 	\subsection{Christoffel Symbols}
 		The computer implementation of steps along geodesics uses equation \ref{geodesic_chris}, so we can completely characterize the geodesics (and therefore walk on the surfaces) by calculating the Christoffel symbols.
 		Below are the calculations producing the symbols for each of the coordinate patches from above.
@@ -228,7 +227,7 @@
 	
 \section{Random Walks}
 	Now that we have all of the tools necessary to take steps on each of our three surfaces, we are able to walk on them.
-	The implementation of these walks is in C\texttt{++} using an implementation of the standard Runge-Kutta numerical method.
+	The implementation of these walks is in C\texttt{++} using an application of the standard Runge-Kutta numerical method.
 	
 	\subsection{Method}
 	
