@@ -91,7 +91,7 @@
 		where $i,j,k$ run over $u$ and $v$.
 		This "definition" means we can write equation \ref{geodesic_eqn} in tensor notation
 		\begin{equation} \label{geodesic_chris}
-			\frac{d^2 x^i}{dt^2} + \sum_{j,k = 1}^2 \Gamma^i_{jk} \frac{d x^j}{dt} \frac{dx^k}{dt}
+			\frac{d^2 x^i}{dt^2} + \sum_{j,k = 1}^2 \Gamma^i_{jk} \frac{d x^j}{dt} \frac{dx^k}{dt} = 0
 		\end{equation}
 		In \cite{BanchoffLovett_DiffGeo_2010}, equation \ref{geodesic_chris} uses $s$ as the independent variable because these equations produce a geodesic that is parametrized by arc length (has unit speed) when the proper initial conditions are given to it.
 		Specifically, if the initial direction vector has unit magnitude, then the resulting solution will have unit speed (and therefore be parametrized by arc length).
@@ -274,6 +274,18 @@
 	This method is constructed in the \texttt{MOSEY::Stepper} class.
 	
 	\subsection{Optimizations}
+	In order for the walks on the different surfaces to be efficiently studied, some situations admit specific optimizations, saving computing time.
+	We are not claiming these processes to be perfectly optimized (read \cite{Redfield_NumericalGeodesics_2007} for a more detailed exploration of efficient numerical solutions to the geodesic equations), but we wish to explain the methods we have used to make the simulation of walks more efficient.
+	
+	Walks on the plane offer the massive simplification of having all zero Christoffel symbols.
+	In order to take a step of length $h$ at an angle $\theta$ from the positive $u$-axis, we could simply add $(h\cos(\theta), h\sin(\theta))$ to the initial point.
+	We do not do this because we would like uniformity across the code package.
+	However, using RK4 with the number of iterations $N = 1$ produces the exact same result algebraically.
+	Due to the limited precision of numbers in computers, this equality is not perfect; nevertheless, it produces a result that only differs from the exact result due to inherent truncation errors in the computer (which implementing the exact result would suffer from as well).
+	Therefore, when the class \texttt{MOSEY::Stepper} is configured to take a step on $P$, the number of iterations used in RK4 is set to one (overriding any user specifications).
+	This avoids unnecessary calculations from additional loops that would not produce a more accurate result.
+	
+	Sphere
 
 \section{Numeric Solution}
 
