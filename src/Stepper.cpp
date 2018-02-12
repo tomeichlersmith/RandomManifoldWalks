@@ -9,13 +9,13 @@ namespace MOSEY {
 	}
 	
 	Stepper::Stepper(Manifold m, int numsteps) :
-		m_curvetensor(m), m_numsteps(numsteps), issphere(false) {
+		m_curvetensor(m), m_numsteps(numsteps), m_issphere(false) {
 		
 		switch (m) {
 			case Manifold::PlaneSquare : m_coordwrap = &CoordinateWrapper::PlaneSquare;
 								break;
 			case Manifold::Sphere : m_coordwrap = &CoordinateWrapper::Sphere;
-								issphere = true;
+								m_issphere = true;
 								break;
 			case Manifold::Torus : m_coordwrap = &CoordinateWrapper::Torus;
 								break;
@@ -26,7 +26,7 @@ namespace MOSEY {
 		
 	}
 	
-	Stepper::Stepper() : m_curvetensor(), m_numsteps(1), m_coordwrap(&CoordinateWrapper::Plane), issphere(false) {
+	Stepper::Stepper() : m_curvetensor(), m_numsteps(1), m_coordwrap(&CoordinateWrapper::Plane), m_issphere(false) {
 		/* Intentionally Empty */
 	}
 		
@@ -34,16 +34,8 @@ namespace MOSEY {
 	void Stepper::Forward(const double u0, const double v0, const double direction, const double steplen, double &u1, double &v1) const {
 		
 		bool transformed = false;
-		if (issphere) {
+		if (m_issphere) {
 			//ASK GUETTER
-			if ( v < 0.1 ) { //South Pole
-				v += 0.5;
-				transformed = true;
-			}
-			else if ( v > 0.9 ) { //North Pole
-				v -= 0.5;
-				transformed = true;
-			}
 			
 		} //On a sphere, check if near poles
 		
