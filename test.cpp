@@ -31,8 +31,8 @@ int main() {
 	planewalk.SetMaxWalkLength( 1000. );
 	
 	std::ofstream plane_unitcircle_out;
-	plane_unitcircle_out.open("../Data/Plane_UnitCircle.csv", std::ofstream::app );
-	//plane_unitcircle_out << "U,V,WalkLen" << std::endl;
+	plane_unitcircle_out.open("../Data/Plane_UnitCircle.csv");//, std::ofstream::app );
+	plane_unitcircle_out << "U,V,WalkLen" << std::endl;
 	
 	if ( plane_unitcircle_out.is_open() ) {
 		SimulateWalks( planewalk , 0. , 0. , 100 , plane_unitcircle_out );
