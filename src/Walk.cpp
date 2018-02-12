@@ -119,7 +119,7 @@ namespace MOSEY {
 		
 			StepBackward( u , v , len );
 			
-			outs << u << "," << "," << len << std::endl;
+			outs << u << "," << v << "," << len << std::endl;
 			
 		}
 		
