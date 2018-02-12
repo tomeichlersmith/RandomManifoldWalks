@@ -11,6 +11,31 @@ namespace MOSEY {
 	
 			return;
 		}
+		
+		void PlaneUnitDisk(double& u, double& v) {
+			
+			double dist = u*u + v*v;
+			
+		}
+		
+		void PlaneSquare(double& u, double& v) {
+			
+			if ( abs(u) > 1 or abs(v) > 1 ) {
+				
+				if ( u > 1 )
+					u = 2-u; //1-(u-1) = 1-u+1 = 2-u
+				else if ( u < -1 )
+					u = -2-u; //-1-(u+1) = -1-u-1 = -2-u
+				
+				if ( v > 1 )
+					v = 2-v; //1-(u-1) = 1-u+1 = 2-u
+				else if ( v < -1 )
+					v = -2-v; //-1-(u+1) = -1-u-1 = -2-u
+				
+			} //(u,v) outside square
+			
+			return;
+		}
 
 		void Sphere(double &u, double &v) {
 		

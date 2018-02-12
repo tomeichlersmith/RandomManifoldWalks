@@ -19,6 +19,21 @@ namespace MOSEY {
 		 * does nothing to the coordinate point.
 		 */
 		void Plane(double& u, double& v);
+		
+		/**
+		 * Plane Coordinate Wrapper, but points are restricted to being
+		 * within the unit disk. If a step goes outside the unit disk,
+		 * it is reflected over the unit circle.
+		 */
+		//void PlaneUnitDisk(double& u, double& v);
+		
+		/**
+		 * Plane Coordinate Wrapper, but points are restricted to being
+		 * within a square with corners on (1,1);(1,-1);(-1,1);(-1,-1)
+		 * If a step goes outside this square, it is reflected over the
+		 * side(s) it crossed
+		 */
+		void PlaneSquare(double& u, double& v);
 	
 		/**
 		 * Sphere Coordinate Wrapper. Using most basic chart from unit square to
@@ -26,7 +41,7 @@ namespace MOSEY {
 		 * Assumes (u,v) is not further than 1 unit outside of domain in either coordinate.
 		 */
 		void Sphere(double& u, double& v);
-	
+		
 		/**
 		 * Torus Coordinate Wrapper. Using most basic chart from unit square
 		 * to torus.
