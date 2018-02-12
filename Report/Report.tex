@@ -277,6 +277,10 @@
 	In order for the walks on the different surfaces to be efficiently studied, some situations admit specific optimizations, saving computing time.
 	We are not claiming these processes to be perfectly optimized (read \cite{Redfield_NumericalGeodesics_2007} for a more detailed exploration of efficient numerical solutions to the geodesic equations), but we wish to explain the methods we have used to make the simulation of walks more efficient.
 	
+	The first (and most widely applicable) optimization is recording every step of a random walk as if it was the first step of the walk following it.
+	This allows for several walks starting from different initial positions to be acquired at once.
+	We are able to use this data because --- besides the starting point --- steps are independent of their predecessors.
+	
 	Walks on the plane offer the massive simplification of having all zero Christoffel symbols.
 	In order to take a step of length $h$ at an angle $\theta$ from the positive $u$-axis, we could simply add $(h\cos(\theta), h\sin(\theta))$ to the initial point.
 	We do not do this because we would like uniformity across the code package.
