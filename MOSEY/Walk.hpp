@@ -2,7 +2,7 @@
 #ifndef MOSEY_WALK_HPP
 #define MOSEY_WALK_HPP
 
-#include <iostream> //Functional checks and Error Messages
+#include <iostream> //Export
 
 #include "Stepper.hpp"
 #include "Step.hpp"
@@ -67,6 +67,11 @@ namespace MOSEY {
 			 * Continues to step forward until the escape check returns true begining at input point
 			 */
 			void Wander(const double u, const double v);
+			
+			/**
+			 * Exports what has been walked to ostream using StepBackward
+			 */
+			void Export(std::ostream& outs);
 			
 			/**
 			 * Remove a single step off the top of the stack and "return" the point and

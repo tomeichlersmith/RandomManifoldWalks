@@ -111,6 +111,21 @@ namespace MOSEY {
 		return;
 	}
 	
+	void Walk::Export(std::ostream& outs) {
+		
+		double u,v,len;
+		
+		while ( !Empty() ) {
+		
+			StepBackward( u , v , len );
+			
+			outs << u << "," << "," << len << std::endl;
+			
+		}
+		
+		return;
+	}
+	
 	void Walk::StepBackward(double &u, double &v, double &escape_length) {
 		
 		if ( Empty() ) {

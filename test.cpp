@@ -31,12 +31,11 @@ int main() {
 	planewalk.SetMaxWalkLength( 1000. );
 	
 	std::ofstream plane_unitcircle_out;
-	plane_unitcircle_out.open("../Data/Plane_UnitCircle.csv" , std::ofstream::app );
+	plane_unitcircle_out.open("../Data/Plane_UnitCircle.csv", std::ofstream::app );
 	//plane_unitcircle_out << "U,V,WalkLen" << std::endl;
 	
 	if ( plane_unitcircle_out.is_open() ) {
 		SimulateWalks( planewalk , 0. , 0. , 1 , plane_unitcircle_out );
-		//SimulateWalks( planewalk , 0. , 0.5 , 100 , plane_unitcircle_out );
 	}
 	else {
 		std::cout << "ERROR:\tUnable to open ../Data/Plane_UnitCircle.csv" << std::endl;
@@ -53,15 +52,7 @@ void SimulateWalks( MOSEY::Walk walker , double u0 , double v0 , int num_walks ,
 		
 		walker.Wander( u0 , v0 );
 		
-		double u,v,len;
-		
-		while ( !walker.Empty() ) {
-			
-			walker.StepBackward( u , v , len );
-			
-			output << u << "," << v << "," << len << std::endl;
-			
-		}
+		walker.Export( output );
 		
 	} //simulating num_walks walks
 	
