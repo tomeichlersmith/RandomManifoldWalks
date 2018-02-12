@@ -3,20 +3,21 @@
 
 namespace MOSEY {
 	
-	Stepper::Stepper(CurveTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap) :
-		m_curvetensor(curvetensor), m_numsteps(numsteps), m_coordwrap(coordwrap) {
+	Stepper::Stepper(CurveTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap, bool issphere) :
+		m_curvetensor(curvetensor), m_numsteps(numsteps), m_coordwrap(coordwrap), m_issphere(issphere) {
 		/* Intentionally Empty */
 	}
 	
 	Stepper::Stepper(Manifold m, int numsteps) :
-		m_curvetensor(m), m_numsteps(numsteps) {
+		m_curvetensor(m), m_numsteps(numsteps), issphere(false) {
 		
 		switch (m) {
-			case Manifold::PlaneSquare: m_coordwrap = &CoordinateWrapper::PlaneSquare;
+			case Manifold::PlaneSquare : m_coordwrap = &CoordinateWrapper::PlaneSquare;
 								break;
-			case Manifold::Sphere: m_coordwrap = &CoordinateWrapper::Sphere;
+			case Manifold::Sphere : m_coordwrap = &CoordinateWrapper::Sphere;
+								issphere = true;
 								break;
-			case Manifold::Torus: m_coordwrap = &CoordinateWrapper::Torus;
+			case Manifold::Torus : m_coordwrap = &CoordinateWrapper::Torus;
 								break;
 			default : m_coordwrap = &CoordinateWrapper::Plane;
 								m_numsteps = 1; //In the plane, one step of RK4 is exact solution
@@ -25,14 +26,29 @@ namespace MOSEY {
 		
 	}
 	
-	Stepper::Stepper() : m_curvetensor(), m_numsteps(1), m_coordwrap(&CoordinateWrapper::Plane) {
+	Stepper::Stepper() : m_curvetensor(), m_numsteps(1), m_coordwrap(&CoordinateWrapper::Plane), issphere(false) {
 		/* Intentionally Empty */
 	}
 		
 	
 	void Stepper::Forward(const double u0, const double v0, const double direction, const double steplen, double &u1, double &v1) const {
 		
+		bool transformed = false;
+		if (issphere) {
+			//ASK GUETTER
+			if ( v < 0.1 ) { //South Pole
+				v += 0.5;
+				transformed = true;
+			}
+			else if ( v > 0.9 ) { //North Pole
+				v -= 0.5;
+				transformed = true;
+			}
+			
+		} //On a sphere, check if near poles
+		
 		//Declaring and Initializing variables that will be carried through Runge-Kutta
+		//SPHERE: move (u,v) away from poles and move back after stepping
 		double y[4] = { u0 , v0 , cos(direction) , sin(direction) };
 		
 		//Declaring useful variables
@@ -80,6 +96,10 @@ namespace MOSEY {
 		
 		u1 = y[0];
 		v1 = y[1];
+		
+		if (transformed) {
+			//Transform (u1,v1) back
+		}
 		
 		//Make sure coordinates stay within domain of chart
 		m_coordwrap( u1 , v1 );

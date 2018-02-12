@@ -28,9 +28,9 @@ namespace MOSEY {
 					u = -2-u; //-1-(u+1) = -1-u-1 = -2-u
 				
 				if ( v > 1 )
-					v = 2-v; //1-(u-1) = 1-u+1 = 2-u
+					v = 2-v;
 				else if ( v < -1 )
-					v = -2-v; //-1-(u+1) = -1-u-1 = -2-u
+					v = -2-v;
 				
 			} //(u,v) outside square
 			

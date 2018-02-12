@@ -22,8 +22,9 @@ namespace MOSEY {
 			 * @param curvetensor CurvatureTensor class instance that contains the correct Christoffel symbols
 			 * @param numsteps number of steps to be used in the Runge-Kutta method
 			 * @param coordwrap Coordinate Wrapping function for the manifold
+			 * @param issphere boolean to signal if the surface is a sphere or not
 			 */
-			Stepper(CurveTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap);
+			Stepper(CurveTensor curvetensor, int numsteps, CoordinateWrapperPtr coordwrap, bool issphere);
 			
 			/**
 			 * Preferred Constructor. Defines member variables depending on Manifold.
@@ -64,6 +65,11 @@ namespace MOSEY {
 			 * Pointer to function that will wrap the u,v coordinates appropriately for the manifold.
 			 */
 			CoordinateWrapperPtr m_coordwrap;
+			
+			/**
+			 * Boolean that signals if the surface is the sphere
+			 */
+			bool m_issphere;
 			
 			/**
 			 * Helper Function for Runge-Kutta Method. Puts values for u,v,p,q in k array (size 4)
