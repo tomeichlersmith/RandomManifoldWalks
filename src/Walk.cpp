@@ -126,31 +126,6 @@ namespace MOSEY {
 		return;
 	}
 	
-	void Walk::StepBackward(double &u, double &v, double &escape_length) {
-		
-		if ( Empty() ) {
-			std::cout << "ERROR:\tWalk stack empty. No steps to back-track." << std::endl;
-		}
-		else {
-			//Get data from last step
-			m_last->StepPoint( u , v );
-			escape_length = m_total_length_walked - m_last->LengthWalked();
-		
-			//Delete last step
-			StepPtr tempstep;
-			tempstep = m_last;
-			m_last = m_last->PrevStep();
-		
-			delete tempstep;
-		}
-		
-		return;
-	}
-	
-	bool Walk::Empty() const {
-		return (m_last == nullptr);
-	}
-	
 	void Walk::StepForward() {
 		
 		//Get starting point
@@ -177,6 +152,31 @@ namespace MOSEY {
 		//std::cout << u0 << " " << v0 << '\t' << u1 << " " << v1 << std::endl;
 		
 		return;
+	}
+	
+	void Walk::StepBackward(double &u, double &v, double &escape_length) {
+		
+		if ( Empty() ) {
+			std::cout << "ERROR:\tWalk stack empty. No steps to back-track." << std::endl;
+		}
+		else {
+			//Get data from last step
+			m_last->StepPoint( u , v );
+			escape_length = m_total_length_walked - m_last->LengthWalked();
+		
+			//Delete last step
+			StepPtr tempstep;
+			tempstep = m_last;
+			m_last = m_last->PrevStep();
+		
+			delete tempstep;
+		}
+		
+		return;
+	}
+	
+	bool Walk::Empty() const {
+		return (m_last == nullptr);
 	}
 	
 }

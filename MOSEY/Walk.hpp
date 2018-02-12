@@ -73,17 +73,6 @@ namespace MOSEY {
 			 */
 			void Export(std::ostream& outs);
 			
-			/**
-			 * Remove a single step off the top of the stack and "return" the point and
-			 * length to escape
-			 */
-			void StepBackward(double &u, double &v, double &escape_length);
-			
-			/**
-			 * Utility function to tell if the stack is empty.
-			 */
-			bool Empty() const;
-			
 		private:
 			
 			RandDouble m_randangle; //* random number generator
@@ -107,6 +96,17 @@ namespace MOSEY {
 			 * New step is in random direction and is made from m_last.
 			 */
 			void StepForward();
+			
+			/**
+			 * Remove a single step off the top of the stack and "return" the point and
+			 * length to escape
+			 */
+			void StepBackward(double &u, double &v, double &escape_length);
+			
+			/**
+			 * Utility function to tell if the stack is empty.
+			 */
+			bool Empty() const;
 	};
 	
 }
