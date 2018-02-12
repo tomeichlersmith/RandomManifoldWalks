@@ -53,6 +53,7 @@ namespace MOSEY {
 			case Manifold::Torus : m_uuv = &ChristoffelSymbol::TorusUUV; m_vuu = &ChristoffelSymbol::TorusVUU;
 								break;
 			case Manifold::Plane : break; //Do nothing
+			case Manifold::PlaneSquare : break; //Do nothing
 			default : break; //Do Nothing
 		}
 		

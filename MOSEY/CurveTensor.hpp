@@ -51,7 +51,7 @@ namespace MOSEY {
 	/**
 	 * Manifold specification for formatted constructor
 	 */
-	enum Manifold { Plane , Sphere , Torus };
+	enum Manifold { Plane , PlaneSquare, Sphere , Torus };
 	
 	/**
 	 * Curvature Tensor class. A short class that stores the Christoffel symbols for a two dimensional manifold.

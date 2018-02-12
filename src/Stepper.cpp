@@ -12,6 +12,8 @@ namespace MOSEY {
 		m_curvetensor(m), m_numsteps(numsteps) {
 		
 		switch (m) {
+			case Manifold::PlaneSquare: m_coordwrap = &CoordinateWrapper::PlaneSquare;
+								break;
 			case Manifold::Sphere: m_coordwrap = &CoordinateWrapper::Sphere;
 								break;
 			case Manifold::Torus: m_coordwrap = &CoordinateWrapper::Torus;
