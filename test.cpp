@@ -25,17 +25,17 @@ int main() {
 	MOSEY::Walk planewalk( MOSEY::Manifold::Plane );
 	planewalk.SetStepLength( 0.05 );
 	std::vector<double> circle_params( 4 , 0. );
-	circle_params[0] = 0.;
-	circle_params[1] = 1.;
+	circle_params[0] = 1.;
+	circle_params[1] = 3.;
 	planewalk.SetEscapeRegion( &MOSEY::EscapeCheck::CircleRing , circle_params );
 	planewalk.SetMaxWalkLength( 1000. );
 	
 	std::ofstream plane_unitcircle_out;
-	plane_unitcircle_out.open("../Data/Plane_UnitCircle.csv");//, std::ofstream::app );
+	plane_unitcircle_out.open("../Data/Plane_CircleRing_1_3.csv");//, std::ofstream::app );
 	plane_unitcircle_out << "U,V,WalkLen" << std::endl;
 	
 	if ( plane_unitcircle_out.is_open() ) {
-		SimulateWalks( planewalk , 0. , 0. , 100 , plane_unitcircle_out );
+		SimulateWalks( planewalk , 0. , 2. , 100 , plane_unitcircle_out );
 	}
 	else {
 		std::cout << "ERROR:\tUnable to open ../Data/Plane_UnitCircle.csv" << std::endl;

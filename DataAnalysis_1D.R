@@ -6,7 +6,7 @@
 library(ggplot2)
 
 #Construct file path
-fp <- file.path("~/CodeProjects/MathDHP_201718/Data", "Plane_UnitCircle.csv")
+fp <- file.path("~/CodeProjects/MathDHP_201718/Data", "Plane_CircleRing_1_3.csv")
 #read in csv file to a data frame
 raw_walk <- read.csv(fp)
 
@@ -15,13 +15,13 @@ raw_walk$R <- sqrt((raw_walk$U)^2+(raw_walk$V)^2)
 
 #Default ggplot fit
 gp <- ggplot( raw_walk , aes( x = R , y = WalkLen ) ) +
-  geom_point( size = 0.5 , alpha = 0.1 )
+  geom_point( size = 0.5 , alpha = 0.05 )
 gp + geom_smooth()
 
 #Personal Model
 model <- loess( R ~ WalkLen , data = raw_walk )
 xrange <- range(  raw_walk$R )
-xseq <- seq( from = xrange[1] , to = xrange[2] , length = 80 )
+xseq <- seq( from = xrange[1] , to = xrange[2] , length = 100 )
 pred <- predict( model , newdata = data.frame( WalkLen = xseq ) , se = TRUE )
 y = pred$fit
 ci <- pred$se.fit * qt( 0.95 / 2 + 0.5 , pred$df )
@@ -29,6 +29,6 @@ ymin = y - ci
 ymax = y + ci
 loess.DF <- data.frame( x = xseq , y , ymin , ymax , se = pred$se.fit )
 
-gp + geom_point( size = 0.5 , alpha = 0.1 ) +
+gp +
   geom_smooth( aes_auto(loess.DF) , data = loess.DF , stat = "identity" )
 # n - polynomial degree
