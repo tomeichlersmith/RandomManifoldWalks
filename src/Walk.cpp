@@ -111,7 +111,7 @@ namespace MOSEY {
 		return;
 	}
 	
-	void Walk::Export(std::ostream& outs) {
+	void Walk::Export( std::ostream& outs , ExportType type ) {
 		
 		double u,v,len;
 		
@@ -119,7 +119,19 @@ namespace MOSEY {
 		
 			StepBackward( u , v , len );
 			
-			outs << u << "," << v << "," << len << std::endl;
+			switch ( type ) {
+				case ExportType::Radius : 
+					outs << sqrt( u*u + v*v );
+					break;
+				case ExportType::VCoord :
+					outs << v;
+					break;
+				default : 
+					outs << u << "," << v;
+					break;
+			}
+			
+			outs << "," << len << std::endl;
 			
 		}
 		

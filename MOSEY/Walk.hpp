@@ -3,6 +3,7 @@
 #define MOSEY_WALK_HPP
 
 #include <iostream> //Export
+#include <cmath> //std::sqrt
 
 #include "Stepper.hpp"
 #include "Step.hpp"
@@ -11,6 +12,14 @@
 #include "CurveTensor.hpp" //Definition of TWO_PI
 
 namespace MOSEY {
+	
+	/**
+	 * enum to specify how data is to be exported
+	 * Radius outputs std::sqrt( u*u + v*v )
+	 * VCoord outputs only the v coordinate
+	 * UV outputs both u and v
+	 */
+	enum ExportType { Radius , VCoord , UV };
 	
 	/**
 	 * Walk Class. Stack linked list, code copied heavily from Savitch 2009.
@@ -70,8 +79,11 @@ namespace MOSEY {
 			
 			/**
 			 * Exports what has been walked to ostream using StepBackward
+			 * @param outs ostream that is already connected to destination
+			 * @param type ExportType that specifies how data should be written to file
+			 * @sa ExportType
 			 */
-			void Export(std::ostream& outs);
+			void Export( std::ostream& outs , ExportType type );
 			
 		private:
 			

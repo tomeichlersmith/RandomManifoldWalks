@@ -32,10 +32,17 @@ int main() {
 	
 	std::ofstream plane_unitcircle_out;
 	plane_unitcircle_out.open("../Data/Plane_CircleRing_1_3.csv");//, std::ofstream::app );
-	plane_unitcircle_out << "U,V,WalkLen" << std::endl;
+	plane_unitcircle_out << "R,WalkLen" << std::endl;
 	
 	if ( plane_unitcircle_out.is_open() ) {
-		SimulateWalks( planewalk , 0. , 2. , 100 , plane_unitcircle_out );
+		
+		for (int i = 0; i < 1; i++) {
+		
+			planewalk.Wander( 0. , 2. );
+		
+			planewalk.Export( plane_unitcircle_out , MOSEY::ExportType::Radius );
+		
+		} //simulating num_walks walks
 	}
 	else {
 		std::cout << "ERROR:\tUnable to open ../Data/Plane_UnitCircle.csv" << std::endl;
@@ -48,13 +55,7 @@ int main() {
 
 void SimulateWalks( MOSEY::Walk walker , double u0 , double v0 , int num_walks , std::ostream& output ) {
 	
-	for (int i = 0; i < num_walks; i++) {
-		
-		walker.Wander( u0 , v0 );
-		
-		walker.Export( output );
-		
-	} //simulating num_walks walks
+	
 	
 	return;
 }
