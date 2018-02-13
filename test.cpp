@@ -36,7 +36,7 @@ int main() {
 	
 	if ( plane_unitcircle_out.is_open() ) {
 		
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < 200; i++) {
 		
 			planewalk.Wander( 0. , 2. );
 		
