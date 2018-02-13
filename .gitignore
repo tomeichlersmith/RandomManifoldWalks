@@ -12,3 +12,6 @@ test
 *.bbl
 *.blg
 *.pdf
+
+#None of the mathematica files
+*.nb
