@@ -3,6 +3,8 @@ Mathematica and related files on performing random walks on various (simple and 
 
 ----------------------------------------------------------------------------------------------------------------------------
 
+Data Analysis and Plotting will be done in R while using a standard csv file to transfer the simulation data from the C++ program to R's ability to plot and process large data sets.
+
 ## Classes for C++ Implementation:
 
 RandGen: Uniform Random Real Generator
