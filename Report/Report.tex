@@ -289,7 +289,9 @@
 	Therefore, when the class \texttt{MOSEY::Stepper} is configured to take a step on $P$, the number of iterations used in RK4 is set to one (overriding any user specifications).
 	This avoids unnecessary calculations from additional loops that would not produce a more accurate result.
 	
-	Sphere
+	The two-dimensional sphere is also incredibly symmetrical. In this specific situation, the escape regions are generally circles withe centers at one of the poles.
+	Because of the symmetry around the axis of the sphere, we are able to only consider the $v$ (polar) coordinate when analyzing how the walk distance changes depending on the starting location.
+	This simplification will not help the walks themselves be simulated more efficiently; nevertheless, it will allow for the analysis of the data garnered from the walks be simplified --- making it one-dimensional instead of two.
 
 \section{Numeric Solution}
 
