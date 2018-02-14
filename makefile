@@ -5,7 +5,7 @@ DEBUG = -g
 CXXFLAGS = -std=c++11 -Wall -c $(DEBUG)
 LFLAGS = -std=c++11 -Wall $(DEBUG)
 INCDIR = MOSEY
-OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/EscapeCheck.o bin/RandDouble.o bin/Step.o bin/Stepper.o bin/Walk.o bin/MOSEY.o
+OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/EscapeCheck.o bin/RandDouble.o bin/Step.o bin/Stepper.o bin/Walk.o
 
 run/test : test.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
@@ -35,9 +35,6 @@ bin/Stepper.o : src/Stepper.cpp $(INCDIR)/Stepper.hpp $(INCDIR)/CurveTensor.hpp 
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 bin/Walk.o : src/Walk.cpp $(INCDIR)/Walk.hpp $(INCDIR)/RandDouble.hpp $(INCDIR)/Stepper.hpp $(INCDIR)/Step.hpp $(INCDIR)/EscapeCheck.hpp $(INCDIR)/CurveTensor.hpp
-	$(CXX) $(CXXFLAGS) $< -o $@
-
-bin/MOSEY.o : src/MOSEY.cpp $(INCDIR)/MOSEY.hpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 directories :
