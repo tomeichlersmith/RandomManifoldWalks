@@ -5,6 +5,17 @@ Mathematica and related files on performing random walks on various (simple and 
 
 Data Analysis and Plotting will be done in R while using a standard csv file to transfer the simulation data from the C++ program to R's ability to plot and process large data sets.
 
+## Executables
+
+#### SphereWalk
+Run: `./run/SphereWalk lat nwalks steplen maxwalklen dir`
+Inputs:
+ - `lat`: polar angle of escape region boundary (in radians)
+ - `nwalks`: number of walks to simulate
+ - `steplen`: length of each step of the walks
+ - `maxwalklen`: maximum walk length before exiting
+ - `dir`: directory to store data storage file
+
 ## Classes for C++ Implementation:
 
 RandGen: Uniform Random Real Generator
