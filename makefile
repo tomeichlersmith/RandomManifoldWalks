@@ -10,6 +10,9 @@ OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/EscapeCheck.o bin/RandDoub
 test : test.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
 
+SphereWalk : SphereWalk.cpp bin/libMOSEY.a
+	$(CXX) $(LFLAGS) $^ -o $@
+
 bin/libMOSEY.a : $(OBJS)
 	ar -rc $@ $^
 
