@@ -13,7 +13,7 @@
  * argv[2] number of walks (1)
  * argv[3] length of each step of the walk (0.05)
  * argv[4] maximum walk length (1000)
- * argv[5] directory to put data storage file in (current directory)
+ * argv[5] name of data storage file (output.csv) - put into data/ directory
  */
 int main( int argc , char* argv[] ) {
 	
@@ -22,11 +22,11 @@ int main( int argc , char* argv[] ) {
 	int num_walks = 1;
 	double steplen = 0.05;
 	double max_walk_len = 1000.;
-	std::string dir = "";
+	std::string filename = "output.csv";
 	
 	switch( argc ) {
 		case 6 : //Go through all settings, breaking before defaults
-			dir = static_cast<std::string>(argv[5]);
+			filename = static_cast<std::string>(argv[5]);
 		case 5 :
 			max_walk_len = std::stod( static_cast<std::string>(argv[4]) );
 		case 4 :
@@ -39,17 +39,6 @@ int main( int argc , char* argv[] ) {
 			break;
 	}
 	
-	std::stringstream filepath_ss;
-	std::string pol_ang_str = std::to_string( pol_ang );
-	pol_ang_str.erase( pol_ang_str.begin()+1 );
-	std::string steplen_str = std::to_string( steplen );
-	steplen_str.erase( steplen_str.begin()+1 );
-	filepath_ss << dir << "Sphere_"
-							<< pol_ang_str << "_"
-							<< steplen_str << "_"
-							<< num_walks
-							<< ".csv";
-	
 	MOSEY::Walk spherewalk( MOSEY::Manifold::Sphere );
 	spherewalk.SetStepLength( steplen );
 	std::vector<double> params( 3 , 0. );
@@ -58,7 +47,7 @@ int main( int argc , char* argv[] ) {
 	spherewalk.SetMaxWalkLength( max_walk_len );
 	
 	std::ofstream outs;
-	outs.open( filepath_ss.str().c_str() );
+	outs.open( ("data/"+filename).c_str() );
 	
 	if( outs.is_open() ) {
 		
@@ -75,7 +64,7 @@ int main( int argc , char* argv[] ) {
 	}
 	else {
 	
-		std::cout << "ERROR:\tUnable to open " << filepath_ss.str() << std::endl;
+		std::cout << "ERROR:\tUnable to open " << filename << std::endl;
 		
 	}
 	

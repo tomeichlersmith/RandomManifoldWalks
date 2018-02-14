@@ -1,4 +1,4 @@
-# 1-dimensional data analysis
+?# 1-dimensional data analysis
 # Useful in symmetrical cases where the problem can be reduced to one dimension
 # Import data in two column table: { point , distance of walk to escape }
 # Plots, "averages" data by interpolating

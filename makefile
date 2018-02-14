@@ -40,7 +40,7 @@ bin/Walk.o : src/Walk.cpp $(INCDIR)/Walk.hpp $(INCDIR)/RandDouble.hpp $(INCDIR)/
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 directories :
-	mkdir -p bin && mkdir -p run
+	mkdir -p bin && mkdir -p run && mkdir -p data
 
 clean :
 	rm -r bin/* && rm -r run/*

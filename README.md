@@ -8,13 +8,13 @@ Data Analysis and Plotting will be done in R while using a standard csv file to 
 ## Executables
 
 #### SphereWalk
-Run: `./run/SphereWalk lat nwalks steplen maxwalklen dir`
+Run: `./run/SphereWalk lat nwalks steplen maxwalklen filename`
 Inputs:
  - `lat`: polar angle of escape region boundary (in radians)
  - `nwalks`: number of walks to simulate
  - `steplen`: length of each step of the walks
  - `maxwalklen`: maximum walk length before exiting
- - `dir`: directory to store data storage file
+ - `filename`: data storage filename
 
 ## Classes for C++ Implementation:
 
