@@ -9,16 +9,32 @@ namespace MOSEY {
 			return 0;
 		}
 	
-		double SphereUUV(double u, double v) {
-		
-			double sinv = sin( PI*v );
-			double cosv = cos( PI*v );
-		
-			return ( PI*( cosv / sinv ) );
+		double SphereUUU_VUV(double u, double v) {
+			
+			double den = 1+u*u+v*v;
+			
+			return ( -2*u/den );
 		}
-	
+		
+		double SphereUUV_VVV(double u, double v) {
+			
+			double den = 1+u*u+v*v;
+			
+			return ( -2*v/den );
+		}
+		
+		double SphereUVV(double u, double v) {
+			
+			double den = 1+u*u+v*v;
+			
+			return ( 2*u/den );
+		}
+		
 		double SphereVUU(double u, double v) {
-			return ( -1*TWO_PI*sin( TWO_PI*v ) );
+			
+			double den = 1+u*u+v*v;
+			
+			return ( 2*v/den );
 		}
 	
 		double TorusUUV(double u, double v) {
@@ -48,7 +64,9 @@ namespace MOSEY {
 		
 		//Default constructor sets all symbols to zero symbol, so only change non-zero ones
 		switch ( m ) {
-			case Manifold::Sphere: m_uuv = &ChristoffelSymbol::SphereUUV; m_vuu = &ChristoffelSymbol::SphereVUU;
+			case Manifold::Sphere: 
+								m_uuu = &ChristoffelSymbol::SphereUUU_VUV; m_uuv = &ChristoffelSymbol::SphereUUV_VVV; m_vuu = &ChristoffelSymbol::SphereVUU;
+								m_vuu = &ChristoffelSymbol::SphereVUU; m_vuv = &ChristoffelSymbol::SphereUUU_VUV; m_vvv = &ChristoffelSymbol::SphereUUV_VVV;
 								break;
 			case Manifold::Torus : m_uuv = &ChristoffelSymbol::TorusUUV; m_vuu = &ChristoffelSymbol::TorusVUU;
 								break;

@@ -18,17 +18,31 @@ namespace MOSEY {
 		double Zero(double u, double v);
 	
 		/**
-		 * Sphere UUV Christoffel Symbol.
-		 * pi*cot( pi*v )
+		 * Sphere UUV and VUV Christoffel Symbol.
+		 * These symbols are the same in this coordinate patch
+		 * -2u/(1+u*u+v*v)
 		 */
-		double SphereUUV(double u, double v);
-	
+		double SphereUUU_VUV(double u, double v);
+		
+		/**
+		 * Sphere UUV and VVV Christoffel Symbol.
+		 * These symbols are the same in this coordinate patch
+		 * -2v/(1+u*u+v*v)
+		 */
+		double SphereUUV_VVV(double u, double v);
+		
+		/**
+		 * Sphere UVV Christoffel Symbol.
+		 * 2u/(1+u*u+v*v)
+		 */
+		double SphereUVV(double u, double v);
+		
 		/**
 		 * Sphere VUU Christoffel Symbol.
-		 * -2*pi*sin( 2*pi*v )
+		 * 2v/(1+u*u+v*v)
 		 */
 		double SphereVUU(double u, double v);
-	
+		
 		/**
 		 * Torus UUV Christoffel Symbol.
 		 * (-2*pi*r*sin( 2*pi*v ))/(R+r*cos( 2*pi*v ))
