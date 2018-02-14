@@ -47,7 +47,7 @@
 		$$ \sigma(u,v) = \left( \frac{2u}{1+u^2+v^2} , \frac{2v}{1+u^2+v^2} , \frac{-1+u^2+v^2}{1+u^2+v^2} \right) $$
 		Practically, the technical need for the other coordinate patch in order to satisfy the requirements of the chart can be ignored when implementing in a computer program because the difficulties arise only at one infinitesimal point (the \textit{north pole} of the sphere).
 		Nevertheless, care will be taken in order to avoid the issues arising from being near this point.
-		For our specific situation, we will always have the north pole contained inside of the escape region so that the walk never arrives at that point. 
+		For our specific situation, we will always have the north pole contained inside of the escape region so that the walk never needs to arrive at that point. 
 		Finally, the chart for the torus $T(R,r)$ consists of a single coordinate patch $\tau:I^2 \to T(R,r)$ defined by
 		$$ \tau(u,v) = ( (R+r\cos(2\pi v))\cos(2\pi u) , (R+r\cos(2\pi v)\sin(2\pi u) , r\sin(2\pi v) ) $$
 		We will use these charts whenever speaking of these surfaces for the rest of this paper, and their form will lead to slightly different calculations that what you see in \cite{BanchoffLovett_DiffGeo_2010,Irons_GeodesicsTorus_2005}.
@@ -146,10 +146,20 @@
 	
 \section{Random Walks}
 	Now that we have all of the tools necessary to take steps on each of our three surfaces, we are able to walk on them.
-	The implementation of these walks is in C\texttt{++} using an application of the standard Runge-Kutta numerical method.
+	The implementation of these walks is in C\texttt{++} using an application of the standard Runge-Kutta method to numerically solve the geodesic equations in steps.
+	Once we are able to take a single step in any direction and from any point on the surface, we are able to randomly walk on the surface.
+	By \textit{random walk} (or simply \textit{walk}), we mean that the direction of each step is randomly chosen uniformly.
+	A general structure to walk on a given surface is constructed in the package \texttt{MOSEY} where one can define a surface by its Christoffel symbols (\texttt{MOSEY::CurveTensor}) and how its coordinates connect across domain edges (\texttt{MOSEY::CoordinateWrappers}).
+	The walks are done in the coordinate space and then output to a \texttt{csv}-file in a format depending on the situation --- for example, the walk distances are output with respect to latitudes when walking on the sphere.
 	
-	\subsection{Method}
-	The Runge-Kutta method is a process to approximate first order differential equations. We will be using the standard, fourth order Runge-Kutta method (RK4) that will be outlined for our specific problem below. First, we must transform our two second order geodesic equations \ref{geodesic_chris} into a system of first order differential equations so that we are able to apply the RK4 method.
+	For each situation, we define an \textit{escape region} where a walk ends if entered.
+	These escape regions allow us to be able to study the behavior of walks on different surfaces by analyzing the "distance" different points on a surface are from escaping.
+	We define a walks \textit{length} to be the sum of the steps it has to take for it to enter the escape region.
+	
+	\subsection{Stepping Method}
+	The Runge-Kutta method is a process to approximate first order differential equations.
+	We will be using the standard, fourth order Runge-Kutta method (RK4) that will be outlined for our specific problem below.
+	First, we must transform our two second order geodesic equations \ref{geodesic_chris} into a system of first order differential equations so that we are able to apply the RK4 method.
 	
 	We begin by expanding \ref{geodesic_chris} and using $u$ and $v$ instead of $x^1$ and $x^2$.
 	\begin{equation} \label{geodesic_expansion} \begin{split} 
@@ -198,7 +208,7 @@
 	
 	The first (and most widely applicable) optimization is recording every step of a random walk as if it was the first step of the walk following it.
 	This allows for several walks starting from different initial positions to be acquired at once.
-	We are able to use this data because --- besides the starting point --- steps are independent of their predecessors.
+	We are able to use this data because steps are independent of their predecessors.
 	
 	Walks on the plane offer the massive simplification of having all zero Christoffel symbols.
 	In order to take a step of length $h$ at an angle $\theta$ from the positive $u$-axis, we could simply add $(h\cos(\theta), h\sin(\theta))$ to the initial point.
@@ -209,8 +219,12 @@
 	This avoids unnecessary calculations from additional loops that would not produce a more accurate result.
 	
 	The two-dimensional sphere is also incredibly symmetrical. In this specific situation, the escape regions are generally circles withe centers at one of the poles.
-	Because of the symmetry around the axis of the sphere, we are able to only consider the $v$ (polar) coordinate when analyzing how the walk distance changes depending on the starting location.
-	This simplification will not help the walks themselves be simulated more efficiently; nevertheless, it will allow for the analysis of the data garnered from the walks be simplified --- making it one-dimensional instead of two.
+	Because of the symmetry around the axis of the sphere, we are able to only consider latitude when analyzing how the walk distance changes depending on the starting location.
+	We calculate the latitude $\phi$ of $\sigma(u,v)$ by
+	\begin{equation*}
+		\phi = \arctan\left(\frac{1}{u^2+v^2}\right)
+	\end{equation*}
+	This simplification will not help the walks themselves be simulated more efficiently; nevertheless, it will allow for the analysis of the data gathered from the walks be simplified --- making it one-dimensional instead of two.
 
 \section{Numeric Solution}
 
