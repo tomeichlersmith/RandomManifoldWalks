@@ -4,14 +4,19 @@
 #include <iostream>
 #include <fstream>
 
+#include <cmath> //cot
+
 int main() {
-	/*
-	MOSEY::Walk spherewalk( MOSEY::Manifold::Sphere ); //Define class instance to perform walk
+	///*
+	MOSEY::Walk spherewalk( MOSEY::Manifold::Sphere );
 	spherewalk.SetStepLength( 0.05 );
-	std::vector<double> params( 1 , 0.5 );
-	spherewalk.SetEscapeRegion( &MOSEY::EscapeCheck::VThresh , params );
+	std::vector<double> params( 2 , 0. );
+	double pol_ang = MOSEY::TWO_PI/8;
+	params[0] = sin(pol_ang)/(1-cos(pol_ang)); //Change radius of circle in (u,v)-space
+	spherewalk.SetEscapeRegion( &MOSEY::EscapeCheck::OutsideCircle , params );
 	spherewalk.SetMaxWalkLength( 1000. );
-	*/
+	//*/
+	/*
 	MOSEY::Walk planewalk( MOSEY::Manifold::Plane );
 	planewalk.SetStepLength( 0.05 );
 	std::vector<double> circle_params( 4 , 0. );
@@ -19,18 +24,18 @@ int main() {
 	circle_params[1] = 3.;
 	planewalk.SetEscapeRegion( &MOSEY::EscapeCheck::CircleRing , circle_params );
 	planewalk.SetMaxWalkLength( 1000. );
+	//*/
+	std::ofstream outs;
+	outs.open("../Data/Sphere_CircleRing_2PI_8.csv");//, std::ofstream::app );
+	outs << "Ang,WalkLen" << std::endl;
 	
-	std::ofstream plane_unitcircle_out;
-	plane_unitcircle_out.open("../Data/Plane_CircleRing_1_3.csv");//, std::ofstream::app );
-	plane_unitcircle_out << "R,WalkLen" << std::endl;
-	
-	if ( plane_unitcircle_out.is_open() ) {
+	if ( outs.is_open() ) {
 		
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 2; i++) {
 		
-			planewalk.Wander( 0. , 2. );
+			spherewalk.Wander( 0. , 0. );
 		
-			planewalk.Export( plane_unitcircle_out , MOSEY::ExportType::Radius );
+			spherewalk.Export( outs , MOSEY::ExportType::PolarAng );
 		
 		} //simulating num_walks walks
 	}
@@ -38,7 +43,7 @@ int main() {
 		std::cout << "ERROR:\tUnable to open ../Data/Plane_UnitCircle.csv" << std::endl;
 	}
 	
-	plane_unitcircle_out.close();
+	outs.close();
 	
 	return 0;
 }

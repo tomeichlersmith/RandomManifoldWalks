@@ -123,8 +123,8 @@ namespace MOSEY {
 				case ExportType::Radius : 
 					outs << sqrt( u*u + v*v );
 					break;
-				case ExportType::VCoord :
-					outs << v;
+				case ExportType::PolarAng :
+					outs << atan( 1/sqrt( u*u + v*v ) );
 					break;
 				default : 
 					outs << u << "," << v;

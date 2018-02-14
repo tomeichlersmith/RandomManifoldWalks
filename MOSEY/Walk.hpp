@@ -3,7 +3,7 @@
 #define MOSEY_WALK_HPP
 
 #include <iostream> //Export
-#include <cmath> //std::sqrt
+#include <cmath> //sqrt and atan
 
 #include "Stepper.hpp"
 #include "Step.hpp"
@@ -19,7 +19,7 @@ namespace MOSEY {
 	 * VCoord outputs only the v coordinate
 	 * UV outputs both u and v
 	 */
-	enum ExportType { Radius , VCoord , UV };
+	enum ExportType { Radius , PolarAng , UV };
 	
 	/**
 	 * Walk Class. Stack linked list, code copied heavily from Savitch 2009.
