@@ -21,6 +21,9 @@ namespace MOSEY {
 		/**
 		 * Defines escape region as a circle and if step is further away from
 		 * the center than the given radius, then returns true.
+		 * With the center set to (0,0), one can use this to define an "arctic circle"
+		 * around the north pole on the sphere. Calculate the radius equivalent to a 
+		 * polar angle of p (for the boundary) by r = sin(p)/(1-cos(p))
 		 * @param parameters list of the form { r , u , v } where r is the radius, u is the 
 		 *  u coordinate of the center, and v is the v coordinate
 		 */
@@ -35,15 +38,6 @@ namespace MOSEY {
 		 */
 		bool CircleRing(std::vector<double> parameters, StepPtr step);
 		
-		/**
-		 * Defines escape region as the area 'above' a threshhold v-coordinate.
-		 * Intented to be used on the Sphere (with usual chart) in which this escape
-		 * region is a circle around the 'south' pole (the pole with v = pi)
-		 * @param parameters list of the form { vthresh } where vthresh is the minimum v
-		 *  coordinate to be in the escape region
-		 */
-		bool VThresh(std::vector<double> parameters, StepPtr step);
-	
 	} //namespace EscapeCheck
 	
 }

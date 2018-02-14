@@ -41,18 +41,6 @@ namespace MOSEY {
 			return ( dist < in_rad or dist > out_rad );	
 		}
 		
-		bool VThresh(std::vector<double> parameters, StepPtr step) {
-			
-			//Get parameters from vector
-			double vthresh = parameters[0];
-			
-			//Get point of the step
-			double u,v;
-			step->StepPoint( u , v );
-			
-			return ( v > vthresh );
-		}
-	
 	} //namespace EscapeCheck
 	
 }
