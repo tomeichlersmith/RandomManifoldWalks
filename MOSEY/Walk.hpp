@@ -85,6 +85,8 @@ namespace MOSEY {
 			 */
 			void Export( std::ostream& outs , ExportType type );
 			
+			int MaxWalkCount() const;
+			
 		private:
 			
 			RandDouble m_randangle; //* random number generator
@@ -96,6 +98,8 @@ namespace MOSEY {
 			double m_total_length_walked; //* total length walked to get to m_last
 			
 			double m_maximum_walk_length; //* maximum walk length (to avoid infinite loops)
+			
+			int m_maxlen_counter; //* counts the number of walks that have reached maximum walk length
 			
 			EscapeCheckPtr m_escape_check; //* function defining if the walk has entered the escape region
 			

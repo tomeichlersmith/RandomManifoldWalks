@@ -70,5 +70,7 @@ int main( int argc , char* argv[] ) {
 	
 	outs.close();
 	
+	std::cout << "Number of Simulated Walks that Ended Before Escaping: " << spherewalk.MaxWalkCount() << std::endl;
+	
 	return 0;
 }

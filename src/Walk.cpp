@@ -5,19 +5,19 @@ namespace MOSEY {
 	
 	Walk::Walk() : 
 		m_randangle(0,TWO_PI), m_last(nullptr), m_step_length(1), m_total_length_walked(0), m_maximum_walk_length(100),
-		m_escape_check(nullptr), m_check_parameters(), m_stepper() {
+		m_maxlen_counter(0), m_escape_check(nullptr), m_check_parameters(), m_stepper() {
 		/* Intentionally Empty */
 	}
 	
 	Walk::Walk(const double step_length, EscapeCheckPtr escape_check, std::vector<double> check_parameters, Stepper stepper) :
 		m_randangle(0,TWO_PI), m_last(nullptr), m_step_length(step_length), m_total_length_walked(0), m_maximum_walk_length(100),
-		m_escape_check(escape_check), m_check_parameters(check_parameters), m_stepper(stepper) {
+		m_maxlen_counter(0), m_escape_check(escape_check), m_check_parameters(check_parameters), m_stepper(stepper) {
 		/*Intentionally Empty */
 	}
 	
 	Walk::Walk(Manifold m) :
 		m_randangle(0,TWO_PI), m_last(nullptr), m_step_length(1), m_total_length_walked(0), m_maximum_walk_length(100),
-		m_escape_check(nullptr), m_check_parameters(), m_stepper(m,10) {
+		m_maxlen_counter(0), m_escape_check(nullptr), m_check_parameters(), m_stepper(m,10) {
 		/* Intentionally Empty */
 	}
 	
@@ -41,6 +41,7 @@ namespace MOSEY {
 			this->m_step_length = rhs.m_step_length;
 			this->m_total_length_walked = rhs.m_total_length_walked;
 			this->m_maximum_walk_length = rhs.m_maximum_walk_length;
+			this->m_maxlen_counter = rhs.m_maxlen_counter;
 			this->m_escape_check = rhs.m_escape_check;
 			this->m_check_parameters = rhs.m_check_parameters;
 			this->m_stepper = rhs.m_stepper;
@@ -103,6 +104,20 @@ namespace MOSEY {
 			while ( !m_escape_check( m_check_parameters , m_last ) and m_total_length_walked < m_maximum_walk_length ) {
 				StepForward();
 			} //walking until escape
+			
+			if ( !m_escape_check( m_check_parameters , m_last) ) {
+				std::cout << "WARNG:\tWalk did not escape. Erasing Walk.\n";
+				std::cout << "      \tMay need to increase maximum walk length." << std::endl;
+				
+				m_maxlen_counter++;
+				
+				double u,v,len;
+				while ( !Empty() ) {
+					StepBackward( u , v , len );
+				}
+				
+			} //walk ended but did not escape
+			
 		} //stack is empty, can perform new walk
 		else {
 			std::cout << "ERROR:\tWalk stack nonempty. Walk::StepBackward until empty." << std::endl;
@@ -136,6 +151,10 @@ namespace MOSEY {
 		}
 		
 		return;
+	}
+	
+	int Walk::MaxWalkCount() const {
+		return ( m_maxlen_counter );
 	}
 	
 	void Walk::StepForward() {
