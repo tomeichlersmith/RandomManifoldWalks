@@ -38,9 +38,8 @@ namespace MOSEY {
 		void PlaneSquare(double& u, double& v);
 	
 		/**
-		 * Sphere Coordinate Wrapper. Using most basic chart from unit square to
-		 * sphere.
-		 * Assumes (u,v) is not further than 1 unit outside of domain in either coordinate.
+		 * Sphere Coordinate Wrapper. Stereographic projection of Sphere onto plane.
+		 * This chart does not have a bound on the domain points (so does nothing).
 		 */
 		void Sphere(double& u, double& v);
 		
