@@ -3,9 +3,17 @@
 # Import data in two column table: { point , distance of walk to escape }
 # Plots, "averages" data by interpolating
 
-library(ggplot2)
+# Input data file from command line
+#!/usr/bin/env Rscript
+args = commandArgs(trailingOnly = TRUE)
 
-filename <- "Sphere_L03_S005_N100.csv"
+if ( length(args) != 1 ) {
+  stop("ERROR:\tData File not provided", call. = FALSE)
+}
+
+filename <- args[1]
+
+library(ggplot2)
 
 #Construct file path
 datadir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/data/"
@@ -16,7 +24,7 @@ raw_walk <- read.csv(fp)
 #Default ggplot
 gp <- ggplot( raw_walk , aes( x = PolAng , y = WalkLen ) ) +
   geom_point( size = 0.2 , alpha = 0.02 )
-gp
+
 #ggplot does the fit
 gp <- gp + geom_smooth()
 

@@ -16,6 +16,11 @@ Inputs:
  - `maxwalklen`: maximum walk length before exiting
  - `filename`: data storage filename
 
+#### Sphere Walk Plot Generation
+Run: `Rscript --vanilla SphereWalkPlotGen.R filename`
+Inputs:
+ - `filename` : data storage filename (same as provided to SphereWalk above)
+
 ## Classes for C++ Implementation:
 
 RandGen: Uniform Random Real Generator
