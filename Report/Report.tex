@@ -14,11 +14,11 @@
 
 \section{Introduction and Background}
 	For us to be capable of exploring the central problem explained later in this paper, we must develop machinery in order to replicate the intuitive notion of a walk on different surfaces.
-	If we are able to determine what a "step" is on each of our surfaces, then a "walk" is simply a string of steps connected end-to-end.
-	We define a "step" on a surface as the movement to a point relatively near-by along the shortest path.
+	If we are able to determine what a ``step" is on each of our surfaces, then a ``walk" is simply a string of steps connected end-to-end.
+	We define a ``step" on a surface as the movement to a point relatively near-by along the shortest path.
 	In order to determine this shortest path (as well as the direction the movement is taken), we require calculational tools from differential geometry.
 	Most of this machinery has been learned from \cite{BanchoffLovett_DiffGeo_2010} (Read it for a more detailed and precise explanation of this material).
-	We will begin with a general overview of differential manifolds that are considered to be "regular" because of their similarity to what we consider to be intuitively smooth.
+	We will begin with a general overview of differential manifolds that are considered to be ``regular" because of their similarity to what we consider to be intuitively smooth.
 	
 	\subsection{Regular Surfaces}
 		The introduction to parametrized surfaces given in \cite{BanchoffLovett_DiffGeo_2010} is most readily adapted to this project because it can be easily implemented in computer programming.
@@ -153,8 +153,12 @@
 	The walks are done in the coordinate space and then output to a \texttt{csv}-file in a format depending on the situation --- for example, the walk distances are output with respect to latitudes when walking on the sphere.
 	
 	For each situation, we define an \textit{escape region} where a walk ends if entered.
-	These escape regions allow us to be able to study the behavior of walks on different surfaces by analyzing the "distance" different points on a surface are from escaping.
-	We define a walks \textit{length} to be the sum of the steps it has to take for it to enter the escape region.
+	These escape regions allow us to be able to study the behavior of walks on different surfaces by analyzing the ``distance" different points on a surface are from escaping.
+	We define a walk's \textit{length} to be the sum of the steps it has to take for it to enter the escape region.
+	This leads to general questions that can be explored using the package \texttt{MOSEY}.
+	How are the walk lengths and escape regions related?
+	How much of an impact does the surface the walk is on have?
+	Does the size of the escape region (relative to the surface) have a large effect?
 	
 	\subsection{Stepping Method}
 	The Runge-Kutta method is a process to approximate first order differential equations.
