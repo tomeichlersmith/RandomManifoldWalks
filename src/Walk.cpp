@@ -124,7 +124,7 @@ namespace MOSEY {
 					outs << sqrt( u*u + v*v );
 					break;
 				case ExportType::PolarAng :
-					outs << atan( 1/sqrt( u*u + v*v ) );
+					outs << 2*atan( 1/sqrt( u*u + v*v ) );
 					break;
 				default : 
 					outs << u << "," << v;
