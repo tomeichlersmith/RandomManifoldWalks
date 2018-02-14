@@ -4,16 +4,6 @@
 #include <iostream>
 #include <fstream>
 
-/**
- * Function to simulate walks from (u0,v0) and output data to output
- * @param walker MOSEY::Walk that is already formated to do the walk (with a specific escape region)
- * @param u0 u coordinate of starting point
- * @param v0 v coordinate of starting point
- * @param num_walks number of walks to simulate (all output to same file)
- * @param output output stream (usually file stream) that will receive the data
- */
-void SimulateWalks( MOSEY::Walk walker , double u0, double v0, int num_walks , std::ostream& output );
-
 int main() {
 	/*
 	MOSEY::Walk spherewalk( MOSEY::Manifold::Sphere ); //Define class instance to perform walk
@@ -53,9 +43,3 @@ int main() {
 	return 0;
 }
 
-void SimulateWalks( MOSEY::Walk walker , double u0 , double v0 , int num_walks , std::ostream& output ) {
-	
-	
-	
-	return;
-}
