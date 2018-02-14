@@ -6,12 +6,12 @@
 library(ggplot2)
 
 #Construct file path
-fp <- file.path("~/CodeProjects/MathDHP_201718/Data", "Plane_CircleRing_1_3.csv")
+fp <- file.path("~/CodeProjects/MathDHP_201718/Data", "Sphere_0300000_0050000_50.csv")
 #read in csv file to a data frame
 raw_walk <- read.csv(fp)
 
 #Default ggplot fit
-gp <- ggplot( raw_walk , aes( x = R , y = WalkLen ) ) +
+gp <- ggplot( raw_walk , aes( x = PolAng , y = WalkLen ) ) +
   geom_point( size = 0.5 , alpha = 0.05 )
 gp + geom_smooth()
 
