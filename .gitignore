@@ -15,3 +15,6 @@ test
 
 #None of the Mathematica files
 *.nb
+
+#None of the executables
+run/*
