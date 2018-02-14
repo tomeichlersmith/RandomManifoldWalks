@@ -2,8 +2,8 @@
 #Nothing in the bin
 bin/*
 
-#Ignore test executable
-test
+#Ignore executables
+run/*
 
 #None of the latex process files
 *.aux
@@ -15,3 +15,6 @@ test
 
 #None of the mathematica files
 *.nb
+
+#ignore default data file
+output.csv
