@@ -18,6 +18,7 @@ Inputs:
  - `filename`: data storage filename
 
 #### Sphere Walk Plot Generation
+*Requires the ggplot2 package*
 Run: `Rscript --vanilla SphereWalkPlotGen.R filename`
 Inputs:
  - `filename` : data storage filename (same as provided to SphereWalk above)
