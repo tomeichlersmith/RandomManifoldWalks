@@ -23,10 +23,10 @@ raw_walk <- read.csv(fp)
 
 #Default ggplot
 gp <- ggplot( raw_walk , aes( x = PolAng , y = WalkLen ) ) +
-  geom_point( size = 0.2 , alpha = 0.02 )
+  geom_bin2d( alpha = 0.7 )
 
 #ggplot does the fit
-gp <- gp + geom_smooth()
+gp <- gp + geom_smooth( color = "black" )
 
 #Export to pdf file
 plotname <- gsub( "csv" , "pdf" , filename)
