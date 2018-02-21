@@ -33,14 +33,7 @@ namespace MOSEY {
 	
 	void Stepper::Forward(const double u0, const double v0, const double direction, const double steplen, double &u1, double &v1) const {
 		
-		bool transformed = false;
-		if (m_issphere) {
-			//ASK GUETTER
-			
-		} //On a sphere, check if near poles
-		
 		//Declaring and Initializing variables that will be carried through Runge-Kutta
-		//SPHERE: move (u,v) away from poles and move back after stepping
 		double y[4] = { u0 , v0 , cos(direction) , sin(direction) };
 		
 		//Declaring useful variables
@@ -88,10 +81,6 @@ namespace MOSEY {
 		
 		u1 = y[0];
 		v1 = y[1];
-		
-		if (transformed) {
-			//Transform (u1,v1) back
-		}
 		
 		//Make sure coordinates stay within domain of chart
 		m_coordwrap( u1 , v1 );

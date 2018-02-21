@@ -11,8 +11,8 @@ namespace MOSEY {
 	
 			return;
 		}
-		
-		/*void PlaneUnitDisk(double& u, double& v) {
+		/*
+		void PlaneUnitDisk(double& u, double& v) {
 			
 			double dist = u*u + v*v;
 			
