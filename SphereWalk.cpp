@@ -3,6 +3,7 @@
 
 #include <string> //Processing inputs
 #include <sstream> //Making filepath
+#include <algorithm> //partial_sort
 #include <iostream>
 #include <fstream>
 
@@ -47,7 +48,7 @@ int main( int argc , char* argv[] ) {
 	spherewalk.SetMaxWalkLength( max_walk_len );
 	
 	std::ofstream outs;
-	outs.open( ("data/"+filename).c_str() );
+	outs.open( ("data/"+filename+".csv").c_str() );
 	
 	if( outs.is_open() ) {
 		
@@ -71,6 +72,86 @@ int main( int argc , char* argv[] ) {
 	outs.close();
 	
 	std::cout << "Number of Simulated Walks that Ended Before Escaping: " << spherewalk.MaxWalkCount() << std::endl;
+	
+	char answer;
+	std::cout << "Construct summary file from generated data? (y/n) ";
+	std::cin >> answer;
+	
+	if ( answer == 'y' or answer == 'Y' ) {
+		
+		//Output File Declaration
+		std::ofstream sum_out;
+		sum_out.open( ("data/"+filename+"_summary.csv").c_str() );
+		
+		//Input File Declaration
+		std::ifstream data_in;
+		data_in.open( ("data/"+filename+".csv").c_str() );
+		
+		//Data Storage Vector
+		// Store data in 1000 bins
+		// Data Range from 0 to pi ==> Multiply by 2000/(2pi), truncated integer is the index
+		std::vector< std::vector<double> > databins( 1000 , std::vector<double>() );
+		
+		if ( sum_out.is_open() and data_in.is_open() ) {
+			
+			double latitude, walklen;
+			int lat_index;
+			char comma;
+			
+			while( !data_in.eof() ) {
+				
+				data_in >> latitude >> comma >> walklen;
+				
+				lat_index = latitude*(2000/MOSEY::TWO_PI);
+				
+				databins[ lat_index ].push_back( walklen );
+				
+			} //read data_in
+			
+			//Write out data while finding medians
+			
+			sum_out << "Lat,MedWalkLen" << std::endl;
+			
+			double lat, medwalklen;
+			int mid_index;
+			for (unsigned int i = 0; i < 1000; i++) {
+				
+				//Middle of the bin
+				lat = (2*i+1)*(MOSEY::TWO_PI)/2000;
+				
+				//Determining Median
+				if ( databins[i].size()%2 == 0 ) {
+					
+					mid_index = databins[i].size()/2;
+					
+					std::partial_sort( databins[i].begin() , databins[i].begin()+mid_index , databins[i].end() );
+					
+					medwalklen = (databins[i][mid_index-1] + databins[i][mid_index])/2;
+					
+				} //even size
+				else {
+					
+					mid_index = databins[i].size()/2; //Truncates down to correct index
+					
+					std::partial_sort( databins[i].begin() , databins[i].begin()+mid_index , databins[i].end() );
+					
+					medwalklen = databins[i][mid_index];
+					
+				} //odd size
+				
+				sum_out << lat << "," << medwalklen << std::endl;
+				
+			} //loop through all the bins (i)
+			
+		} //files connected
+		else if ( sum_out.is_open() ) {
+			std::cout << "ERROR:\tUnable to open " << filename << ".csv" << std::endl;
+		} //data_in problem
+		else {
+			std::cout << "ERROR:\tUnable to open " << filename << "_summary.csv" << std::endl;
+		} //sum_out problem
+		
+	} //Construct summary file
 	
 	return 0;
 }
