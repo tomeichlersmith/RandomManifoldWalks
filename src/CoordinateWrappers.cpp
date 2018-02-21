@@ -27,17 +27,17 @@ namespace MOSEY {
 		
 		void PlaneSquare(double uprev, double vprev, double& ucurr, double& vcurr) {
 			
-			if ( std::abs(u) > 1 or std::abs(v) > 1 ) {
+			if ( std::abs(ucurr) > 1 or std::abs(vcurr) > 1 ) {
 				
 				//bounce off of walls
-				if ( u > 1 )
+				if ( ucurr > 1 )
 					ucurr = 2-ucurr; //1-(u-1) = 1-u+1 = 2-u
 				else if ( ucurr < -1 )
 					ucurr = -2-ucurr; //-1-(u+1) = -1-u-1 = -2-u
 				
-				if ( v > 1 )
+				if ( vcurr > 1 )
 					vcurr = 2-vcurr;
-				else if ( v < -1 )
+				else if ( vcurr < -1 )
 					vcurr = -2-vcurr;
 				
 			} //(ucurr,vcurr) outside square
