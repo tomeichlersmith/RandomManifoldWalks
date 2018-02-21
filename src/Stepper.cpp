@@ -83,7 +83,7 @@ namespace MOSEY {
 		v1 = y[1];
 		
 		//Make sure coordinates stay within domain of chart
-		m_coordwrap( u1 , v1 );
+		m_coordwrap( u0 , v0 , u1 , v1 );
 		
 		return;
 	}
