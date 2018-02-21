@@ -83,6 +83,9 @@ namespace MOSEY {
 		v1 = y[1];
 		
 		//Make sure coordinates stay within domain of chart
+		//Changes (u1,v1) to stay within the specified domain
+		//May use previous point (u0,v0) to determine how to wrap
+		// the point (u1,v1)
 		m_coordwrap( u0 , v0 , u1 , v1 );
 		
 		return;

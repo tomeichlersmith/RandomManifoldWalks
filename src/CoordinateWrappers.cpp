@@ -31,9 +31,9 @@ namespace MOSEY {
 				
 				//bounce off of walls
 				if ( ucurr > 1 )
-					ucurr = 2-ucurr; //1-(u-1) = 1-u+1 = 2-u
+					ucurr = 2-ucurr; //Reflect over positive wall: 1-(u-1) = 1-u+1 = 2-u
 				else if ( ucurr < -1 )
-					ucurr = -2-ucurr; //-1-(u+1) = -1-u-1 = -2-u
+					ucurr = -2-ucurr; //Reflect over negative wall: -1-(u+1) = -1-u-1 = -2-u
 				
 				if ( vcurr > 1 )
 					vcurr = 2-vcurr;
