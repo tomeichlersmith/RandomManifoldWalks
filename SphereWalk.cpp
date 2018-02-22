@@ -3,7 +3,6 @@
 
 #include <string> //Processing inputs
 #include <sstream> //Making filepath
-#include <algorithm> //partial_sort
 #include <iostream>
 #include <fstream>
 
@@ -14,7 +13,7 @@
  * argv[2] number of walks (1)
  * argv[3] length of each step of the walk (0.05)
  * argv[4] maximum walk length (1000)
- * argv[5] name of data storage file (output.csv) - put into data/ directory
+ * argv[5] name of data storage file (output) - put into data/ directory
  */
 int main( int argc , char* argv[] ) {
 	
@@ -23,7 +22,7 @@ int main( int argc , char* argv[] ) {
 	int num_walks = 1;
 	double steplen = 0.05;
 	double max_walk_len = 1000.;
-	std::string filename = "output.csv";
+	std::string filename = "output";
 	
 	switch( argc ) {
 		case 6 : //Go through all settings, breaking before defaults
@@ -87,10 +86,11 @@ int main( int argc , char* argv[] ) {
 		std::ifstream data_in;
 		data_in.open( ("data/"+filename+".csv").c_str() );
 		
-		//Data Storage Vector
+		//Data Storage Vectors
 		// Store data in 1000 bins
-		// Data Range from 0 to pi ==> Multiply by 2000/(2pi), truncated integer is the index
-		std::vector< std::vector<double> > databins( 1000 , std::vector<double>() );
+		// Data Range from pol_ang to pi ==> Multiply by 2000/(2pi), truncated integer is the index
+		std::vector< double > walktotals( 1000 , 0. ); //add up walk lengths in the bin
+		std::vector< int > walkcounts( 1000 , 0 ); //count number of walks in the bin
 		
 		if ( sum_out.is_open() and data_in.is_open() ) {
 			
@@ -98,48 +98,41 @@ int main( int argc , char* argv[] ) {
 			int lat_index;
 			char comma;
 			
+			//First line of data_in
+			std::string dummy;
+			std::getline( data_in , dummy );
+			
+			int numwalks = 0;
+			std::cout << std::endl;
 			while( !data_in.eof() ) {
 				
 				data_in >> latitude >> comma >> walklen;
 				
-				lat_index = latitude*(2000/MOSEY::TWO_PI);
+				lat_index = static_cast<int>( (latitude - pol_ang)*( 1000 / (MOSEY::TWO_PI/2 - pol_ang) ) );
 				
-				databins[ lat_index ].push_back( walklen );
+				walktotals[ lat_index ] += walklen;
+				walkcounts[ lat_index ]++;
+				
+				if ( walklen == 0 ) {
+					numwalks++;
+					std::cout << "\r" << numwalks;
+				}
 				
 			} //read data_in
+			std::cout << "\rWriting out summary..." << std::endl;
+			//Write out data while calculating means
 			
-			//Write out data while finding medians
+			sum_out << "Lat,MeanWalkLen" << std::endl;
 			
-			sum_out << "Lat,MedWalkLen" << std::endl;
-			
-			double lat, medwalklen;
-			int mid_index;
+			double lat, meanwalklen;
 			for (unsigned int i = 0; i < 1000; i++) {
 				
-				//Middle of the bin
-				lat = (2*i+1)*(MOSEY::TWO_PI)/2000;
+				//lat is in the middle of the bin
+				lat = (2*i+1)*MOSEY::TWO_PI/2000;
 				
-				//Determining Median
-				if ( databins[i].size()%2 == 0 ) {
-					
-					mid_index = databins[i].size()/2;
-					
-					std::partial_sort( databins[i].begin() , databins[i].begin()+mid_index , databins[i].end() );
-					
-					medwalklen = (databins[i][mid_index-1] + databins[i][mid_index])/2;
-					
-				} //even size
-				else {
-					
-					mid_index = databins[i].size()/2; //Truncates down to correct index
-					
-					std::partial_sort( databins[i].begin() , databins[i].begin()+mid_index , databins[i].end() );
-					
-					medwalklen = databins[i][mid_index];
-					
-				} //odd size
+				meanwalklen = walktotals[i]/walkcounts[i];
 				
-				sum_out << lat << "," << medwalklen << std::endl;
+				sum_out << lat << "," << meanwalklen << std::endl;
 				
 			} //loop through all the bins (i)
 			
