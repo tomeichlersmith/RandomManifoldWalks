@@ -31,8 +31,7 @@ gp <- ggplot() +
   geom_point( data = sum_walk , aes( x = PolAng , y = MeanWalkLen ) , shape = 1 , alpha = 0.3 ) +
   geom_smooth( data = raw_walk , aes( x = PolAng , y = WalkLen ) , color = 'blue' ) +
   geom_smooth( data = sum_walk , aes( x = PolAng , y = MeanWalkLen ) , color = 'black' )
-gp + ggtitle( "Walks Escaping at Polar Angle 0.3") +
-  xlab("Starting Polar Angle") +
+gp <- gp + xlab("Starting Polar Angle") +
   ylab("Length of Walk to Escape")
 
 #Export to pdf file
