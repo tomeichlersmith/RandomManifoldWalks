@@ -18,3 +18,6 @@ run/*
 
 #ignore default data file
 output.csv
+
+#ignore data files in general
+data/*
