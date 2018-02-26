@@ -146,6 +146,10 @@ int main( int argc , char* argv[] ) {
 			std::cout << "ERROR:\tUnable to open " << filename << "_summary.csv" << std::endl;
 		} //sum_out problem
 		
+		
+		sum_out.close();
+		data_in.close();
+		
 	} //Construct summary file
 	
 	return 0;
