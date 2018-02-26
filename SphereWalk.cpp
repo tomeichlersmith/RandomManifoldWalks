@@ -119,22 +119,24 @@ int main( int argc , char* argv[] ) {
 				}
 				
 			} //read data_in
-			std::cout << "\rWriting out summary..." << std::endl;
+			std::cout << "\rWriting out summary...";
 			//Write out data while calculating means
 			
-			sum_out << "Lat,MeanWalkLen" << std::endl;
+			sum_out << "PolAng,MeanWalkLen" << std::endl;
 			
 			double lat, meanwalklen;
 			for (unsigned int i = 0; i < 1000; i++) {
 				
 				//lat is in the middle of the bin
-				lat = (2*i+1)*MOSEY::TWO_PI/2000;
+				lat = (i+0.5)*(MOSEY::TWO_PI/2 - pol_ang)/1000 + pol_ang;
 				
 				meanwalklen = walktotals[i]/walkcounts[i];
 				
 				sum_out << lat << "," << meanwalklen << std::endl;
 				
 			} //loop through all the bins (i)
+			
+			std::cout << "\rDONE: Summary Written  " << std::endl;
 			
 		} //files connected
 		else if ( sum_out.is_open() ) {
