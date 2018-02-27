@@ -138,13 +138,15 @@ int main( int argc , char* argv[] ) {
 
 			double lat, meanwalklen;
 			for (unsigned int i = 0; i < 1000; i++) {
+				
+				if ( walkcounts[i] > 0 ) {
+					//lat is in the middle of the bin
+					lat = (i+0.5)*(PI - pol_ang)/1000 + pol_ang;
 
-				//lat is in the middle of the bin
-				lat = (i+0.5)*(PI - pol_ang)/1000 + pol_ang;
+					meanwalklen = walktotals[i]/walkcounts[i];
 
-				meanwalklen = walktotals[i]/walkcounts[i];
-
-				sum_out << lat << "," << meanwalklen << std::endl;
+					sum_out << lat << "," << meanwalklen << std::endl;
+				} //if bin has some data in it
 
 			} //loop through all the bins (i)
 
