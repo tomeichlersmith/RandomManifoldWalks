@@ -15,7 +15,7 @@ if ( length(args) > 2 ) {
 filename <- args[1]
 
 # Get whether to include raw walks
-inluderaw <- FALSE
+includeraw <- FALSE
 if ( args[2] == "T" ) {
   includeraw <- TRUE;
 }
