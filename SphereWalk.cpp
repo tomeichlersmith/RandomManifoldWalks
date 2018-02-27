@@ -59,7 +59,7 @@ int main( int argc , char* argv[] ) {
 
 			spherewalk.Export( outs , MOSEY::ExportType::PolarAng );
 
-			std::cout << "[" << i << "/" << num_walks << "] completed...\r";
+			std::cout << "[" << i << "/" << num_walks << "] completed...\r" << std::flush;
 
 		}
 
@@ -109,7 +109,12 @@ int main( int argc , char* argv[] ) {
 
 				data_in >> latitude >> comma >> walklen;
 
-				lat_index = static_cast< int >( abs(latitude - pol_ang)*( 1000 / (MOSEY::TWO_PI/2 - pol_ang) ) );
+				if ( latitude < pol_ang ) {
+					lat_index = 0.;
+				}
+				else {
+						lat_index = static_cast< int >( (latitude - pol_ang)*( 1000 / (MOSEY::TWO_PI/2 - pol_ang) ) );
+				}
 
 				walktotals[ lat_index ] += walklen;
 				walkcounts[ lat_index ] ++;
