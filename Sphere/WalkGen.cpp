@@ -1,5 +1,5 @@
 
-#include "MOSEY/MOSEY.hpp"
+#include "../MOSEY/MOSEY.hpp"
 
 #include <string> //Processing inputs
 #include <sstream> //Making filepath

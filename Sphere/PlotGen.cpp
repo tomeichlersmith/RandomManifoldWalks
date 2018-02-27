@@ -23,7 +23,7 @@ if ( args[2] == "T" ) {
 library(ggplot2)
 
 #Construct file path
-datadir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/data/"
+datadir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/Sphere/data/"
 if ( includeraw ) {
   raw_fp <- paste( datadir , filename , ".csv" , sep = "" )
   raw_walk <- read.csv( raw_fp )

@@ -17,7 +17,7 @@ run/*
 *.nb
 
 #ignore default data file
-output.csv
+*output.csv
 
 #ignore data files in general
-data/*
+Sphere/data/*

@@ -12,7 +12,7 @@ all : run/SphereWalk
 run/test : test.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
 
-run/SphereWalk : SphereWalk.cpp bin/libMOSEY.a
+run/SphereWalk : Sphere/WalkGen.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
 
 bin/libMOSEY.a : $(OBJS)
@@ -40,7 +40,10 @@ bin/Walk.o : src/Walk.cpp $(INCDIR)/Walk.hpp $(INCDIR)/RandDouble.hpp $(INCDIR)/
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 directories :
-	mkdir -p bin && mkdir -p run && mkdir -p data
+	mkdir -p bin
+	mkdir -p run
+	mkdir -p Sphere/data
 
 clean :
-	rm -r bin/* && rm -r run/*
+	rm -r bin/*
+	rm -r run/*
