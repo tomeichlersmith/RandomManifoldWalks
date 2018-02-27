@@ -9,7 +9,7 @@
 /**
  * Description of argv[] array for inputs (default value)
  * argv[0] name of program (./SphereWalk)
- * argv[1] the latitude of the boundary for the escape region around north pole (MOSEY::TWO_PI/8)
+ * argv[1] the latitude of the boundary for the escape region around north pole (PI/4)
  * argv[2] number of walks (1)
  * argv[3] length of each step of the walk (0.05)
  * argv[4] maximum walk length (1000)
@@ -17,8 +17,11 @@
  */
 int main( int argc , char* argv[] ) {
 
+	//Global value
+	const double PI = MOSEY::TWO_PI/2;
+
 	//Default Value
-	double pol_ang = MOSEY::TWO_PI/8;
+	double pol_ang = PI/4;
 	int num_walks = 1;
 	double steplen = 0.05;
 	double max_walk_len = 1000.;
@@ -110,10 +113,13 @@ int main( int argc , char* argv[] ) {
 				data_in >> latitude >> comma >> walklen;
 
 				if ( latitude < pol_ang ) {
-					lat_index = 0.;
+					lat_index = 0;
+				}
+				else if ( latitude > PI ) {
+					lat_index = 999;
 				}
 				else {
-						lat_index = static_cast< int >( (latitude - pol_ang)*( 1000 / (MOSEY::TWO_PI/2 - pol_ang) ) );
+						lat_index = static_cast< int >( (latitude - pol_ang)*( 1000 / (PI - pol_ang) ) );
 				}
 
 				walktotals[ lat_index ] += walklen;
@@ -134,7 +140,7 @@ int main( int argc , char* argv[] ) {
 			for (unsigned int i = 0; i < 1000; i++) {
 
 				//lat is in the middle of the bin
-				lat = (i+0.5)*(MOSEY::TWO_PI/2 - pol_ang)/1000 + pol_ang;
+				lat = (i+0.5)*(PI - pol_ang)/1000 + pol_ang;
 
 				meanwalklen = walktotals[i]/walkcounts[i];
 
