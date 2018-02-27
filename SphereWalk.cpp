@@ -59,13 +59,14 @@ int main( int argc , char* argv[] ) {
 
 			spherewalk.Export( outs , MOSEY::ExportType::PolarAng );
 
+			std::cout << "[" << i << "/" << num_walks << "] completed...\r";
+
 		}
 
 	}
 	else {
-
 		std::cout << "ERROR:\tUnable to open " << filename << std::endl;
-
+		exit(1);
 	}
 
 	outs.close();
@@ -108,15 +109,11 @@ int main( int argc , char* argv[] ) {
 
 				data_in >> latitude >> comma >> walklen;
 
-				if ( latitude < 0 or latitude > MOSEY::TWO_PI/2 ) {
-					std::cout << "ERROR:\tData read latitude " << latitude << " is outside range." << std::endl;
-				}
-				else {
-					lat_index = static_cast< int >( (latitude - pol_ang)*( 1000 / (MOSEY::TWO_PI/2 - pol_ang) ) );
+				lat_index = static_cast< int >( abs(latitude - pol_ang)*( 1000 / (MOSEY::TWO_PI/2 - pol_ang) ) );
 
-					walktotals[ lat_index ] += walklen;
-					walkcounts[ lat_index ] ++;
-				}
+				walktotals[ lat_index ] += walklen;
+				walkcounts[ lat_index ] ++;
+
 				if ( walklen == 0 ) {
 					numwalks++;
 					std::cout << "\r" << numwalks;
