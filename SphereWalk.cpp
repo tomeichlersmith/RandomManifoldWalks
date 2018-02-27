@@ -89,8 +89,8 @@ int main( int argc , char* argv[] ) {
 		//Data Storage Vectors
 		// Store data in 1000 bins
 		// Data Range from pol_ang to pi ==> Multiply by 2000/(2pi), truncated integer is the index
-		std::vector< double > walktotals( 1000 , 0. ); //add up walk lengths in the bin
-		std::vector< int > walkcounts( 1000 , 0 ); //count number of walks in the bin
+		std::vector< double > walktotals ( 1000 , 0. ); //Summing walk lengths
+		std::vector< int > walkcounts ( 1000 , 0 ); //Counting number of walks
 
 		if ( sum_out.is_open() and data_in.is_open() ) {
 
@@ -108,11 +108,15 @@ int main( int argc , char* argv[] ) {
 
 				data_in >> latitude >> comma >> walklen;
 
-				lat_index = static_cast<int>( (latitude - pol_ang)*( 1000 / (MOSEY::TWO_PI/2 - pol_ang) ) );
+				if ( latitude < 0 or latitude > MOSEY::TWO_PI/2 ) {
+					std::cout << "ERROR:\tData read latitude " << latitude << " is outside range." << std::endl;
+				}
+				else {
+					lat_index = static_cast< int >( (latitude - pol_ang)*( 1000 / (MOSEY::TWO_PI/2 - pol_ang) ) );
 
-				walktotals[ lat_index ] += walklen;
-				walkcounts[ lat_index ]++;
-
+					walktotals[ lat_index ] += walklen;
+					walkcounts[ lat_index ] ++;
+				}
 				if ( walklen == 0 ) {
 					numwalks++;
 					std::cout << "\r" << numwalks;
@@ -145,7 +149,7 @@ int main( int argc , char* argv[] ) {
 		else {
 			std::cout << "ERROR:\tUnable to open " << filename << "_summary.csv" << std::endl;
 		} //sum_out problem
-		
+
 		sum_out.close();
 		data_in.close();
 
