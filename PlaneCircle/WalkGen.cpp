@@ -39,12 +39,15 @@ int main( int argc , char* argv[] ) {
 			break;
 	}
 
-	MOSEY::Walk spherewalk( MOSEY::Manifold::Sphere );
-	spherewalk.SetStepLength( steplen );
-	std::vector<double> params( 3 , 0. );
-	params[0] = sin(pol_ang)/(1-cos(pol_ang)); //Change radius of circle to (u,v)-space
-	spherewalk.SetEscapeRegion( &MOSEY::EscapeCheck::OutsideCircle , params );
-	spherewalk.SetMaxWalkLength( max_walk_len );
+	MOSEY::Walk walk( MOSEY::Manifold::PlaneCircleWalk );
+	walk.SetStepLength( steplen );
+	std::vector<double> params( 4 , 0. );
+	params[0] = -side_len/2; //umin for box
+	params[1] = side_len/2; //umax for box
+	params[2] = -side_len/2; //vmin for box
+	params[3] = side_len/2; //vmax for box
+	walk.SetEscapeRegion( &MOSEY::EscapeCheck::InsideBox , params );
+	walk.SetMaxWalkLength( max_walk_len );
 
 	std::ofstream outs;
 	outs.open( ("data/"+filename+".csv").c_str() );
@@ -55,9 +58,19 @@ int main( int argc , char* argv[] ) {
 
 		for( int i = 0; i < num_walks; i++ ) {
 
-			spherewalk.Wander( 0. , 0. );
+			double ustart,vstart;
+			if ( i < num_walk/2 ) {
+				ustart = (1+params[1])/2;
+				vstart = 0.;
+			} //Along u-axis
+			else {
+				ustart = (std::sqrt(2)+2*params[1])/4;
+				vstart = ustart;
+			} //along u=v line
 
-			spherewalk.Export( outs , MOSEY::ExportType::PolarAng );
+			walk.Wander( ustart , vstart );
+
+			walk.Export( outs , MOSEY::ExportType::PolarAng );
 
 			std::cout << "[" << i << "/" << num_walks << "] completed...\r" << std::flush;
 
