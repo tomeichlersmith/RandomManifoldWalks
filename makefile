@@ -7,7 +7,7 @@ LFLAGS = -std=c++11 -Wall $(DEBUG)
 INCDIR = MOSEY
 OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/EscapeCheck.o bin/RandDouble.o bin/Step.o bin/Stepper.o bin/Walk.o
 
-all : run/SphereWalk run/PlaneCircleWalk
+all : directories run/SphereWalk run/PlaneCircleWalk
 
 run/test : test.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
