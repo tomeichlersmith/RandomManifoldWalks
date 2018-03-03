@@ -35,12 +35,12 @@ int main( int argc , char* argv[] ) {
 		case 3 :
 			num_walks = std::stoi( static_cast<std::string>(argv[2]) );
 		case 2 :
-			pol_ang = std::stod( static_cast<std::string>(argv[1]) );
+			side_len = std::stod( static_cast<std::string>(argv[1]) );
 		default : //Keep defaults set above
 			break;
 	}
 
-	MOSEY::Walk walk( MOSEY::Manifold::PlaneCircleWalk );
+	MOSEY::Walk walk( MOSEY::Manifold::PlaneCircle );
 	walk.SetStepLength( steplen );
 	std::vector<double> params( 4 , 0. );
 	params[0] = -side_len/2; //umin for box
@@ -79,7 +79,7 @@ int main( int argc , char* argv[] ) {
 
 	outs.close();
 
-	std::cout << "Number of Simulated Walks that Ended Before Escaping: " << spherewalk.MaxWalkCount() << std::endl;
+	std::cout << "Number of Simulated Walks that Ended Before Escaping: " << walk.MaxWalkCount() << std::endl;
 
 	char answer;
 	std::cout << "Construct summary file from generated data? (y/n) ";
@@ -101,7 +101,7 @@ int main( int argc , char* argv[] ) {
 		// Data Range from pol_ang to pi ==> Multiply by 2000/(2pi), truncated integer is the index
 		double walktotals[nbins][nbins]; //Summing walk lengths
 		int walkcounts[nbins][nbins]; //Counting number of walks
-		for (int ui = 0; ui < ; ui++) {
+		for (int ui = 0; ui < nbins; ui++) {
 			for (int vi = 0; vi < nbins; vi++) {
 				walktotals[ui][vi] = 0.;
 				walkcounts[ui][vi] = 0;
@@ -141,7 +141,7 @@ int main( int argc , char* argv[] ) {
 
 			sum_out << "U,V,MeanWalkLen" << std::endl;
 
-			double u, v, meanwalklen;
+			double meanwalklen;
 			for (int ui = 0; ui < nbins; ui++) {
 				for (int vi = 0; vi < nbins; vi++) {
 
