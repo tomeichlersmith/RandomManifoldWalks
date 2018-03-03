@@ -19,22 +19,23 @@ namespace MOSEY {
 	 * @param vcurr current v coordinate (call by reference)
 	 */
 	typedef void (*CoordinateWrapperPtr)(double uprev, double vprev, double &ucurr, double &vcurr);
-	
+
 	namespace CoordinateWrapper {
-	
+
 		/**
 		 * Plane Coordinate Wrapper. Simplest coordinate wrapper because it
 		 * does nothing to the coordinate point.
 		 */
 		void Plane(double uprev, double vprev, double& ucurr, double& vcurr);
-		
+
 		/**
 		 * Plane Coordinate Wrapper, but points are restricted to being
 		 * within the unit disk. If a step goes outside the unit disk,
 		 * it is reflected over the unit circle.
+		 * Assumes (uprev,vprev) is within the unit disk.
 		 */
 		void PlaneUnitDisk(double uprev, double vprev, double& ucurr, double& vcurr);
-		
+
 		/**
 		 * Plane Coordinate Wrapper, but points are restricted to being
 		 * within a square with corners on (1,1);(1,-1);(-1,1);(-1,-1)
@@ -42,22 +43,22 @@ namespace MOSEY {
 		 * side(s) it crossed
 		 */
 		void PlaneSquare(double uprev, double vprev, double& ucurr, double& vcurr);
-	
+
 		/**
 		 * Sphere Coordinate Wrapper. Stereographic projection of Sphere onto plane.
 		 * This chart does not have a bound on the domain points (so does nothing).
 		 */
 		void Sphere(double uprev, double vprev, double& ucurr, double& vcurr);
-		
+
 		/**
 		 * Torus Coordinate Wrapper. Using most basic chart from unit square
 		 * to torus.
 		 * Assumes (u,v) is not further than 1 unit outside of domain in either coordinate.
 		 */
 		void Torus(double uprev, double vprev, double& ucurr, double& vcurr);
-	
+
 	} //namespace CoordinateWrapper
-	
+
 }
 
 #endif

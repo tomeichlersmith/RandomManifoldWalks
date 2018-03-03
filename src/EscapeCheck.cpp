@@ -53,7 +53,7 @@ namespace MOSEY {
 			double u,v;
 			step->StepPoint( u , v );
 
-			return ( (umin < u) and (umax > u) and (vmin < v) and (vmax > v) )
+			return ( (umin < u) and (umax > u) and (vmin < v) and (vmax > v) );
 		}
 
 	} //namespace EscapeCheck
