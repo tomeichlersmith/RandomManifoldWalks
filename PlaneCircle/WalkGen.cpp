@@ -7,6 +7,8 @@
 #include <fstream>
 #include <cmath> //for cos and sin
 
+#define NBINS 500
+
 /**
  * Description of argv[] array for inputs (default value)
  * argv[0] name of program (./PlaneCircleWalk)
@@ -21,8 +23,8 @@ int main( int argc , char* argv[] ) {
 	//Default Value
 	double side_len = 0.5;
 	int num_walks = 100;
-	double steplen = 0.05;
-	double max_walk_len = 1000.;
+	double steplen = 0.1;
+	double max_walk_len = 10000.;
 	std::string filename = "output";
 
 	switch( argc ) {
@@ -51,7 +53,7 @@ int main( int argc , char* argv[] ) {
 	walk.SetMaxWalkLength( max_walk_len );
 
 	std::ofstream outs;
-	outs.open( ("data/"+filename+".csv").c_str() );
+	outs.open( ("PlaneCircle/data/"+filename+".csv").c_str() );
 
 	if( outs.is_open() ) {
 
@@ -89,20 +91,19 @@ int main( int argc , char* argv[] ) {
 
 		//Output File Declaration
 		std::ofstream sum_out;
-		sum_out.open( ("data/"+filename+"_summary.csv").c_str() );
+		sum_out.open( ("PlaneCircle/data/"+filename+"_summary.csv").c_str() );
 
 		//Input File Declaration
 		std::ifstream data_in;
-		data_in.open( ("data/"+filename+".csv").c_str() );
+		data_in.open( ("PlaneCircle/data/"+filename+".csv").c_str() );
 
 		//Data Storage Vectors
 		// Store data in bins
-		const int nbins = 1000;
 		// Data Range from pol_ang to pi ==> Multiply by 2000/(2pi), truncated integer is the index
-		double walktotals[nbins][nbins]; //Summing walk lengths
-		int walkcounts[nbins][nbins]; //Counting number of walks
-		for (int ui = 0; ui < nbins; ui++) {
-			for (int vi = 0; vi < nbins; vi++) {
+		double walktotals[NBINS][NBINS]; //Summing walk lengths
+		int walkcounts[NBINS][NBINS]; //Counting number of walks
+		for (int ui = 0; ui < NBINS; ui++) {
+			for (int vi = 0; vi < NBINS; vi++) {
 				walktotals[ui][vi] = 0.;
 				walkcounts[ui][vi] = 0;
 			} //vi
@@ -124,8 +125,8 @@ int main( int argc , char* argv[] ) {
 
 				data_in >> u >> comma >> v >> comma >> walklen;
 
-				ui = static_cast< int >( u*nbins );
-				vi = static_cast< int >( v*nbins );
+				ui = static_cast< int >( u*NBINS );
+				vi = static_cast< int >( v*NBINS );
 
 				walktotals[ ui ][ vi ] += walklen;
 				walkcounts[ ui ][ vi ] ++;
@@ -142,12 +143,12 @@ int main( int argc , char* argv[] ) {
 			sum_out << "U,V,MeanWalkLen" << std::endl;
 
 			double meanwalklen;
-			for (int ui = 0; ui < nbins; ui++) {
-				for (int vi = 0; vi < nbins; vi++) {
+			for (int ui = 0; ui < NBINS; ui++) {
+				for (int vi = 0; vi < NBINS; vi++) {
 
 					if ( walkcounts[ui][vi] > 0 ) {
-						u = (ui+0.5)/nbins;
-						v = (vi+0.5)/nbins;
+						u = (ui+0.5)/NBINS;
+						v = (vi+0.5)/NBINS;
 						meanwalklen = walktotals[ui][vi]/walkcounts[ui][vi];
 
 						sum_out << u << ',' << v << ',' << meanwalklen << std::endl;

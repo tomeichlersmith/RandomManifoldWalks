@@ -50,7 +50,7 @@ int main( int argc , char* argv[] ) {
 	spherewalk.SetMaxWalkLength( max_walk_len );
 
 	std::ofstream outs;
-	outs.open( ("data/"+filename+".csv").c_str() );
+	outs.open( ("Sphere/data/"+filename+".csv").c_str() );
 
 	if( outs.is_open() ) {
 
@@ -68,7 +68,7 @@ int main( int argc , char* argv[] ) {
 
 	}
 	else {
-		std::cout << "ERROR:\tUnable to open " << filename << std::endl;
+		std::cout << "ERROR:\tUnable to open Sphere/data/" << filename << ".csv" << std::endl;
 		exit(1);
 	}
 
@@ -138,7 +138,7 @@ int main( int argc , char* argv[] ) {
 
 			double lat, meanwalklen;
 			for (unsigned int i = 0; i < 1000; i++) {
-				
+
 				if ( walkcounts[i] > 0 ) {
 					//lat is in the middle of the bin
 					lat = (i+0.5)*(PI - pol_ang)/1000 + pol_ang;
