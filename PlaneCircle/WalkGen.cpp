@@ -96,15 +96,22 @@ int main( int argc , char* argv[] ) {
 		data_in.open( ("data/"+filename+".csv").c_str() );
 
 		//Data Storage Vectors
-		// Store data in 1000 bins
+		// Store data in bins
+		const int nbins = 1000;
 		// Data Range from pol_ang to pi ==> Multiply by 2000/(2pi), truncated integer is the index
-		std::vector< double > walktotals ( 1000 , 0. ); //Summing walk lengths
-		std::vector< int > walkcounts ( 1000 , 0 ); //Counting number of walks
+		double walktotals[nbins][nbins]; //Summing walk lengths
+		int walkcounts[nbins][nbins]; //Counting number of walks
+		for (int ui = 0; ui < ; ui++) {
+			for (int vi = 0; vi < nbins; vi++) {
+				walktotals[ui][vi] = 0.;
+				walkcounts[ui][vi] = 0;
+			} //vi
+		} //ui
 
 		if ( sum_out.is_open() and data_in.is_open() ) {
 
-			double latitude, walklen;
-			int lat_index;
+			double u, v, walklen;
+			int ui, vi;
 			char comma;
 
 			//First line of data_in
@@ -115,45 +122,39 @@ int main( int argc , char* argv[] ) {
 			std::cout << std::endl;
 			while( !data_in.eof() ) {
 
-				data_in >> latitude >> comma >> walklen;
+				data_in >> u >> comma >> v >> comma >> walklen;
 
-				if ( latitude < pol_ang ) {
-					lat_index = 0;
-				}
-				else if ( latitude > PI ) {
-					lat_index = 999;
-				}
-				else {
-						lat_index = static_cast< int >( (latitude - pol_ang)*( 1000 / (PI - pol_ang) ) );
-				}
+				ui = static_cast< int >( u*nbins );
+				vi = static_cast< int >( v*nbins );
 
-				walktotals[ lat_index ] += walklen;
-				walkcounts[ lat_index ] ++;
+				walktotals[ ui ][ vi ] += walklen;
+				walkcounts[ ui ][ vi ] ++;
 
 				if ( walklen == 0 ) {
 					numwalks++;
-					std::cout << "\r" << numwalks;
+					std::cout << "\r" << numwalks << std::flush;
 				}
 
 			} //read data_in
 			std::cout << "\rWriting out summary...";
 			//Write out data while calculating means
 
-			sum_out << "PolAng,MeanWalkLen" << std::endl;
+			sum_out << "U,V,MeanWalkLen" << std::endl;
 
-			double lat, meanwalklen;
-			for (unsigned int i = 0; i < 1000; i++) {
+			double u, v, meanwalklen;
+			for (int ui = 0; ui < nbins; ui++) {
+				for (int vi = 0; vi < nbins; vi++) {
 
-				if ( walkcounts[i] > 0 ) {
-					//lat is in the middle of the bin
-					lat = (i+0.5)*(PI - pol_ang)/1000 + pol_ang;
+					if ( walkcounts[ui][vi] > 0 ) {
+						u = (ui+0.5)/nbins;
+						v = (vi+0.5)/nbins;
+						meanwalklen = walktotals[ui][vi]/walkcounts[ui][vi];
 
-					meanwalklen = walktotals[i]/walkcounts[i];
+						sum_out << u << ',' << v << ',' << meanwalklen << std::endl;
+					} //if bin has some data in it
 
-					sum_out << lat << "," << meanwalklen << std::endl;
-				} //if bin has some data in it
-
-			} //loop through all the bins (i)
+				} //loop through vi
+			} //loop through ui
 
 			std::cout << "\rDONE: Summary Written  " << std::endl;
 
