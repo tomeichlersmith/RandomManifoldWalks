@@ -5,12 +5,13 @@
 #include <sstream> //Making filepath
 #include <iostream>
 #include <fstream>
+#include <cmath> //for cos and sin
 
 /**
  * Description of argv[] array for inputs (default value)
  * argv[0] name of program (./PlaneCircleWalk)
  * argv[1] the length of the side of the escape box centered around origin (0.5)
- * argv[2] number of walks (1)
+ * argv[2] number of walks (100)
  * argv[3] length of each step of the walk (0.05)
  * argv[4] maximum walk length (1000)
  * argv[5] name of data storage file (output) - put into data/ directory
@@ -19,7 +20,7 @@ int main( int argc , char* argv[] ) {
 
 	//Default Value
 	double side_len = 0.5;
-	int num_walks = 1;
+	int num_walks = 100;
 	double steplen = 0.05;
 	double max_walk_len = 1000.;
 	std::string filename = "output";
@@ -54,23 +55,17 @@ int main( int argc , char* argv[] ) {
 
 	if( outs.is_open() ) {
 
-		outs << "PolAng,WalkLen" << std::endl;
+		outs << "U,V,WalkLen" << std::endl;
 
 		for( int i = 0; i < num_walks; i++ ) {
 
-			double ustart,vstart;
-			if ( i < num_walk/2 ) {
-				ustart = (1+params[1])/2;
-				vstart = 0.;
-			} //Along u-axis
-			else {
-				ustart = (std::sqrt(2)+2*params[1])/4;
-				vstart = ustart;
-			} //along u=v line
+			//Starting angle goes from 0 to PI/2
+			double theta_start;
+			theta_start = ((MOSEY::TWO_PI/4)/num_walks)*i;
 
-			walk.Wander( ustart , vstart );
+			walk.Wander( cos(theta_start) , sin(theta_start) );
 
-			walk.Export( outs , MOSEY::ExportType::PolarAng );
+			walk.Export( outs , MOSEY::ExportType::FirstQuad );
 
 			std::cout << "[" << i << "/" << num_walks << "] completed...\r" << std::flush;
 
