@@ -8,8 +8,8 @@
 
 /**
  * Description of argv[] array for inputs (default value)
- * argv[0] name of program (./SphereWalk)
- * argv[1] the latitude of the boundary for the escape region around north pole (PI/4)
+ * argv[0] name of program (./PlaneCircleWalk)
+ * argv[1] the length of the side of the escape box centered around origin (0.5)
  * argv[2] number of walks (1)
  * argv[3] length of each step of the walk (0.05)
  * argv[4] maximum walk length (1000)
@@ -17,11 +17,8 @@
  */
 int main( int argc , char* argv[] ) {
 
-	//Global value
-	const double PI = MOSEY::TWO_PI/2;
-
 	//Default Value
-	double pol_ang = PI/4;
+	double side_len = 0.5;
 	int num_walks = 1;
 	double steplen = 0.05;
 	double max_walk_len = 1000.;
@@ -138,7 +135,7 @@ int main( int argc , char* argv[] ) {
 
 			double lat, meanwalklen;
 			for (unsigned int i = 0; i < 1000; i++) {
-				
+
 				if ( walkcounts[i] > 0 ) {
 					//lat is in the middle of the bin
 					lat = (i+0.5)*(PI - pol_ang)/1000 + pol_ang;
