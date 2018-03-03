@@ -32,9 +32,25 @@ namespace MOSEY {
 				double uinter = t*uprev + (1-t)*ucurr;
 				double vinter = t*vprev + (1-t)*vcurr;
 
-				
-				//normal to intersection point
-				//reflect over circle
+				//determine unit tangent vector to intersection point
+				double slope_x = vinter;
+				double slope_y = -uinter;
+				double slope_mag = std::sqrt(slope_x*slope_x + slope_y*slope_y);
+				slope_x = slope_x/slope_mag;
+				slope_y = slope_y/slope_mag;
+
+				//Project vector (uinter,vinter)->(ucurr,vcurr) onto slope vector
+				double proj = ((ucurr-uinter)*(slope_x) + (vcurr-vinter)*slope_y);
+				double proj_x = proj*slope_x;
+				double proj_y = proj*slope_y;
+
+				//Find perpendicular component (and reflect it over slope vector)
+				double perp_x = -1*((ucurr-uinter)-proj_x);
+				double perp_y = -1*((vcurr-vinter)-proj_y);
+
+				//Add reflected perpindicular component to projection vector
+				ucurr = uinter + proj_x + perp_x;
+				vcurr = vinter + proj_y + perp_y;
 
 			} //if (ucurr,vcurr) is outside unit disk
 
