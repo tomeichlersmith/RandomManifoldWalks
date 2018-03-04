@@ -13,6 +13,7 @@
  * Description of argv[] array for inputs (default value)
  * argv[0] name of program (./PlaneCircleWalk)
  * argv[1] the length of the side of the escape box centered around origin (0.5)
+ *  - should be less than sqrt(2) = 1.41
  * argv[2] number of walks (100)
  * argv[3] length of each step of the walk (0.05)
  * argv[4] maximum walk length (1000)
@@ -82,6 +83,8 @@ int main( int argc , char* argv[] ) {
 	outs.close();
 
 	std::cout << "Number of Simulated Walks that Ended Before Escaping: " << walk.MaxWalkCount() << std::endl;
+	if ( walk.MaxWalkCount() > 1 )
+		std::cout << "\tYou may wish to re-run with a higher maximum walk length." << std::endl;
 
 	char answer;
 	std::cout << "Construct summary file from generated data? (y/n) ";
