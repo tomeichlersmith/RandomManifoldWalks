@@ -22,9 +22,9 @@ int main( int argc , char* argv[] ) {
 
 	//Default Value
 	double side_len = 0.5;
-	int num_walks = 100;
-	double steplen = 0.1;
-	double max_walk_len = 10000.;
+	int num_walks = 500;
+	double steplen = 0.05;
+	double max_walk_len = 1000.;
 	std::string filename = "output";
 
 	switch( argc ) {
@@ -65,7 +65,7 @@ int main( int argc , char* argv[] ) {
 			double theta_start;
 			theta_start = ((MOSEY::TWO_PI/4)/num_walks)*i;
 
-			walk.Wander( cos(theta_start) , sin(theta_start) );
+			walk.Wander( 0.9*cos(theta_start) , 0.9*sin(theta_start) );
 
 			walk.Export( outs , MOSEY::ExportType::FirstQuad );
 

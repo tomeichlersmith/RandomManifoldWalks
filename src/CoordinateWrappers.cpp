@@ -22,15 +22,27 @@ namespace MOSEY {
 				//Solve quadratic equation to find point of intersection between ray
 				// (uprev,vprev) -> (ucurr,vcurr) intersects unit circle
 				double a = (ucurr-uprev)*(ucurr-uprev)+(vcurr-vprev)*(vcurr-vprev);
-				double b = 2*((ucurr-uprev)*(-uprev)+(vcurr-vprev)*(-vprev));
+				double b = 2*((ucurr-uprev)*(uprev)+(vcurr-vprev)*(vprev));
 				double c = uprev*uprev+vprev*vprev - 1.;
 				double disc = std::sqrt( b*b - 4*a*c );
-				//Discard smaller value because (uprev,vprev) is assumed to be in unit disk
-				double t = (-b + disc)/(2*a);
+
+				//Find intersection point by deterimining t that is in between (uprev,vprev)
+				// and (ucurr,vcurr)
+				double t1 = (-b + disc)/(2*a);
+				double t2 = (-b - disc)/(2*a);
+				double t;
+				if (0 <= t1 and t1 <= 1)
+					t = t1;
+				else if ( 0 <= t2 and t2 <= 1)
+					t = t2;
+				else {
+					std::cout << "ERROR:\tNo Intersection with Border!" << std::endl;
+					exit(1);
+				}
 
 				//Intersection point
-				double uinter = t*uprev + (1-t)*ucurr;
-				double vinter = t*vprev + (1-t)*vcurr;
+				double uinter = (1-t)*uprev + t*ucurr;
+				double vinter = (1-t)*vprev + t*vcurr;
 
 				//determine unit tangent vector to intersection point
 				double slope_x = vinter;
@@ -54,6 +66,9 @@ namespace MOSEY {
 
 			} //if (ucurr,vcurr) is outside unit disk
 
+			//Functional Check
+			//std::cout << ucurr << "," << vcurr << "\t" << std::sqrt(ucurr*ucurr+vcurr*vcurr) << std::endl;
+			
 			return;
 		}
 

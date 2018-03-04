@@ -107,7 +107,6 @@ namespace MOSEY {
 
 			if ( !m_escape_check( m_check_parameters , m_last) ) {
 				std::cout << "WARNG:\tWalk did not escape. Erasing Walk.\n";
-				std::cout << "      \tMay need to increase maximum walk length." << std::endl;
 
 				m_maxlen_counter++;
 
@@ -142,7 +141,8 @@ namespace MOSEY {
 					outs << 2*atan( 1/sqrt( u*u + v*v ) );
 					break;
 				case ExportType::FirstQuad :
-					outs << abs(u) << "," << abs(v);
+					outs << fabs(u) << "," << fabs(v);
+					break;
 				default :
 					outs << u << "," << v;
 					break;

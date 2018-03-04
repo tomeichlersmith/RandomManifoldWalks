@@ -4,6 +4,7 @@
 #define MOSEY_COORDINATEWRAPPERS_HPP
 
 #include <cmath> //abs
+#include <iostream> //Funcitonal Checks
 
 namespace MOSEY {
 
