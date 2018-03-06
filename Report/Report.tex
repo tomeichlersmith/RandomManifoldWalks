@@ -2,6 +2,7 @@
 
 \usepackage[margin=1in]{geometry}
 \usepackage{amsfonts, amsmath}
+\usepackage{graphicx}
 
 \newcommand{\R}{\mathbb{R}}
 
@@ -161,79 +162,97 @@
 	Does the size of the escape region (relative to the surface) have a large effect?
 	
 	\subsection{Stepping Method}
-	The Runge-Kutta method is a process to approximate first order differential equations.
-	We will be using the standard, fourth order Runge-Kutta method (RK4) that will be outlined for our specific problem below.
-	First, we must transform our two second order geodesic equations \ref{geodesic_chris} into a system of first order differential equations so that we are able to apply the RK4 method.
-	
-	We begin by expanding \ref{geodesic_chris} and using $u$ and $v$ instead of $x^1$ and $x^2$.
-	\begin{equation} \label{geodesic_expansion} \begin{split} 
-		\frac{d^2u}{dt^2} & = -\Gamma^u_{uu}\left(\frac{du}{dt}\right)^2-2\Gamma^u_{uv}\frac{du}{dt}\frac{dv}{dt}-\Gamma^u_{vv}\left(\frac{dv}{dt}\right)^2 \\
-		\frac{d^2v}{dt^2} & = -\Gamma^v_{uu}\left(\frac{du}{dt}\right)^2-2\Gamma^v_{uv}\frac{du}{dt}\frac{dv}{dt}-\Gamma^v_{vv}\left(\frac{dv}{dt}\right)^2 \\
-	\end{split} \end{equation}
-	Define the first derivatives of $u$ and $v$ as their own variables
-	\begin{equation*} \begin{array}{cc}
-		p = \frac{du}{dt} & q = \frac{dv}{dt}
-	\end{array} \end{equation*}
-	Then \ref{geodesic_expansion} becomes
-	\begin{equation} \begin{split}
-		\frac{du}{dt} & = p \\
-		\frac{dv}{dt} & = q \\
-		\frac{dp}{dt} & = -\Gamma^u_{uu}p^2-2\Gamma^u_{uv}pq-\Gamma^u_{vv}q^2 \\
-		\frac{dq}{dt} & = -\Gamma^v_{uu}p^2-2\Gamma^v_{uv}pq-\Gamma^v_{vv}q^2 \\
-	\end{split} \end{equation}
-	This is a system of first order differential equations, so we can adapt RK4 to numerically solve it.
-	
-	Define $y = \langle u , v , p , q \rangle$.
-	Suppose $(u_0,v_0)$ is the point we wish to step from and we are moving at an angle $\theta$ relative to the positive $u$ axis (at that point).
-	Then the initial vector is $y_0 = \langle u_0 , v_0 , \cos(\theta) , \sin(\theta) \rangle$.
-	This begins the geodesic with unit speed, meaning that it is parametrized by arc length, so if we wish to step a distance $h$, we numerically solve the initial value problem
-	\begin{equation} \label{RK4_imp} \begin{split}
-		\frac{dy}{dt} & = F(y) = \langle p , q , -\Gamma^u_{uu}p^2-2\Gamma^u_{uv}pq-\Gamma^u_{vv}q^2 , -\Gamma^v_{uu}p^2-2\Gamma^v_{uv}pq-\Gamma^v_{vv}q^2 \rangle \\
-		y(0) & = y_0
-	\end{split} \end{equation}
-	until $t = h$.
-	Let $N$ be the number of iterations of the RK4 method we will use to approximate \ref{RK4_imp}.
-	Define $\delta = h/N$, then we write our approximation scheme below.
-	\begin{equation} \label{RK4_alg} \begin{split}
-		& y \gets y_0 \\
-		& \textit{loop } N \textit{ times:} \\
-		& \quad k_1 \gets F(y) \\
-		& \quad k_2 \gets F\left(y+(\delta/2)k_1\right) \\
-		& \quad k_3 \gets F\left(y+(\delta/2)k_2\right) \\
-		& \quad k_4 \gets F\left(y + \delta k_3\right) \\
-		& \quad y \gets y+(\delta/6)(k_1+2k_2+2k_3+k_4)
-	\end{split} \end{equation}
-	When implemented correctly, the loop exits with $y$ containing an approximate value for $u$, $v$, $p$, and $q$ a distance $h$ away from $(u_0, v_0)$ on the surface.
-	This method is constructed in the \texttt{MOSEY::Stepper} class.
-	
+		The Runge-Kutta method is a process to approximate first order differential equations.
+		We will be using the standard, fourth order Runge-Kutta method (RK4) that will be outlined for our specific problem below.
+		First, we must transform our two second order geodesic equations \ref{geodesic_chris} into a system of first order differential equations so that we are able to apply the RK4 method.
+		
+		We begin by expanding \ref{geodesic_chris} and using $u$ and $v$ instead of $x^1$ and $x^2$.
+		\begin{equation} \label{geodesic_expansion} \begin{split} 
+			\frac{d^2u}{dt^2} & = -\Gamma^u_{uu}\left(\frac{du}{dt}\right)^2-2\Gamma^u_{uv}\frac{du}{dt}\frac{dv}{dt}-\Gamma^u_{vv}\left(\frac{dv}{dt}\right)^2 \\
+			\frac{d^2v}{dt^2} & = -\Gamma^v_{uu}\left(\frac{du}{dt}\right)^2-2\Gamma^v_{uv}\frac{du}{dt}\frac{dv}{dt}-\Gamma^v_{vv}\left(\frac{dv}{dt}\right)^2 \\
+		\end{split} \end{equation}
+		Define the first derivatives of $u$ and $v$ as their own variables
+		\begin{equation*} \begin{array}{cc}
+			p = \frac{du}{dt} & q = \frac{dv}{dt}
+		\end{array} \end{equation*}
+		Then \ref{geodesic_expansion} becomes
+		\begin{equation} \begin{split}
+			\frac{du}{dt} & = p \\
+			\frac{dv}{dt} & = q \\
+			\frac{dp}{dt} & = -\Gamma^u_{uu}p^2-2\Gamma^u_{uv}pq-\Gamma^u_{vv}q^2 \\
+			\frac{dq}{dt} & = -\Gamma^v_{uu}p^2-2\Gamma^v_{uv}pq-\Gamma^v_{vv}q^2 \\
+		\end{split} \end{equation}
+		This is a system of first order differential equations, so we can adapt RK4 to numerically solve it.
+		
+		Define $y = \langle u , v , p , q \rangle$.
+		Suppose $(u_0,v_0)$ is the point we wish to step from and we are moving at an angle $\theta$ relative to the positive $u$ axis (at that point).
+		Then the initial vector is $y_0 = \langle u_0 , v_0 , \cos(\theta) , \sin(\theta) \rangle$.
+		This begins the geodesic with unit speed, meaning that it is parametrized by arc length, so if we wish to step a distance $h$, we numerically solve the initial value problem
+		\begin{equation} \label{RK4_imp} \begin{split}
+			\frac{dy}{dt} & = F(y) = \langle p , q , -\Gamma^u_{uu}p^2-2\Gamma^u_{uv}pq-\Gamma^u_{vv}q^2 , -\Gamma^v_{uu}p^2-2\Gamma^v_{uv}pq-\Gamma^v_{vv}q^2 \rangle \\
+			y(0) & = y_0
+		\end{split} \end{equation}
+		until $t = h$.
+		Let $N$ be the number of iterations of the RK4 method we will use to approximate \ref{RK4_imp}.
+		Define $\delta = h/N$, then we write our approximation scheme below.
+		\begin{equation} \label{RK4_alg} \begin{split}
+			& y \gets y_0 \\
+			& \textit{loop } N \textit{ times:} \\
+			& \quad k_1 \gets F(y) \\
+			& \quad k_2 \gets F\left(y+(\delta/2)k_1\right) \\
+			& \quad k_3 \gets F\left(y+(\delta/2)k_2\right) \\
+			& \quad k_4 \gets F\left(y + \delta k_3\right) \\
+			& \quad y \gets y+(\delta/6)(k_1+2k_2+2k_3+k_4)
+		\end{split} \end{equation}
+		When implemented correctly, the loop exits with $y$ containing an approximate value for $u$, $v$, $p$, and $q$ a distance $h$ away from $(u_0, v_0)$ on the surface.
+		This method is constructed in the \texttt{MOSEY::Stepper} class.
+		
 	\subsection{Optimizations}
-	In order for the walks on the different surfaces to be efficiently studied, some situations admit specific optimizations, saving computing time.
-	We are not claiming these processes to be perfectly optimized (read \cite{Redfield_NumericalGeodesics_2007} for a more detailed exploration of efficient numerical solutions to the geodesic equations), but we wish to explain the methods we have used to make the simulation of walks more efficient.
-	
-	The first (and most widely applicable) optimization is recording every step of a random walk as if it was the first step of the walk following it.
-	This allows for several walks starting from different initial positions to be acquired at once.
-	We are able to use this data because steps are independent of their predecessors.
-	
-	Walks on the plane offer the massive simplification of having all zero Christoffel symbols.
-	In order to take a step of length $h$ at an angle $\theta$ from the positive $u$-axis, we could simply add $(h\cos(\theta), h\sin(\theta))$ to the initial point.
-	We do not do this because we would like uniformity across the code package.
-	However, using RK4 with the number of iterations $N = 1$ produces the exact same result algebraically.
-	Due to the limited precision of numbers in computers, this equality is not perfect; nevertheless, it produces a result that only differs from the exact result due to inherent truncation errors in the computer (which implementing the exact result would suffer from as well).
-	Therefore, when the class \texttt{MOSEY::Stepper} is configured to take a step on $P$, the number of iterations used in RK4 is set to one (overriding any user specifications).
-	This avoids unnecessary calculations from additional loops that would not produce a more accurate result.
-	
-	The two-dimensional sphere is also incredibly symmetrical. In this specific situation, the escape regions are generally circles withe centers at one of the poles.
-	Because of the symmetry around the axis of the sphere, we are able to only consider latitude when analyzing how the walk distance changes depending on the starting location.
-	We calculate the latitude $\phi$ of $\sigma(u,v)$ by
-	\begin{equation*}
-		\phi = \arctan\left(\frac{1}{u^2+v^2}\right)
-	\end{equation*}
-	This simplification will not help the walks themselves be simulated more efficiently; nevertheless, it will allow for the analysis of the data gathered from the walks be simplified --- making it one-dimensional instead of two.
+		In order for the walks on the different surfaces to be efficiently studied, some situations admit specific optimizations, saving computing time.
+		We are not claiming these processes to be perfectly optimized (read \cite{Redfield_NumericalGeodesics_2007} for a more detailed exploration of efficient numerical solutions to the geodesic equations), but we wish to explain the methods we have used to make the simulation of walks more efficient.
+		
+		The first (and most widely applicable) optimization is recording every step of a random walk as if it was the first step of the walk following it.
+		This allows for several walks starting from different initial positions to be acquired at once.
+		We are able to use this data because steps are independent of their predecessors.
+		
+		Walks on the plane offer the massive simplification of having all zero Christoffel symbols.
+		In order to take a step of length $h$ at an angle $\theta$ from the positive $u$-axis, we could simply add $(h\cos(\theta), h\sin(\theta))$ to the initial point.
+		We do not do this because we would like uniformity across the code package.
+		However, using RK4 with the number of iterations $N = 1$ produces the exact same result algebraically.
+		Due to the limited precision of numbers in computers, this equality is not perfect; nevertheless, it produces a result that only differs from the exact result due to inherent truncation errors in the computer (which implementing the exact result would suffer from as well).
+		Therefore, when the class \texttt{MOSEY::Stepper} is configured to take a step on $P$, the number of iterations used in RK4 is set to one (overriding any user specifications).
+		This avoids unnecessary calculations from additional loops that would not produce a more accurate result.
+		
+		The two-dimensional sphere is also incredibly symmetrical.
+		In this specific situation, the escape regions are generally circles with centers at one of the poles.
+		Because of the symmetry around the axis of the sphere, we are able to only consider latitude when analyzing how the walk distance changes depending on the starting location.
+		We calculate the latitude $\phi$ of $\sigma(u,v)$ by
+		\begin{equation*}
+			\phi = \arctan\left(\frac{1}{u^2+v^2}\right)
+		\end{equation*}
+		This simplification will not help the walks themselves be simulated more efficiently; nevertheless, it will allow for the analysis of the data gathered from the walks be simplified --- making it one-dimensional instead of two.
+		
+		Due to the inherently large amount of noise generated by collecting data in a purely pseudo-random fashion, the general trends that we expect to appear only arise after several hundred (if not more) walks.
+		Since each walk is hundreds or even thousands of steps (and each step is treated as its own data point), we are required to have millions of data points collected for each manifold-escape region pair.
+		This amount of data leads to an inability to process it all, so we have chosen to compress the data into summary files that are at most one hundred thousand data points.
+		The raw data is still stored; nevertheless, these summary files are valuable to construction of plots that would crash under the weight of millions of points.
+		The compression method is binning the data into small bins and determining the mean for each bin.
+		This procedure substitutes one data point for a few thousand, which quickens analysis and plotting.
 
 \section{Numeric Solution}
 
 \section{Results}
-
+	\subsection{Plane}
+		\subsubsection{Ring}
+		\subsubsection{Circular Walls}
+	\subsection{Sphere}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.5\textwidth]{images/ExampleSphereL04.pdf}
+			\caption{Example data plot from the sphere with the escape region beginning at latitude $0.4$ --- Red is the raw data and blue is the compressed means.}
+		\end{figure}
+	\subsection{Overall Package}
+	
 \bibliographystyle{plain}
 \bibliography{../../References/References_MathDHP_201718}
 
