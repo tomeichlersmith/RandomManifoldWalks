@@ -239,11 +239,20 @@
 		The compression method is binning the data into small bins and determining the mean for each bin.
 		This procedure substitutes one data point for a few thousand, which quickens analysis and plotting.
 
-\section{Numeric Solution}
 
 \section{Results}
+	The construction of this package has arrived at several results that display the versatility of it.
+	While only a small number of concrete situations have been investigated, these investigations have shown that \texttt{MOSEY} is versatile enough to tackle almost any situation defined on the torus, sphere, or plane.
+	We will now go into more detail about specific results of this project.
+	
 	\subsection{Plane}
+		First, we began the investigations with a situation that can be solved analytically.
+		As stated earlier, the Plane, being the special situation with all zero Christoffel symbols, allows for an easy testing ground for our random walk machinery.
+		
 		\subsubsection{Ring}
+			The averages over the walks show the expected squared dependence that is shown in the analytical solution.
+			This specific situation is wildly inefficient; nevertheless, it displays the power of the random walk method.
+			This relatively simple computational method allows for determination of numerical solutions to intricate differential equations whose process is easy for the user to understand --- more on this discussion in section \ref{NumericSoln}.
 		\subsubsection{Circular Walls}
 	\subsection{Sphere}
 		\begin{figure}[h]
@@ -258,6 +267,7 @@
 			\caption{Comparison of several different escape polar angles.}
 		\end{figure}
 	\subsection{Overall Package}
+	\subsection{Numeric Solution} \label{NumericSoln}
 	
 \bibliographystyle{plain}
 \bibliography{../../References/References_MathDHP_201718}
