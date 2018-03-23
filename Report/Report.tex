@@ -250,10 +250,14 @@
 		As stated earlier, the Plane, being the special situation with all zero Christoffel symbols, allows for an easy testing ground for our random walk machinery.
 		
 		\subsubsection{Ring}
-			The averages over the walks show the expected squared dependence that is shown in the analytical solution.
-			This specific situation is wildly inefficient; nevertheless, it displays the power of the random walk method.
+			The averages over the walks show the expected quadratic dependence that is shown in the analytical solution.
+			This specific situation is wildly inefficient (because there is an analytical solution available); nevertheless, it displays the power of the random walk method.
 			This relatively simple computational method allows for determination of numerical solutions to intricate differential equations, and this method has a process that is easy for the user to understand --- more on this discussion in section \ref{NumericSoln}.
 		\subsubsection{Circular Walls}
+			We now extend the method to a situation that is slightly more complex.
+			This situation has ``walls" --- borders that the walk bounces off of instead of passing through.
+			Moreover, it has an escape region with a non-smooth border.
+			These two complexities, which offer large resistance in finding the analytical solution, are easily incorporated into this framework.
 	\subsection{Sphere}
 		\begin{figure}[h]
 			\centering
