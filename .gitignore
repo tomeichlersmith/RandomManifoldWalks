@@ -12,6 +12,7 @@ test
 *.bbl
 *.blg
 *.pdf
+!Report/images/*.pdf
 
 #None of the Mathematica files
 *.nb
