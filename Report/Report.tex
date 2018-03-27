@@ -245,6 +245,9 @@
 	While only a small number of concrete situations have been investigated, these investigations have shown that \texttt{MOSEY} is versatile enough to tackle almost any situation defined on the torus, sphere, or plane.
 	We will now go into more detail about specific results of this project.
 	
+	In the plots below, if both the raw data and the compressed means are able to be plotted, we show the raw data as red and the compressed means as blue.
+	If there is too much data in order to be able to plot the raw data, only the compressed means in blue will be plotted.
+	
 	\subsection{Plane}
 		First, we began the investigations with a situation that can be solved analytically.
 		As stated earlier, the Plane, being the special situation with all zero Christoffel symbols, allows for an easy testing ground for our random walk machinery.
@@ -253,6 +256,13 @@
 			The averages over the walks show the expected quadratic dependence that is shown in the analytical solution.
 			This specific situation is wildly inefficient (because there is an analytical solution available); nevertheless, it displays the power of the random walk method.
 			This relatively simple computational method allows for determination of numerical solutions to intricate differential equations, and this method has a process that is easy for the user to understand --- more on this discussion in section \ref{NumericSoln}.
+			\begin{figure}[h]
+				\centering
+				\includegraphics{images/Plane_In1_Out3_N1000_S005.pdf}
+				\caption{Example data plot from the plane with the escape region beginning at radius $1$ and radius $3$ --- the starting point was at radius $2$.}
+			\end{figure}
+			This figure is able to show that the compressed means closely track the raw data fit, so close in fact that the fit of the compressed means cannot be seen underneath the fit of the raw data.
+			This tracking is promising because it gives credence to the data compression method used --- it seems like little information is lost from the data.
 		\subsubsection{Circular Walls}
 			We now extend the method to a situation that is slightly more complex.
 			This situation has ``walls" --- borders that the walk bounces off of instead of passing through.
