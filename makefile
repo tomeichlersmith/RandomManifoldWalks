@@ -7,7 +7,9 @@ LFLAGS = -std=c++11 -Wall $(DEBUG)
 INCDIR = MOSEY
 OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/EscapeCheck.o bin/RandDouble.o bin/Step.o bin/Stepper.o bin/Walk.o
 
-all : directories run/SphereWalk run/PlaneCircleWalk
+.PHONY : directories all
+
+all : run/SphereWalk run/PlaneCircleWalk run/PlaneWalk
 
 run/test : test.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
@@ -16,6 +18,9 @@ run/SphereWalk : Sphere/WalkGen.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
 
 run/PlaneCircleWalk : PlaneCircle/WalkGen.cpp bin/libMOSEY.a
+	$(CXX) $(LFLAGS) $^ -o $@
+
+run/PlaneWalk : Plane/WalkGen.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
 
 bin/libMOSEY.a : $(OBJS)
@@ -47,6 +52,7 @@ directories :
 	mkdir -p run
 	mkdir -p Sphere/data
 	mkdir -p PlaneCircle/data
+	mkdir -p Plane/data
 
 clean :
 	rm -r bin/*

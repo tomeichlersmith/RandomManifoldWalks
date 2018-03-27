@@ -8,59 +8,67 @@
 
 /**
  * Description of argv[] array for inputs (default value)
- * argv[0] name of program (./SphereWalk)
- * argv[1] the latitude of the boundary for the escape region around north pole (PI/4)
- * argv[2] number of walks (1)
- * argv[3] length of each step of the walk (0.05)
- * argv[4] maximum walk length (1000)
- * argv[5] name of data storage file (output) - put into data/ directory
+ * argv[0] name of program (./run/PlaneWalk)
+ * argv[1] the inner radius of the escape region (1) - set to zero to have no inner circle
+ * argv[2] the outer radius of the escape region (2)
+ * argv[3] number of walks (1)
+ * argv[4] length of each step of the walk (0.05)
+ * argv[5] maximum walk length (1000)
+ * argv[6] name of data storage file (output) - put into data/ directory
  */
 int main( int argc , char* argv[] ) {
 
-	//Global value
-	const double PI = MOSEY::TWO_PI/2;
-
 	//Default Value
-	double pol_ang = PI/4;
+	double inner_rad = 1.;
+	double outer_rad = 2.;
 	int num_walks = 1;
 	double steplen = 0.05;
 	double max_walk_len = 1000.;
 	std::string filename = "output";
 
 	switch( argc ) {
-		case 6 : //Go through all settings, breaking before defaults
-			filename = static_cast<std::string>(argv[5]);
+		case 7 : //Go through all settings, breaking before defaults
+			filename = static_cast<std::string>(argv[6]);
+		case 6 :
+			max_walk_len = std::stod( static_cast<std::string>(argv[5]) );
 		case 5 :
-			max_walk_len = std::stod( static_cast<std::string>(argv[4]) );
+			steplen = std::stod( static_cast<std::string>(argv[4]) );
 		case 4 :
-			steplen = std::stod( static_cast<std::string>(argv[3]) );
+			num_walks = std::stoi( static_cast<std::string>(argv[3]) );
 		case 3 :
-			num_walks = std::stoi( static_cast<std::string>(argv[2]) );
+			outer_rad = std::stod( static_cast<std::string>(argv[2]) );
 		case 2 :
-			pol_ang = std::stod( static_cast<std::string>(argv[1]) );
+			inner_rad = std::stod( static_cast<std::string>(argv[1]) );
 		default : //Keep defaults set above
 			break;
 	}
 
-	MOSEY::Walk spherewalk( MOSEY::Manifold::Sphere );
-	spherewalk.SetStepLength( steplen );
-	std::vector<double> params( 3 , 0. );
-	params[0] = sin(pol_ang)/(1-cos(pol_ang)); //Change radius of circle to (u,v)-space
-	spherewalk.SetEscapeRegion( &MOSEY::EscapeCheck::OutsideCircle , params );
-	spherewalk.SetMaxWalkLength( max_walk_len );
+	MOSEY::Walk walk( MOSEY::Manifold::Plane );
+	walk.SetStepLength( steplen );
+	std::vector<double> params( 4 , 0. );
+	params[0] = inner_rad; //Change inner radius of circle
+	params[1] = outer_rad; //Change outer radius of circle
+	walk.SetEscapeRegion( &MOSEY::EscapeCheck::CircleRing , params );
+	walk.SetMaxWalkLength( max_walk_len );
 
 	std::ofstream outs;
-	outs.open( ("Sphere/data/"+filename+".csv").c_str() );
-
+	outs.open( ("Plane/data/"+filename+".csv").c_str() );
+	
 	if( outs.is_open() ) {
 
-		outs << "PolAng,WalkLen" << std::endl;
+		outs << "R,WalkLen" << std::endl;
+		
+		//Starting point
+		double start_x = 0.;
+		if ( inner_rad > 0. ) {
+			start_x = 0.5*(outer_rad - inner_rad) + inner_rad;
+		}
 
 		for( int i = 0; i < num_walks; i++ ) {
+		
+			walk.Wander( start_x , 0. );
 
-			spherewalk.Wander( 0. , 0. );
-
-			spherewalk.Export( outs , MOSEY::ExportType::PolarAng );
+			walk.Export( outs , MOSEY::ExportType::Radius );
 
 			std::cout << "[" << i << "/" << num_walks << "] completed...\r" << std::flush;
 
@@ -68,13 +76,13 @@ int main( int argc , char* argv[] ) {
 
 	}
 	else {
-		std::cout << "ERROR:\tUnable to open Sphere/data/" << filename << ".csv" << std::endl;
+		std::cout << "ERROR:\tUnable to open Plane/data/" << filename << ".csv" << std::endl;
 		exit(1);
 	}
 
 	outs.close();
 
-	std::cout << "Number of Simulated Walks that Ended Before Escaping: " << spherewalk.MaxWalkCount() << std::endl;
+	std::cout << "Number of Simulated Walks that Ended Before Escaping: " << walk.MaxWalkCount() << std::endl;
 
 	char answer;
 	std::cout << "Construct summary file from generated data? (y/n) ";
@@ -84,11 +92,11 @@ int main( int argc , char* argv[] ) {
 
 		//Output File Declaration
 		std::ofstream sum_out;
-		sum_out.open( ("data/"+filename+"_summary.csv").c_str() );
+		sum_out.open( ("Plane/data/"+filename+"_summary.csv").c_str() );
 
 		//Input File Declaration
 		std::ifstream data_in;
-		data_in.open( ("data/"+filename+".csv").c_str() );
+		data_in.open( ("Plane/data/"+filename+".csv").c_str() );
 
 		//Data Storage Vectors
 		// Store data in 1000 bins
@@ -98,8 +106,8 @@ int main( int argc , char* argv[] ) {
 
 		if ( sum_out.is_open() and data_in.is_open() ) {
 
-			double latitude, walklen;
-			int lat_index;
+			double rad, walklen;
+			int rad_index;
 			char comma;
 
 			//First line of data_in
@@ -110,20 +118,20 @@ int main( int argc , char* argv[] ) {
 			std::cout << std::endl;
 			while( !data_in.eof() ) {
 
-				data_in >> latitude >> comma >> walklen;
+				data_in >> rad >> comma >> walklen;
 
-				if ( latitude < pol_ang ) {
-					lat_index = 0;
+				if ( rad < inner_rad ) {
+					rad_index = 0;
 				}
-				else if ( latitude > PI ) {
-					lat_index = 999;
+				else if ( rad > outer_rad ) {
+					rad_index = 999;
 				}
 				else {
-						lat_index = static_cast< int >( (latitude - pol_ang)*( 1000 / (PI - pol_ang) ) );
+					rad_index = static_cast< int >( (rad - inner_rad)*( 1000 / (outer_rad - inner_rad) ) );
 				}
 
-				walktotals[ lat_index ] += walklen;
-				walkcounts[ lat_index ] ++;
+				walktotals[ rad_index ] += walklen;
+				walkcounts[ rad_index ] ++;
 
 				if ( walklen == 0 ) {
 					numwalks++;
@@ -134,18 +142,19 @@ int main( int argc , char* argv[] ) {
 			std::cout << "\rWriting out summary...";
 			//Write out data while calculating means
 
-			sum_out << "PolAng,MeanWalkLen" << std::endl;
+			sum_out << "R,MeanWalkLen" << std::endl;
 
-			double lat, meanwalklen;
+			double meanwalklen;
 			for (unsigned int i = 0; i < 1000; i++) {
 
 				if ( walkcounts[i] > 0 ) {
-					//lat is in the middle of the bin
-					lat = (i+0.5)*(PI - pol_ang)/1000 + pol_ang;
+					//rad is in the middle of the bin
+					// reusing the variable rad
+					rad = (i+0.5)*(outer_rad - inner_rad)/1000 + inner_rad;
 
 					meanwalklen = walktotals[i]/walkcounts[i];
 
-					sum_out << lat << "," << meanwalklen << std::endl;
+					sum_out << rad << "," << meanwalklen << std::endl;
 				} //if bin has some data in it
 
 			} //loop through all the bins (i)
@@ -154,10 +163,10 @@ int main( int argc , char* argv[] ) {
 
 		} //files connected
 		else if ( sum_out.is_open() ) {
-			std::cout << "ERROR:\tUnable to open " << filename << ".csv" << std::endl;
+			std::cout << "ERROR:\tUnable to open Plane/data/" << filename << ".csv" << std::endl;
 		} //data_in problem
 		else {
-			std::cout << "ERROR:\tUnable to open " << filename << "_summary.csv" << std::endl;
+			std::cout << "ERROR:\tUnable to open Plane/data/" << filename << "_summary.csv" << std::endl;
 		} //sum_out problem
 
 		sum_out.close();

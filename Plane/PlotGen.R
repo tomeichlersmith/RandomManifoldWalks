@@ -23,7 +23,7 @@ if ( args[2] == "T" ) {
 library(ggplot2)
 
 #Construct file path
-datadir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/Sphere/data/"
+datadir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/Plane/data/"
 if ( includeraw ) {
   raw_fp <- paste( datadir , filename , ".csv" , sep = "" )
   raw_walk <- read.csv( raw_fp )
@@ -32,17 +32,17 @@ sum_fp <- paste( datadir , filename , "_summary.csv" , sep = "" )
 sum_walk <- read.csv( sum_fp )
 
 #Default ggplot
-gp <- ggplot() + geom_point( data = sum_walk , aes( x = PolAng , y = MeanWalkLen ) ,
+gp <- ggplot() + geom_point( data = sum_walk , aes( x = R , y = MeanWalkLen ) ,
     alpha = 0.3 , color = 'royalblue4' , shape = 1 ) +
-  geom_smooth( data = sum_walk , aes( x = PolAng , y = MeanWalkLen ) ,
+  geom_smooth( data = sum_walk , aes( x = R , y = MeanWalkLen ) ,
     color = 'royalblue')
 if ( includeraw ) {
-  gp <- gp + geom_point( data = raw_walk , aes( x = PolAng , y = WalkLen ) ,
+  gp <- gp + geom_point( data = raw_walk , aes( x = R , y = WalkLen ) ,
     size = 0.05 , alpha = 0.01 , color = 'red4' , shape = 1 ) +
-  geom_smooth( data = raw_walk , aes( x = PolAng , y = WalkLen ) ,
+  geom_smooth( data = raw_walk , aes( x = R , y = WalkLen ) ,
     color = 'red')
 }
-gp <- gp + xlab("Starting Polar Angle") +
+gp <- gp + xlab("Starting Radius") +
   ylab("Length of Walk to Escape")
 
 #Export to pdf file
