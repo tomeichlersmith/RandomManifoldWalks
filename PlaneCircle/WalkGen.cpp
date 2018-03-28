@@ -102,7 +102,6 @@ int main( int argc , char* argv[] ) {
 
 		//Data Storage Vectors
 		// Store data in bins
-		// Data Range from pol_ang to pi ==> Multiply by 2000/(2pi), truncated integer is the index
 		double walktotals[NBINS][NBINS]; //Summing walk lengths
 		int walkcounts[NBINS][NBINS]; //Counting number of walks
 		for (int ui = 0; ui < NBINS; ui++) {
