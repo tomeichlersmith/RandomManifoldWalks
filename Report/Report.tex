@@ -2,7 +2,7 @@
 
 \usepackage[margin=1in]{geometry}
 \usepackage{amsfonts, amsmath}
-\usepackage{graphicx,wrapfig}
+\usepackage{graphicx,wrapfig,subfig}
 
 \newcommand{\R}{\mathbb{R}}
 
@@ -278,14 +278,15 @@
 		As stated earlier, the Plane, being the special situation with all zero Christoffel symbols, allows for an easy testing ground for our random walk machinery.
 		
 		\subsubsection{Ring}
-			The averages over the walks show the expected quadratic dependence that is shown in the analytical solution.
-			This specific situation is wildly inefficient (because there is an analytical solution available); nevertheless, it displays the power of the random walk method.
-			This relatively simple computational method allows for determination of numerical solutions to intricate differential equations, and this method has a process that is easy for the user to understand --- more on this discussion in section \ref{NumericSoln}.
 			\begin{wrapfigure}{l}{0.4\textwidth}
 				\centering
 				\includegraphics[width=0.38\textwidth]{images/Plane_In1_Out3_N1000_S005.pdf}
-				\caption{Example data plot from the plane with the escape region beginning at radius $1$ and radius $3$ --- the starting point was at radius $2$.}
+				\caption{Example data plot from the plane with the escape region beginning at radius $1$ and radius $3$.}
 			\end{wrapfigure}
+			The averages over the walks show the expected quadratic dependence that is shown in the analytical solution.
+			This specific situation is wildly inefficient (because there is an analytical solution available); nevertheless, it displays the power of the random walk method.
+			This relatively simple computational method allows for determination of numerical solutions to intricate differential equations, and this method has a process that is easy for the user to understand --- more on this discussion in section \ref{NumericSoln}.
+			
 			This figure is able to show that the compressed means closely track the raw data fit, so close in fact that the fit of the compressed means cannot be seen underneath the fit of the raw data.
 			This tracking is promising because it gives credence to the data compression method used --- it seems like little information is lost from the data.
 		\subsubsection{Circular Walls}
@@ -294,17 +295,25 @@
 			Moreover, it has an escape region with a non-smooth border.
 			These two complexities, which offer large resistance in finding the analytical solution, are easily incorporated into this framework.
 	\subsection{Sphere}
-		\begin{figure}[h]
+		\begin{figure*}[htp]
 			\centering
-			\includegraphics{images/ExampleSphereL04.pdf}
-			\caption{Example data plot from the sphere with the escape region beginning at polar angle $0.4$ --- Red is the raw data and blue is the compressed means.}
-		\end{figure}
+			\begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
+				\includegraphics[width=0.48\textwidth]{images/ExampleSphereL04.pdf}
+				\caption{Example data plot from the sphere with the escape region beginning at polar angle $0.4$.}
+				\label{fig:egsphere}
+				&
+				\includegraphics[width=0.48\textwidth]{images/SummaryPlot_L005_04.pdf}
+				\caption{Comparison of several different escape polar angles.}
+				\label{fig:compsphere}
+			\end{tabular}
+		\end{figure*}
+		The sphere surface has been studied the most extensively in this project because it is a good compromise between unexplored territory and few output variables.
+		Since the escape regions that are studied on the sphere are symmetric around the polar axis, we are able to represent the data on the sphere as its angle with respect to the positive z-axis in normal polar coordinates.
+		This ``latitude" representation allows for the analysis to be done in one-dimension, enabling more data to be acquired and more precise analysis to be done.
+		In Figure \ref{fig:egsphere}, you can see how the length of the escape walk changes depending on the latitude of the starting point --- this behavior is interesting and appears to be a fractional power dependence.
+		Several different sizes of escape regions on the sphere were studied, and the summary of the results can be seen in Figure \ref{fig:compsphere}.
+		Most importantly, the length of the escape walk from anywhere on the sphere seems to increase exponentially as the escape latitude decreases (the escape region decreases in size proportional to the escape latitude squared).
 		
-		\begin{figure}[h]
-			\centering
-			\includegraphics{images/SummaryPlot_L005_04.pdf}
-			\caption{Comparison of several different escape polar angles.}
-		\end{figure}
 	\subsection{Overall Package}
 	\subsection{Numeric Solution} \label{NumericSoln}
 	
