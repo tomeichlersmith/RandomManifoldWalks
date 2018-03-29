@@ -282,18 +282,21 @@
 				\centering
 				\includegraphics[width=0.38\textwidth]{images/Plane_In1_Out3_N1000_S005.pdf}
 				\caption{Example data plot from the plane with the escape region beginning at radius $1$ and radius $3$.}
+				\label{fig:planering}
 			\end{wrapfigure}
-			The averages over the walks show the expected quadratic dependence that is shown in the analytical solution.
+			The averages over the walks show the expected quadratic dependence that is calculated in the analytical solution.
 			This specific situation is wildly inefficient (because there is an analytical solution available); nevertheless, it displays the power of the random walk method.
 			This relatively simple computational method allows for determination of numerical solutions to intricate differential equations, and this method has a process that is easy for the user to understand --- more on this discussion in section \ref{NumericSoln}.
 			
-			This figure is able to show that the compressed means closely track the raw data fit, so close in fact that the fit of the compressed means cannot be seen underneath the fit of the raw data.
-			This tracking is promising because it gives credence to the data compression method used --- it seems like little information is lost from the data.
+			Figure \ref{fig:planering} is able to show that the compressed means closely track the raw data fit, so close in fact that the fit of the compressed means cannot be seen underneath the fit of the raw data.
+			Moreover, this tracking is promising because it gives credence to the data compression method used --- it seems like little information is lost from the data.
+			
 		\subsubsection{Circular Walls}
 			We now extend the method to a situation that is slightly more complex.
 			This situation has ``walls" --- borders that the walk bounces off of instead of passing through.
 			Moreover, it has an escape region with a non-smooth border.
 			These two complexities, which offer large resistance in finding the analytical solution, are easily incorporated into this framework.
+			
 	\subsection{Sphere}
 		\begin{figure*}[htp]
 			\centering
@@ -318,7 +321,8 @@
 		Without any more pretty pictures to present, we would like to point out a few more products of this project.
 		The package \texttt{MOSEY} that was used to simulate these walks on these various surfaces is perhaps the most valuable outcome of this project.
 		Its structure allows for incorporation of an amazing amount of different situations, meaning that it can be used to quickly generate data for a more detailed study of this escape time problem.
-		
+		Moreover, although not required, experience with C\texttt{++} would allow the user to modify any part of the package.
+		Even with minimal programming experience, the code and its documentation allows for the user to experiment with different situations, including changing the starting position or the size of the escape region.
 		
 	\subsection{Numeric Solution} \label{NumericSoln}
 	
