@@ -13,11 +13,25 @@
 	
 \maketitle
 
-\section{Introduction and Background}
-	For us to be capable of exploring the central problem explained later in this paper, we must develop machinery in order to replicate the intuitive notion of a walk on different surfaces.
-	If we are able to determine what a ``step" is on each of our surfaces, then a ``walk" is simply a string of steps connected end-to-end.
+\section{Introduction}
+	The goal of this project was to garner a basic understanding of the mathematics surrounding the topics mentioned in the title and to produce a computational package that would allow easy exploration of these topics.
+	We will go into more detail of the explanation in the next section; nevertheless, a quick overview of the words in the title is required.
+	When we say ``random walk", we intend to construct a series of ``steps" on a surface that are each a certain distance a part, but the direction of each step is randomly determined.
+	``Simple two-dimensional manifolds" are a set of mathematical objects that mimic the behavior we are used to seeing on the Euclidean plane.
+	That is, they display a ``smooth-ness" that is helpful when attempting to define the distance between two points and the direction of a curve (both of which are needed to make a step).
+	These random walks are of interest because they are representative of many problems in probability and partial differential equations.
+	Moreover, random walks are pretty well understood when they are done on the familiar space of the Euclidean plane; however, questions that are easily answered on the plane cannot be answered when they are extended to other surfaces.
+	
+	We will be investigating random walks by studying how long they take to reach a certain region we have defined on the surface.
+	We call this destination region the \emph{escape region} and the when a walk enters the escape region we say that it \emph{escapes}.
+	This terminology is merely a helpful shorthand for our purposes; nevertheless, it implies an application of these mathematics to various modeling problems in biology and population dynamics (some of which explored in \cite{Codling_WalksBiology_2008}).
+	Now we will provide a rudimentary understanding of the mathematical machinery that is required for our purposes.
+
+\section{Background}
+	We must develop machinery in order to replicate the intuitive notion of a walk on different surfaces.
+	If we are able to determine what a ``step" is on each of our surfaces, then we define a ``walk" as simply a string of steps connected end-to-end.
 	We define a ``step" on a surface as the movement to a point relatively near-by along the shortest path.
-	In order to determine this shortest path (as well as the direction the movement is taken), we require calculational tools from differential geometry.
+	In order to determine this shortest path (as well as the direction the movement is taken), we require computational tools from differential geometry.
 	Most of this machinery has been learned from \cite{BanchoffLovett_DiffGeo_2010} (Read it for a more detailed and precise explanation of this material).
 	We will begin with a general overview of differential manifolds that are considered to be ``regular" because of their similarity to what we consider to be intuitively smooth.
 	
