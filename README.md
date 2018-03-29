@@ -19,9 +19,10 @@ Inputs:
 
 #### Sphere Walk Plot Generation
 *Requires the ggplot2 package*
-Run: `Rscript --vanilla SphereWalkPlotGen.R filename`
+Run: `Rscript --vanilla SphereWalkPlotGen.R filename includeraw`
 Inputs:
  - `filename` : data storage filename (same as provided to SphereWalk above)
+ - `includeraw` : 'T' or 'F' to indicate whether to include raw data (T) or not (F)
 
 ## Classes for C++ Implementation:
 
