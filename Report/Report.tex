@@ -25,57 +25,60 @@
 \end{titlepage}
 
 \section{Introduction}
-	The goal of this project was to garner a basic understanding of the mathematics surrounding the topics mentioned in the title and to produce a computational package that would allow easy exploration of these topics.
+	The goal of this project was to garner a basic understanding of the mathematics surrounding differential geometry done on two-dimensional surfaces and to produce a computational package that would allow easy exploration of the behavior of walks on these surfaces.
 	We will go into more detail of the explanation in the next section; nevertheless, a quick overview of the words in the title is required.
-	When we say ``random walk", we intend to construct a series of ``steps" on a surface that are each a certain distance a part, but the direction of each step is randomly determined.
+	When we say \emph{random walk}, we intend to construct a series of \emph{steps} on a surface that are each a certain distance a part and the direction of each step is randomly determined. 
 	``Simple two-dimensional manifolds" are a set of mathematical objects that mimic the behavior we are used to seeing on the Euclidean plane.
-	That is, they display a ``smooth-ness" that is helpful when attempting to define the distance between two points and the direction of a curve (both of which are needed to make a step).
+	Specifically, they display a ``smooth-ness" that is helpful when attempting to define the distance between two points and the direction of a curve (both of which are needed to define what a step is).
 	These random walks are of interest because they are representative of many problems in probability and partial differential equations.
-	Moreover, random walks are pretty well understood when they are done on the familiar space of the Euclidean plane; however, questions that are easily answered on the plane cannot be answered when they are extended to other surfaces.
+	Moreover, random walks are pretty well understood when they are done on the familiar space of the Euclidean plane; however, questions that are easily answered on the plane cannot be answered when they are extended to other surfaces with different properties.
 	
 	We will be investigating random walks by studying how long they take to reach a certain region we have defined on the surface.
 	We call this destination region the \emph{escape region} and the when a walk enters the escape region we say that it \emph{escapes}.
-	This terminology is merely a helpful shorthand for our purposes; nevertheless, it implies an application of these mathematics to various modeling problems in biology and population dynamics (some of which explored in \cite{Codling_WalksBiology_2008}).
-	Now we will provide a rudimentary understanding of the mathematical machinery that is required for our purposes.
+	In this context, we measure how long a walk takes to escape by calculating the \emph{length} of the walk by simply adding all of the steps from the starting point to the escape region together.
+	This terminology of ``walking until escaping" is merely a helpful shorthand for our purposes; nevertheless, it implies an application of these mathematics to various modeling problems in biology and population dynamics (some of which explored in \cite{Codling_WalksBiology_2008}).
+	Now we will provide a rudimentary understanding of the mathematical tools that are required for our purposes.
 
 \section{Background}
 	We must develop machinery in order to replicate the intuitive notion of a walk on different surfaces.
-	If we are able to determine what a ``step" is on each of our surfaces, then we define a ``walk" as simply a string of steps connected end-to-end.
-	We define a ``step" on a surface as the movement to a point relatively near-by along the shortest path.
+	If we are able to determine what a step is on each of our surfaces, then we define a walk as simply a string of steps connected end-to-end.
+	We define a step on a surface as the movement to a point relatively near-by along the shortest path.
 	In order to determine this shortest path (as well as the direction the movement is taken), we require computational tools from differential geometry.
-	Most of this machinery has been learned from \cite{BanchoffLovett_DiffGeo_2010} (Read it for a more detailed and precise explanation of this material).
+	Most of this machinery has been learned from \cite{BanchoffLovett_DiffGeo_2010}.
+	The introduction to parametrized surfaces given in it is most readily adapted to this project because it can be easily implemented in computer programming.
 	We will begin with a general overview of differential manifolds that are considered to be ``regular" because of their similarity to what we consider to be intuitively smooth.
 	
 	\subsection{Regular Surfaces}
-		The introduction to parametrized surfaces given in \cite{BanchoffLovett_DiffGeo_2010} is most readily adapted to this project because it can be easily implemented in computer programming.
 		We construct a surface as a subset of $\R^3$ by considering continuous functions $\mu:U \to V$ where $U \subseteq \R^2$ and $V$ is a subset of the surface --- we call the set of $\mu$ that covers the entire surface in question a \textit{chart}.
-		Glossing over the large amount of detail and development that can be extracted from this simple idea of a surface, we apply more restrictions on the surfaces (and their charts) in order to obtain an intuitive "smoothness" on the surface.
-		In a sense, these restrictions allow us to consider surfaces that are locally Euclidean and therefore they more closely resemble what we perceive a surface to be (hence the name for this class of surfaces).
-		For a surface to be regular, there must exist a chart that has a member $\mu$ covering an open neighborhood around each point of the surface and satisfies the following conditions:
+		Glossing over the large amount of detail and development that can be extracted from this simple idea of a surface, we apply more restrictions on the surfaces (and their charts) in order to obtain an intuitive ``smoothness" on the surface.
+		In a sense, these restrictions allow us to consider surfaces that are locally Euclidean (locally plane-like) and therefore they more closely resemble what we perceive a surface to be (hence the name for this class of surfaces).
+		Often, a member of the chart for a surface is called a \emph{coordinate patch} because it imposes a relationship between the coordinates of $\R^2$ --- represented by $U$ --- and a part of the surface --- represented by $V$.
+		For a surface to be \emph{regular}, there must exist a chart that covers the entire surface and has coordinate patches ($\mu$) that each satisfy the following conditions:
 		\begin{enumerate}
 			\item Differentiable --- the coordinate functions of $\mu$ in $\R^3$ have continuous partial derivatives for all orders
 			\item Homeomorphic --- $\mu$ and its inverse are continuous
 			\item Satisfies the Regularity Condition --- The differential of $\mu$ is a one-to-one linear transformation
 		\end{enumerate}
-		Often, a member of the chart for a regular surface is called a \textit{coordinate patch} because it imposes a homeomorphic relationship between coordinates in $\R^2$ --- represented by $U$ --- onto a "patch" enclosing an open neighborhood on the surface --- represented by $V$.
 		When properly constructed, a chart of a regular surface completely characterizes it, and we can calculate all of the properties of the surface we require from the chart.
-		Regular surfaces are the only surfaces we will work with in this paper, and by our definition, are embedded in $\R^3$.
-		They are the Euclidean plane, $P$; the two-dimensional sphere of radius $r$, $S(r)$; and the two-dimensional, one-hole torus of polar radius $R$ and axial radius $r$, $T(R,r)$.
+		Regular surfaces are the only surfaces we will work with in this paper, and are embedded in $\R^3$ by definition.
+		They are the Euclidean plane, $P$; the two-dimensional sphere of unit radius, $S$; and the two-dimensional, one-hole torus of polar radius $R$ and axial radius $r$, $T(R,r)$.
 		For consistency, we impose the restrictions that all radii are larger than zero and the polar radius of the torus is strictly greater than the axial radius of the torus (i.e. $R > r > 0$).
 	
 	\subsection{Charts}
 		For easier program implementation in C\texttt{++}, we are going to define the charts of our focus surfaces to be slightly different from the usual charts of these surfaces.
-		This change is made so that the coordinate patches of $S$ and $T$ have the unit square $I^2 \subset \R^2$ as their domain.
 		The chart for the Euclidean plane $P$ is the single coordinate patch (the identity patch) $i: \R^2 \to P$ defined by
 		$$ i(u,v) = ( u , v , 0 ) $$
 		This is clearly the simplest chart.
 		The chart for the unit sphere $S$ consists of two (stereographic) coordinate patches, one being $\sigma:\R^2 \to S$
 		$$ \sigma(u,v) = \left( \frac{2u}{1+u^2+v^2} , \frac{2v}{1+u^2+v^2} , \frac{-1+u^2+v^2}{1+u^2+v^2} \right) $$
-		Practically, the technical need for the other coordinate patch in order to satisfy the requirements of the chart can be ignored when implementing in a computer program because the difficulties arise only at one infinitesimal point (the \textit{north pole} of the sphere).
-		Nevertheless, care will be taken in order to avoid the issues arising from being near this point.
+		The only way to arrive at the north pole of $S$ using $\sigma$ is to go out to infinity; thus, another coordinate patch is technically required to define the chart of $S$.
+		Practically, the technical need for the other coordinate patch can be ignored when implementing in a computer program because the difficulties arise only at  that one infinitesimal point.
+		Care can (and will) be taken in order to avoid the issues arising from being on this point.
 		For our specific situation, we will always have the north pole contained inside of the escape region so that the walk never needs to arrive at that point. 
 		Finally, the chart for the torus $T(R,r)$ consists of a single coordinate patch $\tau:I^2 \to T(R,r)$ defined by
 		$$ \tau(u,v) = ( (R+r\cos(2\pi v))\cos(2\pi u) , (R+r\cos(2\pi v)\sin(2\pi u) , r\sin(2\pi v) ) $$
+		This definition of $\tau$ is easier to implement because its domain is the unit square.
+		Computing how to stay in the domain will be easier when the coordinates only have to be compared to $0$ or $1$.\footnote{For more detail, investigate the implementation of coordinate wrapping for the torus in \texttt{MOSEY::CoordinateWrappers}. The program would perform less efficiently if it had to compare the coordinates to the approximation of an irrational number on each step.}
 		We will use these charts whenever speaking of these surfaces for the rest of this paper, and their form will lead to slightly different calculations that what you see in \cite{BanchoffLovett_DiffGeo_2010,Irons_GeodesicsTorus_2005}.
 		
 	\subsection{Derivation of Geodesic Equations}
