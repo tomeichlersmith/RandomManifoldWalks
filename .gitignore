@@ -16,8 +16,6 @@ run/*
 #None of the mathematica files
 *.nb
 
-#ignore default data file
-*output.csv
-
 #ignore data files in general
-Sphere/data/*
+*/data/*
+*.csv
