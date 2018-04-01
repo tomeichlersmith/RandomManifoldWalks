@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 
 \usepackage[margin=1in]{geometry}
 \usepackage{amsfonts, amsmath}
@@ -11,7 +11,7 @@
 \begin{titlepage}
 	\centering
 	\vspace*{\fill}
-	{\LARGE\bfseries Random Walks on Simple Two-Dimensional Manifolds\par}
+	{\LARGE\bfseries Random Walks on\\ Simple Two-Dimensional Manifolds\par}
 	\vspace{5cm}
 	{\large Tom Eichlersmith\par}
 	\vspace{5cm}
@@ -71,8 +71,8 @@
 		This is clearly the simplest chart.
 		The chart for the unit sphere $S$ consists of two (stereographic) coordinate patches, one being $\sigma:\R^2 \to S$
 		$$ \sigma(u,v) = \left( \frac{2u}{1+u^2+v^2} , \frac{2v}{1+u^2+v^2} , \frac{-1+u^2+v^2}{1+u^2+v^2} \right) $$
-		The only way to arrive at the north pole of $S$ using $\sigma$ is to go out to infinity; thus, another coordinate patch is technically required to define the chart of $S$.
-		Practically, the technical need for the other coordinate patch can be ignored when implementing in a computer program because the difficulties arise only at  that one infinitesimal point.
+		The only way to arrive at the north pole $(0,0,1)$ of $S$ using $\sigma$ is to go out to infinity; thus, another coordinate patch is technically required to define the chart of $S$.
+		Practically, the technical need for the other coordinate patch can be ignored when implementing in a computer program because the difficulties arise only at that one infinitesimal point.
 		Care can (and will) be taken in order to avoid the issues arising from being on this point.
 		For our specific situation, we will always have the north pole contained inside of the escape region so that the walk never needs to arrive at that point. 
 		Finally, the chart for the torus $T(R,r)$ consists of a single coordinate patch $\tau:I^2 \to T(R,r)$ defined by
@@ -85,23 +85,24 @@
 		Geodesics are defined as paths on a surface with no acceleration (relative to the surface).
 		This is a method of extending the idea of a line on the plane to other surfaces --- done similarly in \cite{Lewis_GeodesicsMathematica_2002}.
 		If $\mu$ represents a coordinate patch on a surface $M$ containing a path $\gamma$, then we can formalize this notion of no acceleration relative to the surface by forcing $\gamma''$ to be normal to the surface everywhere.
-		Let $\gamma:[0,1] \to M$, then $\gamma$ is a \textit{geodesic} if
+		Let $\gamma:[0,1] \to M$, then $\gamma$ is a \emph{geodesic} if
 		\begin{equation} \label{geodesic_def} \begin{split}
 			&\gamma''(t) \cdot \mu_u = 0 \\
 			&\gamma''(t) \cdot \mu_v = 0
 		\end{split} \end{equation}
 		for all $t$.
 		We are able to represent $\gamma(t) = \mu( u(t) , v(t) )$ and expand on this definition to find differential equations for the coordinate functions $u$ and $v$.
-		First (omitting the explicit writing of $t$ and writing partial derivatives as subscripts),
+		First (omitting the explicit writing of $t$ and writing partial derivatives as subscripts), we have
 		\begin{equation*}
 			\gamma' = \mu_u u'+\mu_v v'
 		\end{equation*}
-		And then (using the fact that since $\mu$ is a coordinate chart, we know $\mu_{uv}=\mu_{vu}$)
+		and then (using the fact that since $\mu$ is a coordinate chart, we know $\mu_{uv}=\mu_{vu}$)
 		\begin{equation*} \begin{split}
 			\gamma'' & = (\mu_{uu} u' + \mu_{uv} v')u' + \mu_u u'' + (\mu_{vu} u' + \mu_{vv} v') v' + \mu_v v'' \\
 					 & = (u')^2 \mu_{uu} + (v')^2\mu_{vv} + 2u' v'\mu_{uv} + u''\mu_u + v''\mu_v
 		\end{split} \end{equation*}
-		Now we can put this expression for $\gamma''$ into equation \ref{geodesic_def} to obtain differential equations that the functions $u(t)$ and $v(t)$ must satisfy in order for $\gamma$ to be a geodesic (also using that $\mu_u$ and $\mu_v$ are orthogonal: $\mu_u \cdot \mu_v = 0$)
+		Now we can put this expression for $\gamma''$ into equation \ref{geodesic_def} to obtain differential equations that the functions $u(t)$ and $v(t)$ must satisfy in order for $\gamma$ to be a geodesic.
+		We simplify this substitution by using that $\mu_u$ and $\mu_v$ are orthogonal: $\mu_u \cdot \mu_v = 0$.
 		\begin{equation} \label{geodesic_work} \begin{split}
 			\gamma'' \cdot \mu_u & = (u')^2\mu_u \cdot \mu_{uu} + (v')^2\mu_u \cdot \mu_{vv} + 2u' v'\mu_u \cdot \mu_{uv} + u''\mu_u \cdot \mu_u + v''\mu_u \cdot \mu_v \\
 			0 & = (u')^2\mu_u \cdot \mu_{uu} + (v')^2\mu_u \cdot \mu_{vv} + 2u' v'\mu_u \cdot \mu_{uv} + u''\mu_u \cdot \mu_u \\
@@ -118,7 +119,7 @@
 			\Gamma^i_{jk} = \frac{\mu_{jk} \cdot \mu_i}{\mu_i \cdot \mu_i}
 		\end{equation}
 		where $i,j,k$ run over $u$ and $v$.
-		This "definition" means we can write equation \ref{geodesic_eqn} in tensor notation
+		This ``definition" means we can write equation \ref{geodesic_eqn} in tensor notation
 		\begin{equation} \label{geodesic_chris}
 			\frac{d^2 x^i}{dt^2} + \sum_{j,k = 1}^2 \Gamma^i_{jk} \frac{d x^j}{dt} \frac{dx^k}{dt} = 0
 		\end{equation}
@@ -126,7 +127,7 @@
 		Specifically, if the initial direction vector has unit magnitude, then the resulting solution will have unit speed (and therefore be parametrized by arc length).
 		
 	\subsection{Christoffel Symbols}
-		The computer implementation of steps along geodesics uses equation \ref{geodesic_chris}, so we can completely characterize the geodesics (and therefore walk on the surfaces) by calculating the Christoffel symbols.
+		The computer implementation of steps along geodesics uses equation \ref{geodesic_chris}, so we can characterize the geodesics (and therefore walk on the surfaces) by calculating the Christoffel symbols.
 		Below are the calculations producing the symbols for each of the coordinate patches from above generated using the CAS \textit{Mathematica}.
 		
 		The symbols calculated from $i$ are quickly obtained.
@@ -144,7 +145,7 @@
 			\end{array}
 		\end{equation}
 		
-		The coordinate patch that's a member of the chart of $S$ (and that we will be using for calculations) has the symbols
+		The coordinate patch $\sigma$ that's a member of the chart of $S$ (and that we will be using for calculations) has the symbols
 		\begin{equation}
 			\begin{array}{lr}
 			\left(\Gamma^{u}_{ij}\right) = \left( \begin{array}{cc}
@@ -172,24 +173,31 @@
 				\end{array} \right)
 			\end{array}
 		\end{equation}
+		
+		These Christoffel symbols for each of the surfaces are finite at every point in their domains.
+		This good behavior is helpful when implementing them in the computer program, and it is a result of the choices of coordinate patches we use to study the surfaces.
 	
 \section{Random Walks}
 	Now that we have all of the tools necessary to take steps on each of our three surfaces, we are able to walk on them.
 	The implementation of these walks is in C\texttt{++} using an application of the standard Runge-Kutta method to numerically solve the geodesic equations in steps.
 	Once we are able to take a single step in any direction and from any point on the surface, we are able to randomly walk on the surface.
-	By \textit{random walk} (or simply \textit{walk}), we mean that the direction of each step is randomly chosen uniformly.
-	A general structure to walk on a given surface is constructed in the package \texttt{MOSEY} where one can define a surface by its Christoffel symbols (\texttt{MOSEY::CurveTensor}) and how its coordinates connect across domain edges (\texttt{MOSEY::CoordinateWrappers}).
-	The walks are done in the coordinate space and then output to a \texttt{csv}-file in a format depending on the situation --- for example, the walk distances are output with respect to latitudes when walking on the sphere.
 	
-	For each situation, we define an \textit{escape region} where a walk ends if entered.
-	These escape regions allow us to be able to study the behavior of walks on different surfaces by analyzing the ``distance" different points on a surface are from escaping.
-	We define a walk's \textit{length} to be the sum of the steps it has to take for it to enter the escape region.
-	This leads to general questions that can be explored using the package \texttt{MOSEY}.
+	By \emph{random walk} (or simply \emph{walk}), we mean that the direction of each step is randomly chosen uniformly.
+	We walk in different situations; when we reference a \emph{situation}, we are talking about the surface-escape region pair that defines the behavior of the walks.
+	A general structure to walk on a given surface is constructed in the package \texttt{MOSEY} where one can define a surface by its Christoffel symbols (\texttt{MOSEY::CurveTensor}) and how its coordinates connect across domain edges (\texttt{MOSEY::CoordinateWrappers}).
+	This package is designed to study various situations involving regular surfaces and simply defined escape regions.
+	The walks are done in the coordinate space and then output to a \texttt{csv}-file in a format depending on the situation --- for example, the walk distances are output with respect to polar angles when walking on the sphere.
+	
+	For each situation, we can explore several questions using the package \texttt{MOSEY}.
 	How are the walk lengths and escape regions related?
 	How much of an impact does the surface the walk is on have?
 	Does the size of the escape region (relative to the surface) have a large effect?
 	
 	\subsection{Stepping Method}
+		On many surfaces, the geodesic equations \ref{geodesic_chris} are able to be solved analytically --- both $P$ and $S$ have this behavior; however, these analytical solutions do not necessarily allow for an increase in speed.
+		Moreover, we would like \texttt{MOSEY} to be constructed generally enough to deal with surfaces that contain geodesics that are more difficult to define analytically --- like $T(R,r)$.
+		Therefore, we have written a method for stepping on surfaces that is a numerical approximation but is also quick and can be used with any set of Christoffel symbols.
+		
 		The Runge-Kutta method is a process to approximate first order differential equations.
 		We will be using the standard, fourth order Runge-Kutta method (RK4) that will be outlined for our specific problem below.
 		First, we must transform our two second order geodesic equations \ref{geodesic_chris} into a system of first order differential equations so that we are able to apply the RK4 method.
@@ -203,7 +211,7 @@
 		\begin{equation*} \begin{array}{cc}
 			p = \frac{du}{dt} & q = \frac{dv}{dt}
 		\end{array} \end{equation*}
-		Then \ref{geodesic_expansion} becomes
+		Then \ref{geodesic_expansion} becomes the system
 		\begin{equation} \begin{split}
 			\frac{du}{dt} & = p \\
 			\frac{dv}{dt} & = q \\
@@ -215,7 +223,7 @@
 		Define $y = \langle u , v , p , q \rangle$.
 		Suppose $(u_0,v_0)$ is the point we wish to step from and we are moving at an angle $\theta$ relative to the positive $u$ axis (at that point).
 		Then the initial vector is $y_0 = \langle u_0 , v_0 , \cos(\theta) , \sin(\theta) \rangle$.
-		This begins the geodesic with unit speed, meaning that it is parametrized by arc length, so if we wish to step a distance $h$, we numerically solve the initial value problem
+		This begins the geodesic with unit speed, meaning that it is parametrized by arc length, so if we wish to step a distance $h$, we numerically solve the initial value problem given by
 		\begin{equation} \label{RK4_imp} \begin{split}
 			\frac{dy}{dt} & = F(y) = \langle p , q , -\Gamma^u_{uu}p^2-2\Gamma^u_{uv}pq-\Gamma^u_{vv}q^2 , -\Gamma^v_{uu}p^2-2\Gamma^v_{uv}pq-\Gamma^v_{vv}q^2 \rangle \\
 			y(0) & = y_0
@@ -240,21 +248,21 @@
 		We are not claiming these processes to be perfectly optimized (read \cite{Redfield_NumericalGeodesics_2007} for a more detailed exploration of efficient numerical solutions to the geodesic equations), but we wish to explain the methods we have used to make the simulation of walks more efficient.
 		
 		The first (and most widely applicable) optimization is recording every step of a random walk as if it was the first step of the walk following it.
-		This allows for several walks starting from different initial positions to be acquired at once.
-		We are able to use this data because steps are independent of their predecessors.
+		This allows for several walks starting from different initial positions to be acquired through one iteration.
+		We are able to use this data because steps are independent of their predecessors.\footnote{There are more general random walk problems that deal with steps that are dependent on each other, but this complication would only slow the program down for our purposes. Various modifications could be made in the \texttt{MOSEY} package in order to account for steps that are dependent on previous ones.}
 		
 		Walks on the plane offer the massive simplification of having all zero Christoffel symbols.
 		In order to take a step of length $h$ at an angle $\theta$ from the positive $u$-axis, we could simply add $(h\cos(\theta), h\sin(\theta))$ to the initial point.
-		We do not do this because we would like uniformity across the code package.
+		We do not do this directly because we would like uniformity across the code package.
 		However, using RK4 with the number of iterations $N = 1$ produces the exact same result algebraically.
 		Due to the limited precision of numbers in computers, this equality is not perfect; nevertheless, it produces a result that only differs from the exact result due to inherent truncation errors in the computer (which implementing the exact result would suffer from as well).
 		Therefore, when the class \texttt{MOSEY::Stepper} is configured to take a step on $P$, the number of iterations used in RK4 is set to one (overriding any user specifications).
 		This avoids unnecessary calculations from additional loops that would not produce a more accurate result.
 		
 		The two-dimensional sphere is also incredibly symmetrical.
-		In this specific situation, the escape regions are generally circles with centers at one of the poles.
-		Because of the symmetry around the axis of the sphere, we are able to only consider latitude when analyzing how the walk distance changes depending on the starting location.
-		We calculate the latitude $\phi$ of $\sigma(u,v)$ by
+		In this specific situation, the escape regions are generally circles with centers at the north pole.
+		Because of the symmetry around the axis of the sphere, we are able to only consider polar angle (the angle the point makes with the north pole) when analyzing how the walk distance changes depending on the starting location.
+		We calculate the polar angle $\phi$ of the point $\sigma(u,v)$ by
 		\begin{equation*}
 			\phi = \arctan\left(\frac{1}{u^2+v^2}\right)
 		\end{equation*}
@@ -264,8 +272,9 @@
 		Since each walk is hundreds or even thousands of steps (and each step is treated as its own data point), we are required to have millions of data points collected for each manifold-escape region pair.
 		This amount of data leads to an inability to process it all, so we have chosen to compress the data into summary files that are at most one hundred thousand data points.
 		The raw data is still stored; nevertheless, these summary files are valuable to construction of plots that would crash under the weight of millions of points.
-		The compression method is binning the data into small bins and determining the mean for each bin.
-		This procedure substitutes one data point for a few thousand, which quickens analysis and plotting.
+		The compression method is binning the data into thin bins and determining the mean for each bin.
+		This procedure substitutes one data point for a few thousand, which quickens analysis and plotting while maintaining accurate reflection of the data.
+		Evidence of the validity of this ``compressed means" procedure is given below.
 
 
 \section{Results}
@@ -281,12 +290,16 @@
 		As stated earlier, the Plane, being the special situation with all zero Christoffel symbols, allows for an easy testing ground for our random walk machinery.
 		
 		\subsubsection{Ring}
-			\begin{wrapfigure}{l}{0.4\textwidth}
+			\begin{figure*}[htp]
 				\centering
 				\includegraphics[width=0.38\textwidth]{images/Plane_In1_Out3_N1000_S005.pdf}
 				\caption{Example data plot from the plane with the escape region beginning at radius $1$ and radius $3$.}
 				\label{fig:planering}
-			\end{wrapfigure}
+			\end{figure*}
+			The ``Ring" situation uses $P$ as the surface and two concentric circles as the border of the escape region.
+			If a point is inside the smaller circle or outside the larger cirle, then the walk has escaped.
+			This allows for the plane to be bounded in a continuous fashion, and the walks have a radial symmetry, so only the radius-walk length dependence is studied.
+			
 			The averages over the walks show the expected quadratic dependence that is calculated in the analytical solution.
 			This specific situation is wildly inefficient (because there is an analytical solution available); nevertheless, it displays the power of the random walk method.
 			This relatively simple computational method allows for determination of numerical solutions to intricate differential equations, and this method has a process that is easy for the user to understand --- more on this discussion in section \ref{NumericSoln}.
@@ -298,7 +311,9 @@
 			We now extend the method to a situation that is slightly more complex.
 			This situation has ``walls" --- borders that the walk bounces off of instead of passing through.
 			Moreover, it has an escape region with a non-smooth border.
+			The walls are defined as the unit circle around the origin, and the escape region is a square within the walls.
 			These two complexities, which offer large resistance in finding the analytical solution, are easily incorporated into this framework.
+			Nevertheless, the symmetries in this situation are not enough to simplify the analysis to one dimension, therefore requiring more data to be generated.
 			
 	\subsection{Sphere}
 		\begin{figure*}[htp]
@@ -314,11 +329,14 @@
 			\end{tabular}
 		\end{figure*}
 		The sphere surface has been studied the most extensively in this project because it is a good compromise between unexplored territory and few output variables.
-		Since the escape regions that are studied on the sphere are symmetric around the polar axis, we are able to represent the data on the sphere as its angle with respect to the positive z-axis in normal polar coordinates.
-		This ``latitude" representation allows for the analysis to be done in one-dimension, enabling more data to be acquired and more precise analysis to be done.
-		In Figure \ref{fig:egsphere}, you can see how the length of the escape walk changes depending on the latitude of the starting point --- this behavior is interesting and appears to be a fractional power dependence.
+		Since the escape regions that are studied in these situations are symmetric around the polar axis, we are able to represent the data on the sphere as its angle with respect to the positive z-axis in normal polar coordinates.
+		This angular representation allows for the analysis to be done in one-dimension, enabling more precise analysis to be done without requiring that much more data.
+		Moreover, the escape regions are also able to be characterized by their border at a certain angle, the \emph{escape angle}.
+		
+		In Figure \ref{fig:egsphere}, you can see how the length of the escape walk changes depending on the polar angle of the starting point --- this behavior is interesting and appears to be a fractional power dependence.
+		Additionally, Figure \ref{fig:egsphere} gives another example of the compressed means method following the raw data closely.
 		Several different sizes of escape regions on the sphere were studied, and the summary of the results can be seen in Figure \ref{fig:compsphere}.
-		Most importantly, the length of the escape walk from anywhere on the sphere seems to increase exponentially as the escape latitude decreases (the escape region decreases in size proportional to the escape latitude squared).
+		Most importantly, the length of the escape walk from anywhere on the sphere seems to increase exponentially as the escape angle decreases.
 		
 	\subsection{Overall Package}
 		Without any more pretty pictures to present, we would like to point out a few more products of this project.
@@ -327,7 +345,20 @@
 		Moreover, although not required, experience with C\texttt{++} would allow the user to modify any part of the package.
 		Even with minimal programming experience, the code and its documentation allows for the user to experiment with different situations, including changing the starting position or the size of the escape region.
 		
+		This package's most important trait is its flexibility.
+		The examples already written into the package attempt to give an idea of what can be done with it.
+		Specifically, the \texttt{MOSEY::CoordinateWrapper} function style can be used to define walls (like in the Circular Walls situation) as well as wrap coordinates to maintain domain consistency (like on the torus).
+		
 	\subsection{Numeric Solution} \label{NumericSoln}
+		We end with an example of applying this idea of random walks on different surfaces.
+		The convergence of the solution in the Ring situation suggests a relation between averaging random walks in a situation and solving the differential equation $\Delta u = -1$ for the same situation.
+		Indeed, the solution to the system
+		\begin{equation*} \begin{split} 
+			\Delta u(x,y) & = -1 \\
+			u(x,y) & = 0 \quad\text{if } x^2+y^2 = 1 \text{ or } x^2+y^2 = 9
+		\end{split} \end{equation*}
+		gives the quadratic dependence shown in the average of the walks for the given Ring situation.
+		This hint of a relationship is exciting because extending $\Delta u = -1$ to other surfaces and escape regions makes determining the solution more difficult, while extending the idea of a random walk is in some sense easier (at least we know how to do it).
 	
 \bibliographystyle{plain}
 \bibliography{../../References/References_MathDHP_201718}
