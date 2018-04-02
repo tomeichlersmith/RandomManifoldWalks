@@ -32,18 +32,24 @@ sum_fp <- paste( datadir , filename , "_summary.csv" , sep = "" )
 sum_walk <- read.csv( sum_fp )
 
 #Default ggplot
-gp <- ggplot() + geom_point( data = sum_walk , aes( x = R , y = MeanWalkLen ) ,
-    alpha = 0.3 , color = 'royalblue4' , shape = 1 ) +
-  geom_smooth( data = sum_walk , aes( x = R , y = MeanWalkLen ) ,
-    color = 'royalblue')
-if ( includeraw ) {
-  gp <- gp + geom_point( data = raw_walk , aes( x = R , y = WalkLen ) ,
-    size = 0.05 , alpha = 0.01 , color = 'red4' , shape = 1 ) +
-  geom_smooth( data = raw_walk , aes( x = R , y = WalkLen ) ,
-    color = 'red')
-}
-gp <- gp + xlab("Starting Radius") +
-  ylab("Length of Walk to Escape")
+nbins <- 100
+gp <- ggplot( data = raw_walk , aes( x = R , y = WalkLen ) ) + 
+  stat_summary_bin( fun.y = median, #Median points
+                    bins = nbins,
+                    geom = "line",
+                    size = 1.1,
+                    color = "black") +
+  stat_summary_bin( fun.y = function(y) { quantile(y,0.25) }, #Lower quartile points
+                    bins = nbins,
+                    geom = "line",
+                    color = "slategrey") +
+  stat_summary_bin( fun.y = function(y) { quantile(y,0.75) }, #Upper quartile points
+                    bins = nbins,
+                    geom = "line",
+                    color = "slategrey") +
+  xlab("Starting Radius") +
+  ylab("Median Length of Walk to Escape") +
+  theme_bw()
 
 #Export to pdf file
 plotpath <- paste( datadir , filename , ".pdf" , sep = "" )
