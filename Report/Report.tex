@@ -288,14 +288,20 @@
 	\subsection{Plane}
 		First, we began the investigations with a situation that can be solved analytically.
 		As stated earlier, the Plane, being the special situation with all zero Christoffel symbols, allows for an easy testing ground for our random walk machinery.
-		
-		\subsubsection{Ring}
-			\begin{figure*}[htp]
-				\centering
-				\includegraphics[width=0.38\textwidth]{images/Plane_In1_Out3_N1000_S005.pdf}
+		\begin{figure*}[htp]
+			\centering
+			\begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
+				\includegraphics[width=0.48\textwidth]{images/Plane_In1_Out3_N1000_S005.pdf}
 				\caption{Example data plot from the plane with the escape region beginning at radius $1$ and radius $3$.}
 				\label{fig:planering}
-			\end{figure*}
+				&
+				\includegraphics[width=0.48\textwidth]{images/PlaneCircle_L05_N2000_S005.pdf}
+				\caption{Circular Walls example (only the first quadrant is plotted).}
+				\label{fig:planecircwalls}
+			\end{tabular}
+		\end{figure*}
+		
+		\subsubsection{Ring}
 			The ``Ring" situation uses $P$ as the surface and two concentric circles as the border of the escape region.
 			If a point is inside the smaller circle or outside the larger cirle, then the walk has escaped.
 			This allows for the plane to be bounded in a continuous fashion, and the walks have a radial symmetry, so only the radius-walk length dependence is studied.
@@ -314,6 +320,10 @@
 			The walls are defined as the unit circle around the origin, and the escape region is a square within the walls.
 			These two complexities, which offer large resistance in finding the analytical solution, are easily incorporated into this framework.
 			Nevertheless, the symmetries in this situation are not enough to simplify the analysis to one dimension, therefore requiring more data to be generated.
+			
+			Figure \ref{fig:planecircwalls} shows an example for this situation, the square has $0.5$-length sides and is centered on the origin.
+			Each bin has the median of the walks starting from inside that bin as its value.
+			The behavior in this case is predictable --- the walks approach zero length as they near the escape region.
 			
 	\subsection{Sphere}
 		\begin{figure*}[htp]
