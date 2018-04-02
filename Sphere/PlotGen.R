@@ -12,7 +12,7 @@ if ( length(args) != 1 ) {
 }
 
 # Get filename
-filename <- "Sphere_L04_N200_S005"#args[1]
+filename <- args[1]
 
 library(ggplot2)
 
