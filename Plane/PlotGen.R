@@ -7,29 +7,21 @@
 #!/usr/bin/env Rscript
 args = commandArgs(trailingOnly = TRUE)
 
-if ( length(args) > 2 ) {
-  stop("ERROR:\tInputs not formatted correctly. Should be \"Filename [T/F]\"", call. = FALSE)
+if ( length(args) != 1 ) {
+  stop("ERROR:\tInputs not formatted correctly. Should be \"Filename\"", call. = FALSE)
 }
 
 # Get filename
 filename <- args[1]
 
 # Get whether to include raw walks
-includeraw <- FALSE
-if ( args[2] == "T" ) {
-  includeraw <- TRUE;
-}
 
 library(ggplot2)
 
 #Construct file path
 datadir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/Plane/data/"
-if ( includeraw ) {
-  raw_fp <- paste( datadir , filename , ".csv" , sep = "" )
-  raw_walk <- read.csv( raw_fp )
-}
-sum_fp <- paste( datadir , filename , "_summary.csv" , sep = "" )
-sum_walk <- read.csv( sum_fp )
+raw_fp <- paste( datadir , filename , ".csv" , sep = "" )
+raw_walk <- read.csv( raw_fp )
 
 #Default ggplot
 nbins <- 100
@@ -58,7 +50,5 @@ gp
 dev.off() #Stop Printing
 
 #Data Clean Up
-rm( sum_walk , gp )
-if ( includeraw ) {
-  rm( raw_walk )
-}
+rm( raw_walk , gp )
+
