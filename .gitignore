@@ -12,7 +12,12 @@ test
 *.bbl
 *.blg
 *.pdf
+*.nav
+*.out
+*.snm
+*.toc
 !Report/images/*.pdf
+!Presentation/images/*.pdf
 
 #None of the Mathematica files
 *.nb
@@ -21,5 +26,6 @@ test
 run/*
 
 #None of the data files
+Plane/*
 PlaneCircle/*
 Sphere/*
