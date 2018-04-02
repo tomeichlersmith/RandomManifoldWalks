@@ -9,6 +9,7 @@ Data Analysis and Plotting will be done in R while using a standard csv file to 
 These are being compiled and executed on a Linux machine, so several command line arguments may change if running on a different system.
 
 #### SphereWalk
+Compile: `make directories run/SphereWalk`
 Run: `./run/SphereWalk lat nwalks steplen maxwalklen filename`
 Inputs:
  - `lat`: polar angle of escape region boundary (in radians)
@@ -17,12 +18,44 @@ Inputs:
  - `maxwalklen`: maximum walk length before exiting
  - `filename`: data storage filename
 
-#### Sphere Walk Plot Generation
+Plot Generation
 *Requires the ggplot2 package*
-Run: `Rscript --vanilla SphereWalkPlotGen.R filename includeraw`
+Run: `Rscript --vanilla Sphere/PlotGen.R filename includeraw`
 Inputs:
  - `filename` : data storage filename (same as provided to SphereWalk above)
  - `includeraw` : 'T' or 'F' to indicate whether to include raw data (T) or not (F)
+
+#### PlaneWalk
+Compile: `make directories run/PlaneWalk`
+Run: `./run/PlaneWalk inner_rad outer_rad nwalks steplen maxwalklen filename`
+Inputs:
+ - `inner_rad`: inner radius for escape region boundary (set to zero or less to not have an inner circle)
+ - `outer_rad`: outer radius for escape region boundary (must be larger than zero)
+ - `nwalks`: number of walks to simulate
+ - `steplen`: length of each step of the walks
+ - `maxwalklen`: maximum walk length before exiting
+ - `filename`: data storage filename
+
+Plot Generation
+Run: `Rscript --vanilla Plane/PlotGen.R filename includeraw`
+Inputs:
+	- `filename` : data storage filename (same as provided to PlaneWalk above)
+	- `includeraw` : 'T' or 'F' to indicate whether to include raw data (T) or not (F)
+
+#### PlaneWalk
+Compile: `make directories run/PlaneCircleWalk`
+Run: `./run/PlaneCircleWalk side_len nwalks steplen maxwalklen filename`
+Inputs:
+ - `side_len`: length of side of square escape region centered at origin (should be positive and less than [\sqrt{2}] for square to be in circle walls)
+ - `nwalks`: number of walks to simulate
+ - `steplen`: length of each step of the walks
+ - `maxwalklen`: maximum walk length before exiting
+ - `filename`: data storage filename
+
+Plot Generation
+Run: `Rscript --vanilla PlaneCircle/PlotGen.R filename`
+Inputs:
+	- `filename` : data storage filename (same as provided to PlaneCircleWalk above)
 
 ## Classes for C++ Implementation:
 
