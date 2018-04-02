@@ -32,7 +32,7 @@ if ( length(filenames) != length(escapeangs_str) ) {
 datadir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/Sphere/data/"
 
 #import data into one data.frame
-walkdata <- data.frame( PolAng = double() , MeanWalkLen = double() , EscapeAng = character() )
+walkdata <- data.frame( PolAng = double() , WalkLen = double() , EscapeAng = character() )
 
 for ( i in 1:length(filenames) ) {
     fp <- paste( datadir , filenames[[i]] , "_summary.csv" , sep = "" )

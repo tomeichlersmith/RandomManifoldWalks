@@ -48,7 +48,5 @@ gp
 dev.off() #Stop Printing
 
 #Data Clean Up
-rm( sum_walk , gp )
-if ( includeraw ) {
-  rm( raw_walk )
-}
+rm( raw_walk , gp )
+
