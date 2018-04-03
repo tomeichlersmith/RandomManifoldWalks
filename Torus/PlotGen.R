@@ -1,7 +1,4 @@
-# 1-dimensional data analysis
-# Useful in symmetrical cases where the problem can be reduced to one dimension
-# Import data in two column table: { point , distance of walk to escape }
-# Plots, "averages" data by interpolating
+# 2-dimensional data analysis
 
 # Input data file from command line
 #!/usr/bin/env Rscript
@@ -17,22 +14,8 @@ filename <- args[1]
 library(ggplot2)
 
 #Construct file path
-datadir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/PlaneCircle/data/"
+datadir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/Torus/data/"
 raw_fp <- paste( datadir , filename , ".csv" , sep = "" )
-sum_fp <- paste( datadir , filename , "_summary.csv" , sep = "" )
-
-# ggplot for summary
-# sum_walk <- read.csv( sum_fp )
-# gp_sum <- ggplot(data = sum_walk , aes( x = U , y = V ) ) + 
-#   xlab("Starting U Coordinate") +
-#   ylab("Starting Y Coordinate")
-# gp_sum <- gp_sum + geom_raster(aes(fill = MeanWalkLen)) +
-#   scale_fill_gradient(low = "deepskyblue", high = "black",
-#                       name = "Mean Length\nto Escape",
-#                       trans = "log", #Change color scale to log
-#                       breaks = c(0.1,1,10,100), #Set markers on log scale
-#                       limits = c(0.01,150) #Set limits (required to set markers)
-#   )
 
 # ggplot for raw data
 raw_walk <- read.csv( raw_fp )
@@ -54,5 +37,5 @@ gp_raw
 dev.off() #Stop Printing
 
 #Data Clean Up
-rm( raw_walk , sum_walk , gp_raw )
+rm( raw_walk , gp_raw )
 
