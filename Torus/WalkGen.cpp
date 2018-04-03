@@ -69,15 +69,12 @@ int main( int argc , char* argv[] ) {
 
 		outs << "U,V,WalkLen" << std::endl;
 		
-		//Calculate starting (u,v)
-		//	works if [u,v]max > [u,v]min
 		double ustart,vstart;
-		ustart = umax + (umax - umin)/2;
-		vstart = vmax + (vmax - vmin)/2;
-		MOSEY::CoordinateWrapper::Torus( 0 , 0 , ustart , vstart ); //wraps back into domain
-
-		for( int i = 0; i < num_walks; i++ ) {
-
+		for( int i = 0; i < num_walks; ) {
+			
+			ustart = rand();
+			vstart = rand();
+			
 			walk.Wander( ustart , vstart );
 			
 			walk.Export( outs , MOSEY::ExportType::UV );
