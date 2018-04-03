@@ -288,11 +288,11 @@
 		\begin{figure*}[htp]
 			\centering
 			\begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
-				\includegraphics[width=0.48\textwidth]{images/Plane_In1_Out3_N1000_S005.pdf}
+				\includegraphics[width=0.48\textwidth]{images/PlaneIn1Out3.pdf}
 				\caption{Example data plot from the plane with the escape region beginning at radius $1$ and radius $3$.}
 				\label{fig:planering}
 				&
-				\includegraphics[width=0.48\textwidth]{images/PlaneCircle_L05_N2000_S005.pdf}
+				\includegraphics[width=0.48\textwidth]{images/PlaneCircleL05.pdf}
 				\caption{Circular Walls example (only the first quadrant is plotted).}
 				\label{fig:planecircwalls}
 			\end{tabular}
@@ -345,11 +345,11 @@
 		\begin{figure*}[htp]
 			\centering
 			\begin{tabular}{p{0.5\textwidth}p{0.5\textwidth}}
-				\includegraphics[width=0.48\textwidth]{images/Torus_U045_055_V0_1_N3000.pdf}
+				\includegraphics[width=0.48\textwidth]{images/TorusUBand.pdf}
 				\caption{Example Torus with the U-band escape region having a width of $0.1$.}
 				\label{fig:egtorusU}
 				&
-				\includegraphics[width=0.48\textwidth]{images/Torus_U045_055_V0_1_N3000.pdf}
+				\includegraphics[width=0.48\textwidth]{images/TorusVBand.pdf}
 				\caption{Example Torus with the V-band escape region having a width of $0.1$.}
 				\label{fig:egtorusV}
 			\end{tabular}
@@ -362,10 +362,13 @@
 		These are rudimentary escape regions to study, but since the behavior of walks on this surface is not very well known, we must begin with the basics.
 		
 		Figure \ref{fig:egtorusU} displays an example of the situation with a U-band of width $0.1$.
-		The placement of this band on torus is not of great importance because of the symmetry in the $v$ coordinate; therefore, we placed the band in the center of the defined domain so the graphic is easier to study.
+		The placement of this band on torus is not of great importance because of the symmetry in the $u$ coordinate; therefore, we placed the band in the center of the defined domain so the graphic is easier to study.
 		Here we can see how the walk shortens exponentially as one approaches the band --- the uniform color aligned with the band in this image is due to the breakdown of the logarithmic scale from lack of data in that region.
 		
-		%VBAND example
+		Figure \ref{fig:egtorusV} displays a V-band (of width $0.1$) example, which is much more interesting.
+		The placement of this band on the torus \emph{is} of importance because the curvature of the torus changes in the $v$ coordinate.
+		This band was chosen to wrap around the outside of the torus, and one can see that the walks decrease in length when they begin inside of the torus.
+		This behavior was unexpected and offers an arena for further exploration.
 		
 	\subsection{Overall Package}
 		Without any more pretty pictures to present, we would like to point out a few more products of this project.
