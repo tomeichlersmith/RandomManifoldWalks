@@ -9,7 +9,7 @@ OBJS = bin/CoordinateWrappers.o bin/CurveTensor.o bin/EscapeCheck.o bin/RandDoub
 
 .PHONY : directories all
 
-all : run/SphereWalk run/PlaneCircleWalk run/PlaneWalk
+all : run/SphereWalk run/PlaneCircleWalk run/PlaneWalk run/TorusWalk
 
 run/test : test.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
@@ -21,6 +21,9 @@ run/PlaneCircleWalk : PlaneCircle/WalkGen.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
 
 run/PlaneWalk : Plane/WalkGen.cpp bin/libMOSEY.a
+	$(CXX) $(LFLAGS) $^ -o $@
+
+run/TorusWalk : Torus/WalkGen.cpp bin/libMOSEY.a
 	$(CXX) $(LFLAGS) $^ -o $@
 
 bin/libMOSEY.a : $(OBJS)
@@ -53,6 +56,7 @@ directories :
 	mkdir -p Sphere/data
 	mkdir -p PlaneCircle/data
 	mkdir -p Plane/data
+	mkdir -p Torus/data
 
 clean :
 	rm -r bin/*

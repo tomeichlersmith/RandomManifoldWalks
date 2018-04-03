@@ -68,15 +68,18 @@ int main( int argc , char* argv[] ) {
 	if( outs.is_open() ) {
 
 		outs << "U,V,WalkLen" << std::endl;
+		
+		//Calculate starting (u,v)
+		//	works if [u,v]max > [u,v]min
+		double ustart,vstart;
+		ustart = umax + (umax - umin)/2;
+		vstart = vmax + (vmax - vmin)/2;
+		MOSEY::CoordinateWrapper::Torus( 0 , 0 , ustart , vstart ); //wraps back into domain
 
 		for( int i = 0; i < num_walks; i++ ) {
 
-			//Starting angle goes from 0 to PI/2
-			double theta_start;
-			theta_start = ((MOSEY::TWO_PI/4)/num_walks)*i;
-
-			walk.Wander( /*ustart*/ , /*vstart*/ );
-
+			walk.Wander( ustart , vstart );
+			
 			walk.Export( outs , MOSEY::ExportType::UV );
 
 			std::cout << "[" << i << "/" << num_walks << "] completed...\r" << std::flush;
