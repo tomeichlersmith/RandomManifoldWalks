@@ -22,15 +22,20 @@ raw_fp <- paste( rootdir , datadir , filename , ".csv" , sep = "" )
 raw_walk <- read.csv( raw_fp )
 gp_raw <- ggplot(data = raw_walk , aes( x = U , y = V ) ) +
   xlab("Starting U Coordinate") +
-  ylab("Starting V Coordinate")
+  ylab("Starting V Coordinate") +
+  ggtitle("Median Walk Length to Escape")
 gp_raw <- gp_raw +
   stat_summary_2d(mapping = aes(z = WalkLen),
                   bins = 100,
                   fun = median
                   ) +
+  scale_fill_gradient(low = "lightslateblue",
+  										high = "black",
+  										trans = "log",
+  										breaks = c(10,1,0.1),
+  										limits = c(0.01,50)) +
   theme(legend.title = element_blank()) +
-  theme_bw() +
-  ggtitle("Median Walk Length to Escape")
+  theme_bw()
 
 #Export to pdf file
 plotpath <- paste( rootdir , datadir , filename , ".pdf" , sep = "" )
