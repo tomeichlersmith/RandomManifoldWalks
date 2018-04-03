@@ -69,16 +69,25 @@ int main( int argc , char* argv[] ) {
 
 		outs << "U,V,WalkLen" << std::endl;
 		
+		MOSEY::RandDouble rand_start;
+		
 		double ustart,vstart;
-		for( int i = 0; i < num_walks; ) {
+		MOSEY::Step start;
+		for( int i = 0; i < num_walks; i++) {
 			
-			ustart = rand();
-			vstart = rand();
+			//Randomly determine start point outside escape region
+			int maxtries = 10000, tri = 0;
+			start.SetStepPoint( rand_start() , rand_start() );
+			while( MOSEY::EscapeCheck::InsideBox( params , &start ) && tri < maxtries ) {
+				start.SetStepPoint( rand_start() , rand_start() );
+				tri++;
+			} //randomly generates point until outside escape region
+			start.StepPoint( ustart , vstart );
 			
 			walk.Wander( ustart , vstart );
 			
 			walk.Export( outs , MOSEY::ExportType::UV );
-
+			
 			std::cout << "[" << i << "/" << num_walks << "] completed...\r" << std::flush;
 
 		}
