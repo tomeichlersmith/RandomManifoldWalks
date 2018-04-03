@@ -42,7 +42,7 @@ Inputs:
 	- `filename` : data storage filename (same as provided to PlaneWalk above)
 	- `includeraw` : 'T' or 'F' to indicate whether to include raw data (T) or not (F)
 
-#### PlaneWalk
+#### PlaneCircleWalk
 Compile: `make directories run/PlaneCircleWalk`
 Run: `./run/PlaneCircleWalk side_len nwalks steplen maxwalklen filename`
 Inputs:
@@ -52,10 +52,12 @@ Inputs:
  - `maxwalklen`: maximum walk length before exiting
  - `filename`: data storage filename
 
-Plot Generation
-Run: `Rscript --vanilla PlaneCircle/PlotGen.R filename`
+#### Two-Dimensional Plot Generation (U and V Coordinates)
+*requires the ggplot2 package*
+Run: `Rscript --vanilla PlotGen2D.R datadir filename`
 Inputs:
-	- `filename` : data storage filename (same as provided to PlaneCircleWalk above)
+ - `datadir` : directory in which data is stored (with respect to the directory PlotGen2D.R is in
+ - `filename` : name of file data is in, same as one given to walk generation script
 
 ## Classes for C++ Implementation:
 
