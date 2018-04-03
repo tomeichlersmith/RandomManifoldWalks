@@ -29,6 +29,7 @@ gp_raw <- gp_raw +
                   fun = median
                   ) +
   theme(legend.title = element_blank()) +
+  theme_bw() +
   ggtitle("Median Walk Length to Escape")
 
 #Export to pdf file
