@@ -12,6 +12,10 @@ run/*
 *.bbl
 *.blg
 *.pdf
+*.nav
+*.out
+*.snm
+*.toc
 
 #None of the mathematica files
 *.nb
