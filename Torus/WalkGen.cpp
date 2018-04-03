@@ -11,9 +11,9 @@
 
 /**
  * Description of argv[] array for inputs (default value)
- * argv[0] name of program (./TorusWalk)
+ * argv[0] name of program (./run/TorusWalk)
  * argv[1] minimum u coordinate to be in escape region (0)
- * argv[2] maximum u coordinate to be in escape region (1)
+ * argv[2] maximum u coordinate to be in escape region (0.5)
  * argv[3] minimum v coordinate to be in escape region (0)
  * argv[4] maximum v coordinate to be in escape region (0.5)
  * argv[5] number of walks (100)
@@ -24,8 +24,8 @@
 int main( int argc , char* argv[] ) {
 
 	//Default Value
-	double umin = 0, umax = 1;
-	double vmin = 0, vmax = 0.5;
+	double umin = 0, umax = 0.25;
+	double vmin = 0, vmax = 0.25;
 	int num_walks = 100;
 	double steplen = 0.05;
 	double max_walk_len = 2000.;
@@ -42,11 +42,11 @@ int main( int argc , char* argv[] ) {
 			num_walks = std::stoi( static_cast<std::string>(argv[5]) );
 		case 5 :
 			vmax = std::stod( static_cast<std::string>(argv[4]) );
-		case 3 :
+		case 4 :
 			vmin = std::stod( static_cast<std::string>(argv[3]) );
-		case 2 :
+		case 3 :
 			umax = std::stod( static_cast<std::string>(argv[2]) );
-		case 1 :
+		case 2 :
 			umin = std::stod( static_cast<std::string>(argv[1]) );
 		default : //Keep defaults set above
 			break;
