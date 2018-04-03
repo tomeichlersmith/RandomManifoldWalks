@@ -4,18 +4,19 @@
 #!/usr/bin/env Rscript
 args = commandArgs(trailingOnly = TRUE)
 
-if ( length(args) != 1 ) {
-  stop("ERROR:\tInputs not formatted correctly. Should be \"Filename\"", call. = FALSE)
+if ( length(args) != 2 ) {
+  stop("ERROR:\tInputs not formatted correctly. Should be \"datadir filename\"", call. = FALSE)
 }
 
 # Get filename
-filename <- args[1]
+rootdir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/"
+datadir <- args[1]
+filename <- args[2]
 
 library(ggplot2)
 
 #Construct file path
-datadir <- "~/CodeProjects/MathDHP_201718/RandomManifoldWalks/Torus/data/"
-raw_fp <- paste( datadir , filename , ".csv" , sep = "" )
+raw_fp <- paste( rootdir , datadir , filename , ".csv" , sep = "" )
 
 # ggplot for raw data
 raw_walk <- read.csv( raw_fp )
@@ -31,7 +32,7 @@ gp_raw <- gp_raw +
   ggtitle("Median Walk Length to Escape")
 
 #Export to pdf file
-plotpath <- paste( datadir , filename , ".pdf" , sep = "" )
+plotpath <- paste( rootdir , datadir , filename , ".pdf" , sep = "" )
 pdf( plotpath ) #Open File Connection
 gp_raw
 dev.off() #Stop Printing
