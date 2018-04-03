@@ -29,7 +29,7 @@ gp_raw <- gp_raw +
                   bins = 100,
                   fun = median
                   ) +
-  scale_fill_gradient(low = "lightslateblue",
+  scale_fill_gradient(low = "gray95",
   										high = "black",
   										trans = "log",
   										breaks = c(10,1,0.1),
