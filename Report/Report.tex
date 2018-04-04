@@ -76,7 +76,7 @@
 		Care can (and will) be taken in order to avoid the issues arising from being on this point.
 		For our specific situation, we will always have the north pole contained inside of the escape region so that the walk never needs to arrive at that point. 
 		Finally, the chart for the torus $T(R,r)$ consists of a single coordinate patch $\tau:I^2 \to T(R,r)$ defined by
-		$$ \tau(u,v) = ( (R+r\cos(2\pi v))\cos(2\pi u) , (R+r\cos(2\pi v)\sin(2\pi u) , r\sin(2\pi v) ) $$
+		$$ \tau(u,v) = ( (R+r\cos(2\pi v))\cos(2\pi u) , (R+r\cos(2\pi v))\sin(2\pi u) , r\sin(2\pi v) ) $$
 		This definition of $\tau$ is easier to implement because its domain is the unit square.
 		Computing how to stay in the domain will be easier when the coordinates only have to be compared to $0$ or $1$.\footnote{For more detail, investigate the implementation of coordinate wrapping for the torus in \texttt{MOSEY::CoordinateWrappers}. The program would perform less efficiently if it had to compare the coordinates to the approximation of an irrational number on each step.}
 		We will use these charts whenever speaking of these surfaces for the rest of this paper, and their form will lead to slightly different calculations that what you see in \cite{BanchoffLovett_DiffGeo_2010,Irons_GeodesicsTorus_2005}.
