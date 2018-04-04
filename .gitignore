@@ -17,6 +17,7 @@ test
 *.snm
 *.toc
 !Report/images/*.pdf
+!Report/Report.pdf
 !Presentation/images/*.pdf
 
 #None of the Mathematica files
