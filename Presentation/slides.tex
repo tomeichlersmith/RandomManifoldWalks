@@ -1,0 +1,198 @@
+
+%% HUH Colloquium Presentation
+%% Tom Eichlersmith
+
+\documentclass{beamer}
+
+\mode<presentation> {
+	\usetheme{Goettingen}
+	\setbeamertemplate{navigation symbols}{}
+	\setbeamertemplate{footline}[page number]
+}
+
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{subfigure} % For images next to each other
+
+%-----------------------------------------------
+%%	TITLE PAGE
+%-----------------------------------------------
+
+\title[Random Walks]{Random Walks on Simple Two-Dimensional Manifolds} % The short title appears at the bottom of every slide, the full title is only on the title page
+
+\author{Tom Eichlersmith}
+\institute[Hamline U]
+{
+Hamline University \\
+\medskip
+\texttt{teichlersmith01@hamline.edu}
+}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}
+	\frametitle{Overview} % Table of contents slide, comment this block out to remove it
+	\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%------------------------------------------------
+%%	PRESENTATION SLIDES
+%------------------------------------------------
+
+\section{Introduction} 
+
+\begin{frame}
+
+	\frametitle{Introduction}
+	
+	\begin{itemize}
+		\item Random
+		\item Walk
+		\item Simple
+		\item Two-Dimensional
+		\item Manifolds
+	\end{itemize}
+
+\end{frame}
+
+%------------------------------------------------
+\section{Background}
+
+\begin{frame}
+
+	\frametitle{Regular Surfaces}
+	
+	\textit{Coordinate Patch} $\mu:U\to V$ : continuous functions mapping from $U\subseteq\mathbb{R}^2$ to a subset of the surface $V$
+	
+	\vskip 2em
+	
+	\textit{Chart} : covers entire surface
+	
+	\vskip 2em
+	
+	Regular Surfaces:
+	\begin{itemize}
+		\item Differentiable --- the coordinate functions of $\mu$ in $\mathbb{R}^3$ have continuous partial derivatives for all orders
+		\item Homeomorphic --- $\mu$ and its inverse are continuous
+		\item Satisfies the Regularity Condition --- The differential of $\mu$ is a one-to-one linear transformation
+	\end{itemize}
+
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+
+	\frametitle{Charts}
+	%MAKE PRETTIER
+	\begin{align*}
+		&i:\mathbb{R}^2 \to P\\
+		&i(u,v) = (u,v,0) \\
+		&\sigma:\mathbb{R}^2 \to S \\
+		&\sigma(u,v) = \left(\frac{2u}{1+u^2+v^2},\frac{2v}{1+u^2+v^2},\frac{-1+u^2+v^2}{1+u^2+v^2}\right) \\
+		&\tau:\mathbb{R}^2 \to T(R,r) \\
+		&\tau(u,v) = ( (R+r\cos(2\pi v))\cos(2\pi u),(R+r\cos(2\pi v))\sin(2\pi u),r\sin(2\pi v) )
+	\end{align*}
+
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+	\frametitle{Geodesic Equations}
+	
+	\begin{enumerate}
+		\item Extend definition of line to other surfaces
+		\item Assume a path is a geodesic contained in a coordinate patch
+		\item Derive geodesic equations for coordinate functions of path
+	\end{enumerate}
+
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+	\frametitle{Geodesic Equations}
+	
+	\begin{equation*} \begin{split}
+		u'' + \frac{\mu_{uu} \cdot \mu_u}{\mu_u \cdot \mu_u} (u')^2 + \frac{\mu_{vv} \cdot \mu_u}{\mu_u \cdot \mu_u} (v')^2 + 2\frac{\mu_{uv} \cdot \mu_u}{\mu_u \cdot \mu_u} u'v' & = 0 \\
+		v'' + \frac{\mu_{uu} \cdot \mu_v}{\mu_v \cdot \mu_v} (u')^2 + \frac{\mu_{vv} \cdot \mu_v}{\mu_v \cdot \mu_v} (v')^2 + 2\frac{\mu_{uv} \cdot \mu_v}{\mu_v \cdot \mu_v} u'v' & = 0 \\
+	\end{split} \end{equation*}
+	
+	
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+\frametitle{Christoffel Symbols}
+	
+\end{frame}
+
+%------------------------------------------------
+\section{Method}
+
+\begin{frame}
+
+\frametitle{Stepping Method}
+
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+\frametitle{Optimizations}
+	
+\end{frame}
+
+%------------------------------------------------
+\section{Results}
+
+\begin{frame}
+
+\frametitle{Plane}
+
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+\frametitle{Sphere}
+	
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+\frametitle{Torus}
+	
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+\frametitle{Overall Package}
+	
+\end{frame}
+
+%------------------------------------------------
+\section{Questions}
+
+\begin{frame}
+\Huge{\centerline{Questions?}}
+\end{frame}
+
+
+\end{document} 

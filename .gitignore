@@ -23,3 +23,7 @@ run/*
 #ignore data files in general
 */data/*
 *.csv
+!Report/images/*.pdf
+!Report/Report.pdf
+!Presentation/images/*.pdf
+
