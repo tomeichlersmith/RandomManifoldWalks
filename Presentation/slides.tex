@@ -87,18 +87,42 @@ Hamline University \\
 %---------------------------------------------------------------
 
 \begin{frame}
-
+	
 	\frametitle{Charts}
-	%MAKE PRETTIER
-	\begin{align*}
-		&i:\mathbb{R}^2 \to P\\
-		&i(u,v) = (u,v,0) \\
-		&\sigma:\mathbb{R}^2 \to S \\
-		&\sigma(u,v) = \left(\frac{2u}{1+u^2+v^2},\frac{2v}{1+u^2+v^2},\frac{-1+u^2+v^2}{1+u^2+v^2}\right) \\
-		&\tau:\mathbb{R}^2 \to T(R,r) \\
-		&\tau(u,v) = ( (R+r\cos(2\pi v))\cos(2\pi u),(R+r\cos(2\pi v))\sin(2\pi u),r\sin(2\pi v) )
-	\end{align*}
 
+	\begin{align*}
+	\phi:&\mathbb{R}^2 \to P\\
+	\phi(u,v) &= (u,v,0)
+	\end{align*}
+	
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+	\frametitle{Charts}
+	
+	\begin{align*}
+	\sigma:&\mathbb{R}^2 \to S \\
+	\sigma(u,v) &= \left(\frac{2u}{1+u^2+v^2},\frac{2v}{1+u^2+v^2},\frac{-1+u^2+v^2}{1+u^2+v^2}\right)
+	\end{align*}
+	
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+	\frametitle{Charts}
+	
+	\begin{align*}
+	\tau:&[0,1)\times[0,1) \to T(R,r) \\
+	\tau(u,v) = \Big(&(R+r\cos(2\pi v))\cos(2\pi u), \\
+	&(R+r\cos(2\pi v))\sin(2\pi u), \\
+	&r\sin(2\pi v) \Big)
+	\end{align*}
+	
 \end{frame}
 
 %---------------------------------------------------------------
@@ -121,10 +145,10 @@ Hamline University \\
 	
 	\frametitle{Geodesic Equations}
 	
-	\begin{equation*} \begin{split}
+	\begin{align*}
 		u'' + \frac{\mu_{uu} \cdot \mu_u}{\mu_u \cdot \mu_u} (u')^2 + \frac{\mu_{vv} \cdot \mu_u}{\mu_u \cdot \mu_u} (v')^2 + 2\frac{\mu_{uv} \cdot \mu_u}{\mu_u \cdot \mu_u} u'v' & = 0 \\
 		v'' + \frac{\mu_{uu} \cdot \mu_v}{\mu_v \cdot \mu_v} (u')^2 + \frac{\mu_{vv} \cdot \mu_v}{\mu_v \cdot \mu_v} (v')^2 + 2\frac{\mu_{uv} \cdot \mu_v}{\mu_v \cdot \mu_v} u'v' & = 0 \\
-	\end{split} \end{equation*}
+	\end{align*}
 	
 	
 \end{frame}
@@ -133,7 +157,17 @@ Hamline University \\
 
 \begin{frame}
 	
-\frametitle{Christoffel Symbols}
+	\frametitle{Christoffel Symbols}
+	
+	\begin{equation*} 
+		\Gamma^i_{jk} = \frac{\mu_{jk}\cdot\mu_i}{\mu_i\cdot\mu_i} \quad\text{where } i,j,k \in \{u,v\}
+	\end{equation*}
+	
+	$$\Big\Downarrow \text{abuse of symbols}$$
+	
+	\begin{equation*}
+		\frac{d^2x^i}{dt^2} + \sum_{j,k \in \{1,2\}} \Gamma^i_{jk}\frac{dx^j}{dt}\frac{dx^k}{dt} = 0
+	\end{equation*}
 	
 \end{frame}
 
@@ -142,7 +176,23 @@ Hamline University \\
 
 \begin{frame}
 
-\frametitle{Stepping Method}
+	\frametitle{Stepping Method}
+	
+	Runge-Kutta 4th Order Method (RK4)
+	\begin{equation*}
+		\frac{dy}{dt} = F(y) \quad y_0 = y(0)
+	\end{equation*}
+	Numerically solve up to $t=h$ with $N$ iterations.
+	\begin{align*}
+		& \delta \gets h/N \\
+		& y \gets y_0 \\
+		& \textit{loop } N \textit{ times:} \\
+		& \quad\quad k_1 \gets F(y) \\
+		& \quad\quad k_2 \gets F\left(y+(\delta/2)k_1\right) \\
+		& \quad\quad k_3 \gets F\left(y+(\delta/2)k_2\right) \\
+		& \quad\quad k_4 \gets F\left(y + \delta k_3\right) \\
+		& \quad\quad y \gets y+(\delta/6)(k_1+2k_2+2k_3+k_4)
+	\end{align*}
 
 \end{frame}
 
@@ -150,7 +200,15 @@ Hamline University \\
 
 \begin{frame}
 	
-\frametitle{Optimizations}
+	\frametitle{Coordinate Wrapping}
+	
+	%TORUS WRAP DIA
+	
+\end{frame}
+
+\begin{frame}
+	
+	\frametitle{Optimizations}
 	
 \end{frame}
 
@@ -159,7 +217,11 @@ Hamline University \\
 
 \begin{frame}
 
-\frametitle{Plane}
+	\frametitle{Plane}
+	
+	\begin{figure}
+		\includegraphics[width=0.85\textwidth]{images/PlaneIn1Out3.pdf}
+	\end{figure}
 
 \end{frame}
 
@@ -167,7 +229,11 @@ Hamline University \\
 
 \begin{frame}
 	
-\frametitle{Sphere}
+	\frametitle{Plane}
+	
+	\begin{figure}
+		\includegraphics[width=0.85\textwidth]{images/PlaneCircleL05.pdf}
+	\end{figure}
 	
 \end{frame}
 
@@ -175,7 +241,11 @@ Hamline University \\
 
 \begin{frame}
 	
-\frametitle{Torus}
+	\frametitle{Sphere}
+	
+	\begin{figure}
+		\includegraphics[width=0.85\textwidth]{images/ExampleSphereL04.pdf}
+	\end{figure}
 	
 \end{frame}
 
@@ -183,7 +253,61 @@ Hamline University \\
 
 \begin{frame}
 	
-\frametitle{Overall Package}
+	\frametitle{Sphere}
+	
+	\begin{figure}
+		\includegraphics[width=0.85\textwidth]{images/SummaryPlot_L005_04.pdf}
+	\end{figure}
+	
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+	\frametitle{Torus}
+	
+	\begin{figure}
+		\includegraphics[width=0.85\textwidth]{images/TorusUBand.pdf}
+	\end{figure}
+	
+\end{frame}
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+	\frametitle{Torus}
+	
+	\begin{figure}
+		\includegraphics[width=0.85\textwidth]{images/TorusVBand.pdf}
+	\end{figure}
+	
+\end{frame}
+
+%---------------------------------------------------------------
+
+\begin{frame}
+	
+	\frametitle{Overall Package}
+	
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Versatility
+				\item Flexibility
+				\item Speed
+			\end{itemize}
+		\end{column}
+		
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Stepper
+				\item Coordinate Wrappers
+				\item Escape Checks
+			\end{itemize}
+		\end{column}
+	\end{columns}
+	
 	
 \end{frame}
 

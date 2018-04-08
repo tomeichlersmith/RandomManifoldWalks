@@ -16,6 +16,9 @@ run/*
 *.out
 *.snm
 *.toc
+!Report/images/*.pdf
+!Report/Report.pdf
+!Presentation/images/*.pdf
 
 #None of the mathematica files
 *.nb
@@ -23,7 +26,5 @@ run/*
 #ignore data files in general
 */data/*
 *.csv
-!Report/images/*.pdf
-!Report/Report.pdf
-!Presentation/images/*.pdf
+
 
