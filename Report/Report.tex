@@ -172,7 +172,7 @@
 			\end{array}
 		\end{equation}
 		
-		The coordinate patch we are using for the torus covers the entire surface with no problematic points (as long as domain wrapping is kept consistent, see below). %REF COORD WRAP SECT
+		The coordinate patch we are using for the torus covers the entire surface with no problematic points (as long as domain wrapping is kept consistent, Section \ref{sect:coordwrap}).
 		The Christoffel symbols for $\tau$ are
 		\begin{equation}
 			\begin{array}{lr}
@@ -256,7 +256,7 @@
 		When implemented correctly, the loop exits with $y$ containing an approximate value for $u$, $v$, $p$, and $q$ a distance $h$ away from $(u_0, v_0)$ on the surface.
 		This method is constructed in the \texttt{MOSEY::Stepper} class.
 	
-	\subsection{Coordinate Wrappers}
+	\subsection{Coordinate Wrappers} \label{sect:coordwrap}
 		The implementation of the walks in \MOSEY{} assumes that there is a single coordinate patch whose range covers the area of the surface that the walks will be contained within.
 		Some of the coordinate patches used do not cover the whole surface (e.g. $\sigma$), but as long as the un-covered points are in the escape region, this lack of coverage is not a problem.
 		Other coordinate patches have bounded domains (e.g. $\tau$), and in order for there to be a one-to-one relationship between the coordinates in the domain and the points on the surface, we must be careful when a walk attempts to cross the border of the domain.
