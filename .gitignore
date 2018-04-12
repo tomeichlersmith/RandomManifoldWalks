@@ -19,6 +19,7 @@ run/*
 !Report/images/*.pdf
 !Report/Report.pdf
 !Presentation/images/*.pdf
+!Presentation/slides.pdf
 
 #None of the mathematica files
 *.nb
