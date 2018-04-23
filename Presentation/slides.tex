@@ -61,13 +61,19 @@ Hamline University \\
 
 \begin{frame}
 	
-	\frametitle{}
+	\frametitle{Vocabulary}
+	
+	\begin{itemize}
+		\item Smooth Surfaces
+		\item Geodesic Equations
+		\item Christoffel Symbols
+	\end{itemize}
 	
 \end{frame}
 
 \begin{frame}
 
-	\frametitle{Regular Surfaces}
+	\frametitle{``Smooth" Surfaces}
 	
 	\begin{figure}
 		\includegraphics[width=\textwidth]{images/Torus.png}
@@ -90,35 +96,16 @@ Hamline University \\
 
 \end{frame}
 
-%---------------------------------------------------------------
-
-\begin{frame}
-	
-	\frametitle{Geodesic Equations}
-	
-	\begin{align*}
-		u'' + \frac{\mu_{uu} \cdot \mu_u}{\mu_u \cdot \mu_u} (u')^2 + \frac{\mu_{vv} \cdot \mu_u}{\mu_u \cdot \mu_u} (v')^2 + 2\frac{\mu_{uv} \cdot \mu_u}{\mu_u \cdot \mu_u} u'v' & = 0 \\
-		v'' + \frac{\mu_{uu} \cdot \mu_v}{\mu_v \cdot \mu_v} (u')^2 + \frac{\mu_{vv} \cdot \mu_v}{\mu_v \cdot \mu_v} (v')^2 + 2\frac{\mu_{uv} \cdot \mu_v}{\mu_v \cdot \mu_v} u'v' & = 0 \\
-	\end{align*}
-	
-	
-\end{frame}
-
-%---------------------------------------------------------------
+%-------------------------------------------------
 
 \begin{frame}
 	
 	\frametitle{Christoffel Symbols}
 	
-	\begin{equation*} 
-		\Gamma^i_{jk} = \frac{\mu_{jk}\cdot\mu_i}{\mu_i\cdot\mu_i} \quad\text{where } i,j,k \in \{u,v\}
-	\end{equation*}
-	
-	$$\Big\Downarrow \text{abuse of symbols}$$
-	
-	\begin{equation*}
-		\frac{d^2x^i}{dt^2} + \sum_{j,k \in \{1,2\}} \Gamma^i_{jk}\frac{dx^j}{dt}\frac{dx^k}{dt} = 0
-	\end{equation*}
+	\begin{itemize}
+		\item Represent surface in geodesic equations
+		\item Characterize properties of surface
+	\end{itemize}
 	
 \end{frame}
 
@@ -126,72 +113,13 @@ Hamline University \\
 \section{Method}
 
 \begin{frame}
-
-	\frametitle{Stepping Method}
 	
-	Runge-Kutta 4th Order Method (RK4)
-	\begin{equation*}
-		\frac{dy}{dt} = F(y) \quad y_0 = y(0)
-	\end{equation*}
-	Numerically solve up to $t=h$ with $N$ iterations.
-	\begin{align*}
-		& \delta \gets h/N \\
-		& y \gets y_0 \\
-		& \textit{loop } N \textit{ times:} \\
-		& \quad\quad k_1 \gets F(y) \\
-		& \quad\quad k_2 \gets F\left(y+(\delta/2)k_1\right) \\
-		& \quad\quad k_3 \gets F\left(y+(\delta/2)k_2\right) \\
-		& \quad\quad k_4 \gets F\left(y + \delta k_3\right) \\
-		& \quad\quad y \gets y+(\delta/6)(k_1+2k_2+2k_3+k_4)
-	\end{align*}
-
-\end{frame}
-
-%---------------------------------------------------------------
-
-\begin{frame}
-	
-	\frametitle{Stepping Method}
-	
-	Define
-	\begin{equation*}
-		p = \frac{du}{dt} \quad\text{and}\quad q = \frac{dv}{dt}
-	\end{equation*}
-	Then the geodesic equations become
-	\begin{align*}
-		\frac{du}{dt} & = p \\
-		\frac{dv}{dt} & = q \\
-		\frac{dp}{dt} & = -\Gamma^u_{uu}p^2-2\Gamma^u_{uv}pq-\Gamma^u_{vv}q^2 \\
-		\frac{dq}{dt} & = -\Gamma^v_{uu}p^2-2\Gamma^v_{uv}pq-\Gamma^v_{vv}q^2 \\
-	\end{align*}
-	
-\end{frame}
-
-%---------------------------------------------------------------
-
-\begin{frame}
-	
-	\frametitle{Coordinate Wrapping}
-	
-	\begin{figure}
-		\input{images/TorusWrap.tex}
-	\end{figure}
-	
-\end{frame}
-
-\begin{frame}
-	
-	\frametitle{Optimizations}
+	\frametitle{C\texttt{++} Implementation}
 	
 	\begin{itemize}
-		\item Collection of every step point
-		\item Number of steps in RK4
-		\item Simplifications due to symmetry
-		\begin{itemize}
-			\item Plane with radius representation
-			\item Sphere with polar angle representation
-		\end{itemize}
-		\item Method of ``compressing" the data
+		\item Runge-Kutta 4th Order Method
+		\item Stack Linked List
+		\item Function Pointers
 	\end{itemize}
 	
 \end{frame}
