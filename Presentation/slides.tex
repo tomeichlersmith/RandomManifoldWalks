@@ -36,11 +36,6 @@ Hamline University \\
 	\titlepage % Print the title page as the first slide
 \end{frame}
 
-\begin{frame}
-	\frametitle{Overview} % Table of contents slide, comment this block out to remove it
-	\tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
-\end{frame}
-
 %------------------------------------------------
 %%	PRESENTATION SLIDES
 %------------------------------------------------
@@ -65,64 +60,19 @@ Hamline University \\
 \section{Background}
 
 \begin{frame}
+	
+	\frametitle{}
+	
+\end{frame}
+
+\begin{frame}
 
 	\frametitle{Regular Surfaces}
 	
-	\textit{Coordinate Patch} $\mu:U\to V$ : continuous functions mapping from $U\subseteq\mathbb{R}^2$ to a subset of the surface $V$
-	
-	\vskip 2em
-	
-	\textit{Chart} : covers entire surface
-	
-	\vskip 2em
-	
-	Regular Surfaces:
-	\begin{itemize}
-		\item Differentiable --- the coordinate functions of $\mu$ in $\mathbb{R}^3$ have continuous partial derivatives for all orders
-		\item Homeomorphic --- $\mu$ and its inverse are continuous
-		\item Satisfies the Regularity Condition --- The differential of $\mu$ is a one-to-one linear transformation
-	\end{itemize}
-
-\end{frame}
-
-%---------------------------------------------------------------
-
-\begin{frame}
-	
-	\frametitle{Charts}
-
-	\begin{align*}
-	\phi:&\mathbb{R}^2 \to P\\
-	\phi(u,v) &= (u,v,0)
-	\end{align*}
-	
-\end{frame}
-
-%---------------------------------------------------------------
-
-\begin{frame}
-	
-	\frametitle{Charts}
-	
-	\begin{align*}
-	\sigma:&\mathbb{R}^2 \to S \\
-	\sigma(u,v) &= \left(\frac{2u}{1+u^2+v^2},\frac{2v}{1+u^2+v^2},\frac{-1+u^2+v^2}{1+u^2+v^2}\right)
-	\end{align*}
-	
-\end{frame}
-
-%---------------------------------------------------------------
-
-\begin{frame}
-	
-	\frametitle{Charts}
-	
-	\begin{align*}
-	\tau:&[0,1)\times[0,1) \to T(R,r) \\
-	\tau(u,v) = \Big(&(R+r\cos(2\pi v))\cos(2\pi u), \\
-	&(R+r\cos(2\pi v))\sin(2\pi u), \\
-	&r\sin(2\pi v) \Big)
-	\end{align*}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{images/Torus.png}
+		\caption{By Leonid\_2 - Own work, CC BY-SA 3.0, \texttt{https://commons.wikimedia.org/w/index.php?curid=8643414}}
+	\end{figure}
 	
 \end{frame}
 
@@ -249,6 +199,7 @@ Hamline University \\
 %------------------------------------------------
 \section{Results}
 
+%Circular Ring
 \begin{frame}
 
 	\frametitle{Plane}
@@ -261,6 +212,7 @@ Hamline University \\
 
 %---------------------------------------------------------------
 
+%Circular Walls
 \begin{frame}
 	
 	\frametitle{Plane}
@@ -273,6 +225,7 @@ Hamline University \\
 
 %---------------------------------------------------------------
 
+%Sphere Polar Escape Circle
 \begin{frame}
 	
 	\frametitle{Sphere}
@@ -295,76 +248,8 @@ Hamline University \\
 	
 \end{frame}
 
-%---------------------------------------------------------------
-
-\begin{frame}
-	
-	\frametitle{Torus}
-	
-	\begin{figure}
-		\includegraphics[width=0.85\textwidth]{images/TorusUBand.pdf}
-	\end{figure}
-	
-\end{frame}
-%---------------------------------------------------------------
-
-\begin{frame}
-	
-	\frametitle{Torus}
-	
-	\begin{figure}
-		\includegraphics[width=0.85\textwidth]{images/TorusVBand.pdf}
-	\end{figure}
-	
-\end{frame}
-
-%---------------------------------------------------------------
-
-\begin{frame}
-	
-	\frametitle{Overall Package}
-	
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			Package Attributes
-			\begin{itemize}
-				\item Versatility
-				\item Flexibility
-				\item Speed
-			\end{itemize}
-		\end{column}
-		
-		\begin{column}{0.5\textwidth}
-			Specific Parts
-			\begin{itemize}
-				\item Stepper
-				\item Coordinate Wrappers
-				\item Escape Checks
-			\end{itemize}
-		\end{column}
-	\end{columns}
-	
-	
-\end{frame}
-
 %------------------------------------------------
 \section{Questions}
-
-\begin{frame}
-	
-	\frametitle{Acknowledgements}
-	
-	\begin{itemize}
-		\item Dr Art Guetter
-		\item Dr Ioannis Roussos
-		\item Dr John Mazis
-		\item Dr Thomas Hoft
-		\item Math Department
-	\end{itemize}
-	
-\end{frame}
-
-%------------------------------------------------
 
 \begin{frame}
 	
