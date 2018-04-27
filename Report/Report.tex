@@ -2,7 +2,7 @@
 
 \usepackage[margin=1in]{geometry}
 \usepackage{amsfonts, amsmath}
-\usepackage{graphicx,wrapfig,subfig}
+\usepackage{graphicx,subfig}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\MOSEY}{\texttt{MOSEY}}
@@ -26,7 +26,7 @@
 \end{titlepage}
 
 \section{Introduction}
-	The goal of this project was to garner a basic understanding of the mathematics surrounding differential geometry done on two-dimensional surfaces and to produce a computational package that would allow easy exploration of the behavior of walks on these surfaces.
+	The goal of this project is to garner a basic understanding of the mathematics surrounding differential geometry done on two-dimensional surfaces and to produce a computational package that would allow easy exploration of the behavior of walks on these surfaces.
 	We will go into more detail of the explanation in the next section; nevertheless, a quick overview of the words in the title is required.
 	When we say \emph{random walk}, we intend to construct a series of \emph{steps} on a surface that are each a certain distance a part and the direction of each step is randomly determined. 
 	``Simple two-dimensional manifolds" are a set of mathematical objects that mimic the behavior we are used to seeing on the Euclidean plane --- the flat table-top on which we usually study geometry.
@@ -35,13 +35,13 @@
 	Moreover, random walks are pretty well understood when they are done on the familiar space of the Euclidean plane; however, questions that are easily answered on the plane cannot be answered when they are extended to other surfaces with different properties.
 	
 	We will be investigating random walks by studying how long they take to reach a certain region we have defined on the surface.
-	We call this destination region the \emph{escape region} and the when a walk enters the escape region we say that it \emph{escapes}.
+	We call this destination region the \emph{escape region} and when a walk enters the escape region we say that it \emph{escapes}.
 	In this context, we measure how long a walk takes to escape by calculating the \emph{length} of the walk by simply adding all of the steps from the starting point to the escape region.
 	This terminology of ``walking until escaping" is merely a helpful shorthand for our purposes; nevertheless, it implies an application of these mathematics to various modeling problems in biology and population dynamics (some of which explored in \cite{Codling_WalksBiology_2008}).
 	Now we will provide a rudimentary understanding of the mathematical tools that are required for our purposes.
 
 \section{Background}
-	We must develop machinery in order to replicate the intuitive notion of a walk on different surfaces.
+	We need to develop machinery in order to replicate the intuitive notion of a walk on different surfaces.
 	If we are able to determine what a step is on each of our surfaces, then we define a walk as simply a string of steps connected end-to-end.
 	We define a step on a surface as the movement to a point relatively near-by along the shortest path.
 	In order to determine this shortest path (as well as the direction the movement is taken), we require computational tools from differential geometry.
@@ -50,7 +50,7 @@
 	We will begin with a general overview of differential manifolds that are considered to be ``regular" because of their similarity to what we consider to be intuitively smooth.
 	
 	\subsection{Regular Surfaces}
-		We represent a surface as a subset of $\R^3$ by considering continuous functions $\mu:U \to V$ where $U \subseteq \R^2$ and $V$ is a subset of the surface --- we call the set of $\mu$ that covers the entire surface in question a \textit{chart}.
+		We represent a surface as a subset of $\R^3$ by considering continuous functions $\mu:U \to V$ where $U \subseteq \R^2$ is open and $V$ is a subset of the surface --- we call the set of $\mu$ that covers the entire surface in question a \textit{chart}.
 		Glossing over the large amount of detail and development that can be extracted from this simple idea of a surface, we apply more restrictions on the surfaces (and their charts) in order to obtain intuitively ``smooth" surfaces.
 		In a sense, these restrictions allow us to consider surfaces that are locally Euclidean (locally plane-like) and therefore they more closely resemble what we perceive a surface to be (hence the name for this class of surfaces).
 		Often, a member of the chart for a surface is called a \emph{coordinate patch} because it imposes a relationship between the coordinates of $\R^2$ --- represented by $U$ --- and a part of the surface --- represented by $V$.
@@ -77,7 +77,7 @@
 		The chart for the unit sphere $S$ consists of two (stereographic) coordinate patches, one being $\sigma:\R^2 \to S$ defined by
 		$$ \sigma(u,v) = \left( \frac{2u}{1+u^2+v^2} , \frac{2v}{1+u^2+v^2} , \frac{-1+u^2+v^2}{1+u^2+v^2} \right) $$
 		The only way to arrive at the north pole $(0,0,1)$ of $S$ using $\sigma$ is to let $u$ and $v$ tend to infinity; thus, another coordinate patch is technically required to define the chart of $S$.
-		Practically, the technical need for the other coordinate patch can be ignored when implementing in a computer program because the difficulties arise only at that one infinitesimal point.
+		Practically, the technical need for the other coordinate patch can be ignored when implementing in a computer program because the difficulties arise only at that one point.
 		Care can (and will) be taken in order to avoid the issues arising from being on this point.
 		For our specific situation, we will always have the north pole contained inside of the escape region so that the walk never needs to arrive at that point. 
 		
@@ -288,7 +288,7 @@
 		Therefore, when the class \texttt{MOSEY::Stepper} is configured to take a step on $P$, the number of iterations used in RK4 is set to one (overriding any user specifications).
 		This avoids unnecessary calculations from additional loops that would not produce a more accurate result.
 		
-		The two-dimensional sphere is also incredibly symmetrical.
+		The two-dimensional sphere is also symmetrical.
 		In this specific situation, the escape regions are generally circles with centers at the north pole.
 		Because of the symmetry around the axis of the sphere, we are able to only consider polar angle (the angle the point makes with the north pole) when analyzing how the walk distance changes depending on the starting location.
 		We calculate the polar angle $\phi$ of the point $\sigma(u,v)$ by
@@ -338,7 +338,7 @@
 			This specific situation is wildly inefficient (because there is an analytical solution available); nevertheless, it displays the power of the random walk method.
 			This relatively simple computational method allows for determination of numerical solutions to intricate differential equations, and this method has a process that is easy for the user to understand --- more on this discussion in section \ref{NumericSoln}.
 			
-		\subsubsection{Circular Walls}
+		\subsubsection{Circular Walls} \label{circwalls}
 			We now extend the method to a situation that is slightly more complex.
 			This situation has ``walls" --- borders that the walk bounces off of instead of passing through.
 			Moreover, it has an escape region with a non-smooth border.
@@ -347,9 +347,7 @@
 			Nevertheless, the symmetries in this situation are not enough to simplify the analysis to one dimension, therefore requiring more data to be generated.
 			
 			Figure \ref{fig:planecircwalls} shows an example for this situation, the square has $0.5$-length sides and is centered on the origin.
-			Each bin\footnote{
-				%Explain what a bin is
-				} has the median of the walks starting from inside that bin as its value.
+			Each bin has the median of the walks starting from inside that bin as its value.
 			The behavior in this case is predictable --- the walks approach zero length exponentially as they near the escape region.
 			
 	\subsection{Sphere} \label{sphere}
